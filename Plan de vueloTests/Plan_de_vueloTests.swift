@@ -11,26 +11,28 @@ import XCTest
 
 class Plan_de_vueloTests: XCTestCase {
     
-    override func setUp() {
-        super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    //MARK: Meal Class Tests
+    
+    // Confirm that the User initializer returns a User object when passed valid parameters.
+    func testMealInitializationSucceeds() {
+        
+        let completeUser = User.init(licence: "Licence", email: "email@email", password: "123456")
+        XCTAssertNotNil(completeUser)
     }
     
-    override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-        super.tearDown()
-    }
-    
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-    
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    // Confirm that the User initialier returns nil when passed an empty licence or email or password.
+    func testMealInitializationFails() {
+        // Empty licence
+        let emptyLicenceUser = User.init(licence: "", email: "email@email", password: "123456")
+        XCTAssertNil(emptyLicenceUser)
+        
+        // Empty email
+        let emptyEmailUser = User.init(licence: "Licence", email: "", password: "123456")
+        XCTAssertNil(emptyEmailUser)
+        
+        // Empty password
+        let emptyPasswordUser = User.init(licence: "Licence", email: "email@email", password: "")
+        XCTAssertNil(emptyPasswordUser)
     }
     
 }

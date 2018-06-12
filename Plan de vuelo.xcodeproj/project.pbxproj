@@ -14,6 +14,8 @@
 		AE55CA7020B35C1B00FFF27D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AE55CA6E20B35C1B00FFF27D /* LaunchScreen.storyboard */; };
 		AE55CA7B20B35C1B00FFF27D /* Plan_de_vueloTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE55CA7A20B35C1B00FFF27D /* Plan_de_vueloTests.swift */; };
 		AE55CA8620B35C1B00FFF27D /* Plan_de_vueloUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE55CA8520B35C1B00FFF27D /* Plan_de_vueloUITests.swift */; };
+		AEBB17ED20C0582A008180C2 /* FPLTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEBB17EC20C0582A008180C2 /* FPLTableViewCell.swift */; };
+		AEE417C020BE041C0088FE11 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEE417BF20BE041C0088FE11 /* User.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +49,8 @@
 		AE55CA8120B35C1B00FFF27D /* Plan de vueloUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Plan de vueloUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE55CA8520B35C1B00FFF27D /* Plan_de_vueloUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plan_de_vueloUITests.swift; sourceTree = "<group>"; };
 		AE55CA8720B35C1B00FFF27D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AEBB17EC20C0582A008180C2 /* FPLTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FPLTableViewCell.swift; sourceTree = "<group>"; };
+		AEE417BF20BE041C0088FE11 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,8 @@
 		AE55CA6420B35C1B00FFF27D /* Plan de vuelo */ = {
 			isa = PBXGroup;
 			children = (
+				AEBB17EC20C0582A008180C2 /* FPLTableViewCell.swift */,
+				AEE417BF20BE041C0088FE11 /* User.swift */,
 				AE55CA6520B35C1B00FFF27D /* AppDelegate.swift */,
 				AE55CA6720B35C1B00FFF27D /* ViewController.swift */,
 				AE55CA6920B35C1B00FFF27D /* Main.storyboard */,
@@ -261,6 +267,8 @@
 			files = (
 				AE55CA6820B35C1B00FFF27D /* ViewController.swift in Sources */,
 				AE55CA6620B35C1B00FFF27D /* AppDelegate.swift in Sources */,
+				AEBB17ED20C0582A008180C2 /* FPLTableViewCell.swift in Sources */,
+				AEE417C020BE041C0088FE11 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

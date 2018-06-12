@@ -8,11 +8,23 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
 
+    //MARK: Properties
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    
+    //MARK: Actions
+    @IBAction func logIn(_ sender: Any) {
+        if(emailTextField.text == "santiago.corro@gmail.com" &&
+            passwordTextField.text == "123456") {
+                print("You are IN! 👍")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
