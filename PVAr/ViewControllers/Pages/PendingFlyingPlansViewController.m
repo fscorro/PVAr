@@ -8,6 +8,7 @@
 
 #import "PendingFlyingPlansViewController.h"
 #import "CellFlyingPlan.h"
+#import "Constants.h"
 
 @interface PendingFlyingPlansViewController (){
     NSMutableArray *arr;
@@ -26,7 +27,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 1;//[arr count];
+    return 2;//[arr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -44,7 +45,7 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 //    selectedChat = [arr objectAtIndex:indexPath.row];
-//    [self performSegueWithIdentifier:SegueChat sender:nil];
+    [self performSegueWithIdentifier:@"SegueFlyingPlanDetail" sender:nil];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     // This will create a "invisible" footer
@@ -52,5 +53,8 @@
 }
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     return [UIView new];
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 150.0f;
 }
 @end

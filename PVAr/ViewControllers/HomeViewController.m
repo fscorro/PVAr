@@ -30,6 +30,7 @@ const int tabsNumber = 3;
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    [self.scrollSegmentControll setContentSize:CGSizeMake(self.scrollSegmentControll.contentSize.width, 0)];
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

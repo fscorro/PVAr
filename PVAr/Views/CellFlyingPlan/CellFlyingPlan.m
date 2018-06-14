@@ -7,21 +7,31 @@
 //
 
 #import "CellFlyingPlan.h"
+#import "Constants.h"
 
 @implementation CellFlyingPlan
 
--(void)configureViews{
-    self.viewOrigin.layer.cornerRadius = 10.0f;
-    self.viewOrigin.clipsToBounds = YES;
-
-    self.viewDestination.layer.cornerRadius = 10.0f;
-    self.viewDestination.clipsToBounds = YES;
+- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
+    [super setSelected:selected animated:animated];
     
-    self.viewImageViewFly.layer.cornerRadius = 10.0f;
-    self.viewImageViewFly.clipsToBounds = YES;
+    UIView * selectedBackgroundView = [[UIView alloc] init];
+    [selectedBackgroundView setBackgroundColor:CellSelectedColor];
+    [self setSelectedBackgroundView:selectedBackgroundView];
+}
 
-    self.imageViewFly.image = [self.imageViewFly.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.imageViewFly setTintColor:[UIColor groupTableViewBackgroundColor]];
+-(void)configureViews{
+    
+    self.cellContentViewCustom.layer.cornerRadius = 5.0f;
+    self.cellContentViewCustom.clipsToBounds = true;
+    
+    self.imageViewOrigin.image = [self.imageViewOrigin.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.imageViewOrigin setTintColor:AppColor];
+    
+    self.imageViewRoad.image = [self.imageViewRoad.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.imageViewRoad setTintColor:AppColor];
+    
+    self.imageViewDestination.image = [self.imageViewDestination.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [self.imageViewDestination setTintColor:AppColor];
 }
 
 @end

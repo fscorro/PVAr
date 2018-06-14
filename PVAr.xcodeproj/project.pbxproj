@@ -16,6 +16,7 @@
 		C435CFE220D29A8B00BEF664 /* CreateFlyingPlanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CFE120D29A8B00BEF664 /* CreateFlyingPlanViewController.m */; };
 		C435CFE620D29BDA00BEF664 /* CellFlyingPlan.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CFE520D29BDA00BEF664 /* CellFlyingPlan.m */; };
 		C435CFE820D29BE300BEF664 /* CellFlyingPlan.xib in Resources */ = {isa = PBXBuildFile; fileRef = C435CFE720D29BE300BEF664 /* CellFlyingPlan.xib */; };
+		C435CFEB20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C435CFEA20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m */; };
 		C43C540020D01AF6004BB923 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C43C53FF20D01AF6004BB923 /* AppDelegate.m */; };
 		C43C540620D01AF6004BB923 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C43C540420D01AF6004BB923 /* Main.storyboard */; };
 		C43C540820D01AF8004BB923 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C43C540720D01AF8004BB923 /* Assets.xcassets */; };
@@ -54,6 +55,8 @@
 		C435CFE420D29BDA00BEF664 /* CellFlyingPlan.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CellFlyingPlan.h; sourceTree = "<group>"; };
 		C435CFE520D29BDA00BEF664 /* CellFlyingPlan.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CellFlyingPlan.m; sourceTree = "<group>"; };
 		C435CFE720D29BE300BEF664 /* CellFlyingPlan.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CellFlyingPlan.xib; sourceTree = "<group>"; };
+		C435CFE920D2EEA800BEF664 /* FlyingPlanDetaillViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FlyingPlanDetaillViewController.h; sourceTree = "<group>"; };
+		C435CFEA20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlyingPlanDetaillViewController.m; sourceTree = "<group>"; };
 		C43C53FB20D01AF6004BB923 /* PVAr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PVAr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C43C53FE20D01AF6004BB923 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		C43C53FF20D01AF6004BB923 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -237,6 +240,8 @@
 				C43C542520D01BC1004BB923 /* HomeViewController.m */,
 				C435CFE020D29A8B00BEF664 /* CreateFlyingPlanViewController.h */,
 				C435CFE120D29A8B00BEF664 /* CreateFlyingPlanViewController.m */,
+				C435CFE920D2EEA800BEF664 /* FlyingPlanDetaillViewController.h */,
+				C435CFEA20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -382,6 +387,7 @@
 				C406E60720D15EDB0061398A /* AcceptedFlyingPlansViewController.m in Sources */,
 				C4D6193720D066B10010F04A /* Reachability.m in Sources */,
 				C43C541C20D01B37004BB923 /* LoginViewController.m in Sources */,
+				C435CFEB20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m in Sources */,
 				C43C540E20D01AF8004BB923 /* main.m in Sources */,
 				C406E60A20D15EE60061398A /* CancelledFlyingPlansViewController.m in Sources */,
 				C4D6192420D040A90010F04A /* User.m in Sources */,

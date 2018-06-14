@@ -233,7 +233,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bfR-UT-KuX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="vJe-xv-yS4">
                                         <rect key="frame" x="0.0" y="28" width="320" height="150"/>
@@ -261,11 +261,30 @@
                     </view>
                     <connections>
                         <outlet property="tableviewPendingFlying" destination="bfR-UT-KuX" id="YTN-mW-kxW"/>
+                        <segue destination="WiR-NX-eTX" kind="show" identifier="SegueFlyingPlanDetail" id="32b-Un-qTF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GTX-5I-WXH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="290.625" y="3113.0281690140846"/>
+        </scene>
+        <!--Details-->
+        <scene sceneID="OVC-8X-Qun">
+            <objects>
+                <viewController id="WiR-NX-eTX" customClass="FlyingPlanDetaillViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="REF-6Z-OoX">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="ez4-IR-t52"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Details" id="Mud-o3-rU4">
+                        <barButtonItem key="backBarButtonItem" title="-" id="7zR-ZV-Eo7"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="209-9g-fCs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="291" y="3826"/>
         </scene>
         <!--Accepted Flying Plans View Controller-->
         <scene sceneID="snu-qE-I8C">
@@ -308,11 +327,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZlZ-Mt-SWC">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                 <subviews>
-                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgX-oL-9XP">
+                                    <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fgX-oL-9XP">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                         <subviews>
                                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UV8-Nz-FZ1">
                                                 <rect key="frame" x="8" y="12" width="335" height="29"/>
+                                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                                 <segments>
                                                     <segment title="Pending plans"/>
                                                     <segment title="Accepted plans"/>
@@ -332,7 +352,7 @@
                                         </constraints>
                                     </scrollView>
                                 </subviews>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="fgX-oL-9XP" firstAttribute="top" secondItem="ZlZ-Mt-SWC" secondAttribute="top" id="286-b2-tWx"/>
                                     <constraint firstAttribute="trailing" secondItem="fgX-oL-9XP" secondAttribute="trailing" id="H4h-SE-OfG"/>
