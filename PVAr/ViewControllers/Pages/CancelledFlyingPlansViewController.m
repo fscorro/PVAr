@@ -6,8 +6,8 @@
 //  Copyright © 2018 Prisma. All rights reserved.
 //
 
-#import "UIViewController+CancelledFlyingPlansViewController.h"
+#import "CancelledFlyingPlansViewController.h"
 
-@implementation UIViewController (CancelledFlyingPlansViewController)
+@implementation CancelledFlyingPlansViewController
 
 @end

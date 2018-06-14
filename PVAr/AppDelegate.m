@@ -62,4 +62,9 @@
     }
 }
 
+- (UIStoryboard *)grabStoryboard {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    return storyboard;
+}
+
 @end

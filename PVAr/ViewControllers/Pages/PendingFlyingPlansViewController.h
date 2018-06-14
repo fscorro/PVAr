@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (PendingFlyingPlansViewController)
+@interface PendingFlyingPlansViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableviewPendingFlying;
 
 @end

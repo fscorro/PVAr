@@ -8,6 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UITableViewCell (CellFlyingPlan)
+@interface CellFlyingPlan : UITableViewCell
+@property (weak, nonatomic) IBOutlet UILabel *labelFlyingNumber;
+@property (weak, nonatomic) IBOutlet UILabel *labelFlyingDateTime;
+
+@property (weak, nonatomic) IBOutlet UIView *viewOrigin;
+@property (weak, nonatomic) IBOutlet UILabel *labelFlyingOrigin;
+
+@property (weak, nonatomic) IBOutlet UIView *viewDestination;
+@property (weak, nonatomic) IBOutlet UILabel *labelFlyingDestination;
+
+@property (weak, nonatomic) IBOutlet UIView *viewImageViewFly;
+@property (weak, nonatomic) IBOutlet UIImageView *imageViewFly;
+
+-(void)configureViews;
 
 @end

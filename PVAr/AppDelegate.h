@@ -15,6 +15,7 @@
 + (AppDelegate *)sharedAppDelegate;
 
 -(BOOL)checkNetworkAccess;
+-(UIStoryboard *)grabStoryboard;
 
 @end
 

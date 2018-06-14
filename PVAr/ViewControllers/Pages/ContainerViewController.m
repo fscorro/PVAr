@@ -1,17 +1,16 @@
 //
-//  ContainerViewController.m
-//  EmbeddedSwapping
+//  ContainerViewController.h
+//  PVAr
 //
-//  Created by Michael Luton on 11/13/12.
-//  Copyright (c) 2012 Sandmoose Software. All rights reserved.
-//  Heavily inspired by http://orderoo.wordpress.com/2012/02/23/container-view-controllers-in-the-storyboard/
+//  Created by Prisma on 13/6/18.
+//  Copyright © 2018 Prisma. All rights reserved.
 //
 
 #import "ContainerViewController.h"
 #import "AppDelegate.h"
-#import "CotizacionViewController.h"
-#import "ConvertirViewController.h"
-#import "GraficoViewController.h"
+#import "PendingFlyingPlansViewController.h"
+#import "AcceptedFlyingPlansViewController.h"
+#import "CancelledFlyingPlansViewController.h"
 
 #define SegueIdentifierFirst @"embedFirst"
 #define SegueIdentifierSecond @"embedSecond"
@@ -21,9 +20,9 @@
 
 @property (strong, nonatomic) NSString *currentSegueIdentifier;
 @property (strong, nonatomic) NSString *oldtSegueIdentifier;
-@property (strong, nonatomic) CotizacionViewController *firstViewController;
-@property (strong, nonatomic) ConvertirViewController *secondViewController;
-@property (strong, nonatomic) GraficoViewController *thirdViewController;
+@property (strong, nonatomic) PendingFlyingPlansViewController *firstViewController;
+@property (strong, nonatomic) AcceptedFlyingPlansViewController *secondViewController;
+@property (strong, nonatomic) CancelledFlyingPlansViewController *thirdViewController;
 @property (assign, nonatomic) BOOL transitionInProgress;
 
 @end
@@ -107,39 +106,39 @@
     }
     self.transitionInProgress = YES;
     
-    if ([toViewController isKindOfClass:[CotizacionViewController class]]) {
+    if ([toViewController isKindOfClass:[PendingFlyingPlansViewController class]]) {
         self.currentSegueIdentifier = SegueIdentifierFirst;
-    }else if ([toViewController isKindOfClass:[ConvertirViewController class]]) {
+    }else if ([toViewController isKindOfClass:[AcceptedFlyingPlansViewController class]]) {
         self.currentSegueIdentifier = SegueIdentifierSecond;
-    }else if ([toViewController isKindOfClass:[GraficoViewController class]]) {
+    }else if ([toViewController isKindOfClass:[CancelledFlyingPlansViewController class]]) {
         self.currentSegueIdentifier = SegueIdentifierThird;
     }
     
     if ([self.oldtSegueIdentifier isEqualToString:SegueIdentifierFirst] ){
-        if ([toViewController isKindOfClass:[ConvertirViewController class]] && self.secondViewController) {
+        if ([toViewController isKindOfClass:[AcceptedFlyingPlansViewController class]] && self.secondViewController) {
             [self swapFromViewController:self.firstViewController toViewController:self.secondViewController];
             return;
-        }else if ([toViewController isKindOfClass:[GraficoViewController class]] && self.thirdViewController) {
+        }else if ([toViewController isKindOfClass:[CancelledFlyingPlansViewController class]] && self.thirdViewController) {
             [self swapFromViewController:self.firstViewController toViewController:self.thirdViewController];
             return;
         }
     }
     
     if ([self.oldtSegueIdentifier isEqualToString:SegueIdentifierSecond] ){
-        if ([toViewController isKindOfClass:[CotizacionViewController class]] && self.firstViewController) {
+        if ([toViewController isKindOfClass:[PendingFlyingPlansViewController class]] && self.firstViewController) {
             [self swapFromViewController:self.secondViewController toViewController:self.firstViewController];
             return;
-        }else if ([toViewController isKindOfClass:[GraficoViewController class]] && self.thirdViewController) {
+        }else if ([toViewController isKindOfClass:[CancelledFlyingPlansViewController class]] && self.thirdViewController) {
             [self swapFromViewController:self.secondViewController toViewController:self.thirdViewController];
             return;
         }
     }
 
     if ([self.oldtSegueIdentifier isEqualToString:SegueIdentifierThird] ){
-        if ([toViewController isKindOfClass:[CotizacionViewController class]] && self.firstViewController) {
+        if ([toViewController isKindOfClass:[PendingFlyingPlansViewController class]] && self.firstViewController) {
             [self swapFromViewController:self.thirdViewController toViewController:self.firstViewController];
             return;
-        }else if ([toViewController isKindOfClass:[ConvertirViewController class]] && self.secondViewController) {
+        }else if ([toViewController isKindOfClass:[AcceptedFlyingPlansViewController class]] && self.secondViewController) {
             [self swapFromViewController:self.thirdViewController toViewController:self.secondViewController];
             return;
         }

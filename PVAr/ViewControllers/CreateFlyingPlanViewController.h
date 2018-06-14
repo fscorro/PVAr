@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIViewController (CreateFlyingPlanViewController)
+@interface CreateFlyingPlanViewController : UIViewController
 
 @end

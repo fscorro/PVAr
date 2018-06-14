@@ -6,8 +6,8 @@
 //  Copyright © 2018 Prisma. All rights reserved.
 //
 
-#import "UIViewController+CreateFlyingPlanViewController.h"
+#import "CreateFlyingPlanViewController.h"
 
-@implementation UIViewController (CreateFlyingPlanViewController)
+@implementation CreateFlyingPlanViewController
 
 @end
