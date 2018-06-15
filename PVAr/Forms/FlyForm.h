@@ -39,6 +39,21 @@ typedef NS_ENUM(NSInteger, AeroplaneCategory)
     AeroplaneCategoryL
 };
 
+typedef NS_ENUM(NSInteger, Nudos)
+{
+    NudosK = 0,
+    NudosN,
+    NudosM
+};
+
+typedef NS_ENUM(NSInteger, Level)
+{
+    LevelF = 0,
+    LevelS,
+    LevelA,
+    LevelM
+};
+
 @interface FlyForm : NSObject <FXForm>
 
 @property (nonatomic, copy) NSString *number;
@@ -56,6 +71,17 @@ typedef NS_ENUM(NSInteger, AeroplaneCategory)
 @property (nonatomic, copy) NSString *aerodrome;
 @property (nonatomic, strong) NSDate *date;
 @property (nonatomic, strong) NSDate *time;
+@property (nonatomic, assign) Nudos unit;
+@property (nonatomic, copy) NSString *speed;
+@property (nonatomic, assign) Level level;
+
+@property (nonatomic, copy) NSString *origin;
+@property (nonatomic, copy) NSString *destination;
+@property (nonatomic, copy) NSString *EET;
+@property (nonatomic, copy) NSString *alternative;
+@property (nonatomic, copy) NSString *alternative_B;
+@property (nonatomic, copy) NSString *information;
+
 
 
 -(BOOL)validateFlyForm;
