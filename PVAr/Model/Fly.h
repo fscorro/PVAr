@@ -10,24 +10,30 @@
 
 @interface Fly : NSObject
 
-@property (nonatomic, copy) NSString *flyID;
-@property (nonatomic, copy) NSString *flyNumber;
-@property (nonatomic, copy) NSString *flyOrigin;
-@property (nonatomic, copy) NSString *flyDestination;
-@property (nonatomic, copy) NSArray *flyAlternatives;
-@property (nonatomic, copy) NSString *flyDate;
-@property (nonatomic, copy) NSString *flyTime;
-@property (nonatomic, copy) NSString *flyEnrollment;
-@property (nonatomic, copy) NSString *flyRule;
-@property (nonatomic, copy) NSString *flyUtilizationCheck;
-@property NSInteger flyAeroplaneNUmbers;
-@property (nonatomic, copy) NSString *flyAeroplaneType;
-@property (nonatomic, copy) NSString *flyCategory;
-@property (nonatomic, copy) NSString *flyEquipment;
-@property (nonatomic, copy) NSString *flyVelocity;
-@property (nonatomic, copy) NSString *flyLevel;
-@property (nonatomic, copy) NSString *flyTotalEET;
-@property (nonatomic, copy) NSArray *flyRout;
+@property (nonatomic, copy) NSString *number;
+@property (nonatomic, assign) NSString *priority;
+@property (nonatomic, copy) NSString *enrollment;
+@property (nonatomic, copy) NSString *company;
+@property (nonatomic, assign) NSString *rule;
+@property (nonatomic, assign) NSString *type;
+
+@property (nonatomic, copy) NSString *aeroplaneNumber;
+@property (nonatomic, copy) NSString *aeroplaneType;
+@property (nonatomic, assign) NSString *category;
+@property (nonatomic, copy) NSString *equipment;
+
+@property (nonatomic, copy) NSString *aerodrome;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSDate *time;
+@property (nonatomic, assign) NSString *unit;
+@property (nonatomic, copy) NSString *speed;
+@property (nonatomic, assign) NSString *level;
+
+@property (nonatomic, copy) NSString *origin;
+@property (nonatomic, copy) NSString *destination;
+@property (nonatomic, copy) NSString *EET;
+@property (nonatomic, strong) NSArray *alternative;
+@property (nonatomic, copy) NSString *information;
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
 

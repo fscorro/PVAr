@@ -78,11 +78,8 @@ typedef NS_ENUM(NSInteger, Level)
 @property (nonatomic, copy) NSString *origin;
 @property (nonatomic, copy) NSString *destination;
 @property (nonatomic, copy) NSString *EET;
-@property (nonatomic, copy) NSString *alternative;
-@property (nonatomic, copy) NSString *alternative_B;
+@property (nonatomic, strong) NSArray *alternative;
 @property (nonatomic, copy) NSString *information;
-
-
 
 -(BOOL)validateFlyForm;
 

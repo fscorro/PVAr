@@ -22,11 +22,13 @@
     [super viewDidLoad];
     
     self.formController.form = [[FlyForm alloc] init];
+
 }
 
 - (void)submitFlyingForm:(UITableViewCell<FXFormFieldCell> *)cell{
     //we can lookup the form from the cell if we want, like this:
     form = cell.field.form;
+
     if([form validateFlyForm] == true){
         [ShowAlert ShowAlertWithTitle:@"Submit Successfull" andMessage:@"Your flying plan was created." acceptBlock:^{
             [self.navigationController popViewControllerAnimated:YES];

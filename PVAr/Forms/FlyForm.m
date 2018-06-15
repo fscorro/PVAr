@@ -7,11 +7,11 @@
 //
 
 #import "FlyForm.h"
+#import "Constants.h"
 
 @implementation FlyForm
 
-- (NSArray *)fields
-{
+- (NSArray *)fields{
     return @[
              
              //we want to add a group header for the field set of fields
@@ -39,8 +39,7 @@
              @{FXFormFieldKey: @"origin", FXFormFieldHeader: @""},
              @"destination",
              @"EET",
-             @"alternative",
-             @"alternative_B",
+             @{FXFormFieldKey: @"alternative", FXFormFieldSortable: @YES},
              @{FXFormFieldKey: @"information", FXFormFieldType: FXFormFieldTypeLongText},
 
              @{FXFormFieldTitle: @"Submit", FXFormFieldHeader: @"", FXFormFieldAction: @"submitFlyingForm:"},
