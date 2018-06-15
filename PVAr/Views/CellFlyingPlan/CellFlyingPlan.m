@@ -35,10 +35,6 @@
     
     self.imageViewDestination.image = [self.imageViewDestination.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.imageViewDestination setTintColor:AppColor];
-}
-
-- (IBAction)ShowCellActions:(id)sender {
     
 }
-
 @end

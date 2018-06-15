@@ -20,6 +20,5 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 -(void)configureViews;
-- (IBAction)ShowCellActions:(id)sender;
 
 @end

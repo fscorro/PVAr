@@ -235,25 +235,11 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TWO-db-VbR">
-                                                <rect key="frame" x="200" y="0.0" width="30" height="30"/>
-                                                <color key="backgroundColor" red="0.0" green="0.1843137255" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="30" id="qPD-e4-DJ4"/>
-                                                    <constraint firstAttribute="width" constant="30" id="wYT-hG-LPF"/>
-                                                </constraints>
-                                                <state key="normal" image="icon_more"/>
-                                                <connections>
-                                                    <action selector="ShowCellActions:" destination="ilu-dN-f07" eventType="touchUpInside" id="tly-tn-HKz"/>
-                                                </connections>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="gR5-cx-iBs" secondAttribute="trailing" constant="8" id="1oM-N8-Jx6"/>
                                             <constraint firstItem="gR5-cx-iBs" firstAttribute="centerY" secondItem="cFD-qI-kkm" secondAttribute="centerY" id="GP9-AC-NgU"/>
-                                            <constraint firstAttribute="trailing" secondItem="TWO-db-VbR" secondAttribute="trailing" id="JQz-br-iaW"/>
-                                            <constraint firstItem="TWO-db-VbR" firstAttribute="top" secondItem="cFD-qI-kkm" secondAttribute="top" id="Ml0-Pg-XlQ"/>
                                             <constraint firstItem="gR5-cx-iBs" firstAttribute="leading" secondItem="cFD-qI-kkm" secondAttribute="leading" constant="8" id="es7-ps-du6"/>
                                         </constraints>
                                     </view>
@@ -347,8 +333,8 @@
                     <constraint firstAttribute="bottom" secondItem="abM-yI-beE" secondAttribute="bottom" constant="4" id="xbb-5x-VO0"/>
                 </constraints>
             </tableViewCellContentView>
+            <gestureRecognizers/>
             <connections>
-                <outlet property="buttonCellAction" destination="TWO-db-VbR" id="1ic-4c-vQh"/>
                 <outlet property="cellContentViewCustom" destination="abM-yI-beE" id="vIc-bD-xbq"/>
                 <outlet property="imageViewDestination" destination="uli-Jy-VKh" id="7zJ-av-BWU"/>
                 <outlet property="imageViewOrigin" destination="UZ8-0S-yU0" id="73x-K7-mE5"/>
@@ -360,7 +346,6 @@
     </objects>
     <resources>
         <image name="icon_menu" width="21" height="21"/>
-        <image name="icon_more" width="21" height="21"/>
         <image name="icon_point" width="21" height="21"/>
     </resources>
 </document>

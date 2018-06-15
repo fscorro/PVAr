@@ -12,7 +12,7 @@
 
 @interface PendingFlyingPlansViewController (){
     NSMutableArray *arr;
-//    Chat *selectedChat;
+    NSIndexPath *selectedIndex;
 }
 
 @end
@@ -38,13 +38,16 @@
         cell = [tableView dequeueReusableCellWithIdentifier:@"CellFlyingPlan"];
     }
     [cell configureViews];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleCellLongPress:)];
+    [cell addGestureRecognizer:longPress];
     
     return cell;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//    selectedChat = [arr objectAtIndex:indexPath.row];
+    selectedIndex = indexPath;
+
     [self performSegueWithIdentifier:@"SegueFlyingPlanDetail" sender:nil];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
@@ -56,5 +59,31 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 150.0f;
+}
+
+-(void) handleCellLongPress:(UIGestureRecognizer *)longPress {
+    if (longPress.state==UIGestureRecognizerStateBegan) {
+        CGPoint point = [longPress locationInView:self.tableviewPendingFlying];
+        NSIndexPath *indexPath = [self.tableviewPendingFlying indexPathForRowAtPoint:point];
+        NSLog(@"Holding Cell Indexpath %@",indexPath);
+        
+        UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"Options:" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+            
+        }]];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Add as favorite" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            
+        }]];
+        
+        [actionSheet addAction:[UIAlertAction actionWithTitle:@"Clone" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+            
+            
+        }]];
+
+        [self presentViewController:actionSheet animated:YES completion:nil];
+    }
 }
 @end
