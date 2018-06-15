@@ -21,6 +21,9 @@
 
 -(void)configureViews{
     
+    self.viewFlingNumber.layer.cornerRadius = 5.0f;
+    self.viewFlingNumber.clipsToBounds = true;
+    
     self.cellContentViewCustom.layer.cornerRadius = 5.0f;
     self.cellContentViewCustom.clipsToBounds = true;
     
@@ -32,6 +35,10 @@
     
     self.imageViewDestination.image = [self.imageViewDestination.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
     [self.imageViewDestination setTintColor:AppColor];
+}
+
+- (IBAction)ShowCellActions:(id)sender {
+    
 }
 
 @end

@@ -10,8 +10,7 @@
 
 @implementation UserForm
 
-- (NSArray *)fields
-{
+- (NSArray *)fields{
     return @[
              
              //we want to add a group header for the field set of fields
@@ -29,4 +28,14 @@
              
              ];
 }
+
+-(BOOL)validateUserForm{
+    if([self.email length] <= 0 || [self.password length] <= 0 || [self.repeatPassword length] <= 0){
+        return false;
+    }else if(![self.password isEqualToString:self.repeatPassword]){
+        return false;
+    }
+    return true;
+}
+
 @end

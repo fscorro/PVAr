@@ -12,11 +12,14 @@
 
 @property (weak, nonatomic) IBOutlet UIView *cellContentViewCustom;
 
+@property (strong, nonatomic) IBOutlet UIView *viewFlingNumber;
+@property (strong, nonatomic) IBOutlet UIButton *buttonCellAction;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewOrigin;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewRoad;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewDestination;
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated;
 -(void)configureViews;
+- (IBAction)ShowCellActions:(id)sender;
 
 @end

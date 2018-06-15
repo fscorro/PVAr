@@ -414,7 +414,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="rMG-O9-03O"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create new plan" id="Jp4-vF-Uee"/>
+                    <navigationItem key="navigationItem" title="Create new plan" id="Jp4-vF-Uee">
+                        <barButtonItem key="backBarButtonItem" title="-" id="yoa-wF-BrK"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aaf-dK-uv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -463,6 +465,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="454"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="5zF-Db-gkI"/>
                     </view>
                     <connections>
                         <segue destination="Pn2-WB-dCx" kind="custom" identifier="embedFirst" customClass="EmptySegue" id="Sik-Ya-w5p"/>

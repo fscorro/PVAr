@@ -15,4 +15,6 @@
 @property (nonatomic, copy) NSString *password;
 @property (nonatomic, copy) NSString *repeatPassword;
 
+-(BOOL)validateUserForm;
+
 @end

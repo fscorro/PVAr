@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FXForms/FXForms.h>
+#import <RKDropdownAlert.h>
 
-@interface CreateFlyingPlanViewController : UIViewController
+@interface CreateFlyingPlanViewController : FXFormViewController
 
 @end

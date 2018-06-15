@@ -27,21 +27,12 @@
 - (void)submitRegistrationForm:(UITableViewCell<FXFormFieldCell> *)cell{
     //we can lookup the form from the cell if we want, like this:
     form = cell.field.form;
-    if([self validateForm] == true){
+    if([form validateUserForm] == true){
         [ShowAlert ShowAlertWithTitle:@"Registration Successfull" andMessage:@"Your account was created successfully, please back to login." acceptBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
-    }
-}
-
--(BOOL)validateForm{
-    if([form.email length] <= 0 || [form.password length] <= 0 || [form.repeatPassword length] <= 0){
+    }else{
         [RKDropdownAlert title:@"Registration failure" message:@"Please complete all fields and try again." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
-        return false;
-    }else if(![form.password isEqualToString:form.repeatPassword]){
-        [RKDropdownAlert title:@"Registration failure" message:@"Please verify your password." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
-        return false;
     }
-    return true;
 }
 @end
