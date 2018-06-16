@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AcceptedFlyingPlansViewController : UIViewController
+@interface AcceptedFlyingPlansViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableviewAcceptedFlying;
 
 @end

@@ -10,6 +10,11 @@
 #define Constants_h
 
 #define AppColor [UIColor colorWithRed:(0/255.0) green:(47/255.0) blue:(102/255.0) alpha:1]
+
+#define FlyStatePendingColor [UIColor colorWithRed:(255/255.0) green:(235/255.0) blue:(59/255.0) alpha:1]
+#define FlyStateAcceptedColor [UIColor colorWithRed:(56/255.0) green:(142/255.0) blue:(60/255.0) alpha:1]
+#define FlyStateCancelledColor [UIColor colorWithRed:(211/255.0) green:(47/255.0) blue:(47/255.0) alpha:1]
+
 #define AlertColorError [UIColor colorWithRed:(183/255.0) green:(28/255.0) blue:(28/255.0) alpha:1]
 #define AlertColorSuccess [UIColor colorWithRed:(27/255.0) green:(94/255.0) blue:(32/255.0) alpha:1]
 #define CellSelectedColor [UIColor colorWithRed:(0/255.0) green:(47/255.0) blue:(102/255.0) alpha:0.45f]
@@ -19,6 +24,7 @@
 #define ModelUserPasswordKEY @"password"
 #define ModelUserRepeatPasswordKEY @"repeatPassword"
 
+#define ModelFlystate @"state"
 #define ModelFlynumber @"number"
 #define ModelFlypriority @"priority"
 #define ModelFlyenrollment @"enrollment"
@@ -40,5 +46,8 @@
 #define ModelFlyEET @"EET"
 #define ModelFlyalternative @"alternative"
 #define ModelFlyinformation @"information"
+
+#define SegueFlyingPlanDetail @"SegueFlyingPlanDetail"
+
 
 #endif /* Constants_h */

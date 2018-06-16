@@ -19,6 +19,26 @@
     [self setSelectedBackgroundView:selectedBackgroundView];
 }
 
+-(void)configureWithFly:(Fly *)fly{
+    if([fly.flyState isEqualToString:@"P"]){
+        [self.viewFlyState setBackgroundColor:FlyStatePendingColor];
+    }else if([fly.flyState isEqualToString:@"A"]){
+        [self.viewFlyState setBackgroundColor:FlyStateAcceptedColor];
+    }else if([fly.flyState isEqualToString:@"C"]){
+        [self.viewFlyState setBackgroundColor:FlyStateCancelledColor];
+    }
+    [self.labelFlyNumber setText:fly.number];
+    [self.labelFlyDate setText:fly.date];
+    [self.labelFlyTime setText:fly.time];
+    [self.labelFlyOrigin setText:[NSString stringWithFormat:@"Origin: %@", fly.origin]];
+    [self.labelFlyDestination setText:[NSString stringWithFormat:@"Destination: %@", fly.destination]];
+    [self.labelFlySpeed setText:fly.speed];
+    [self.labelFlyLevel setText:fly.level];
+    [self.labelFlyEnrollment setText:fly.enrollment];
+
+    [self configureViews];
+}
+
 -(void)configureViews{
     
     self.viewFlingNumber.layer.cornerRadius = 5.0f;

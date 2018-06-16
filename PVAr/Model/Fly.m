@@ -14,6 +14,8 @@
 -(instancetype)initWithDict:(NSDictionary *)dict{
     self = [super init];
     if(self){
+        self.flyState = [dict valueForKey:ModelFlystate];
+
         self.number = [dict valueForKey:ModelFlynumber];
         self.priority = [dict valueForKey:ModelFlypriority];
         self.enrollment = [dict valueForKey:ModelFlyenrollment];

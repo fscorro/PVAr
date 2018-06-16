@@ -339,7 +339,16 @@
                 <outlet property="imageViewDestination" destination="uli-Jy-VKh" id="7zJ-av-BWU"/>
                 <outlet property="imageViewOrigin" destination="UZ8-0S-yU0" id="73x-K7-mE5"/>
                 <outlet property="imageViewRoad" destination="Qcf-o3-lgV" id="dw8-is-7De"/>
+                <outlet property="labelFlyDate" destination="riI-dC-DpN" id="mLJ-V8-zl4"/>
+                <outlet property="labelFlyDestination" destination="N7H-Ad-9DO" id="89a-3A-o5y"/>
+                <outlet property="labelFlyEnrollment" destination="jMx-b5-Ar3" id="vbe-d5-TNi"/>
+                <outlet property="labelFlyLevel" destination="b4U-Yi-b5q" id="co4-aY-DoB"/>
+                <outlet property="labelFlyNumber" destination="bzi-zd-j79" id="9Ui-VD-bRL"/>
+                <outlet property="labelFlyOrigin" destination="gR5-cx-iBs" id="ShE-lq-Gjs"/>
+                <outlet property="labelFlySpeed" destination="XHJ-lK-PKD" id="pcE-JX-Fmv"/>
+                <outlet property="labelFlyTime" destination="D3F-a3-v93" id="zen-WH-7dU"/>
                 <outlet property="viewFlingNumber" destination="s2v-4K-Ibe" id="wKh-xe-rra"/>
+                <outlet property="viewFlyState" destination="PwO-RF-X5n" id="xvm-aj-Odc"/>
             </connections>
             <point key="canvasLocation" x="-36.5" y="-39"/>
         </tableViewCell>

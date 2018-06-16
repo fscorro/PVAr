@@ -10,6 +10,8 @@
 
 @interface Fly : NSObject
 
+@property (nonatomic, copy) NSString *flyState;
+
 @property (nonatomic, copy) NSString *number;
 @property (nonatomic, assign) NSString *priority;
 @property (nonatomic, copy) NSString *enrollment;
@@ -23,8 +25,8 @@
 @property (nonatomic, copy) NSString *equipment;
 
 @property (nonatomic, copy) NSString *aerodrome;
-@property (nonatomic, strong) NSDate *date;
-@property (nonatomic, strong) NSDate *time;
+@property (nonatomic, strong) NSString *date;
+@property (nonatomic, strong) NSString *time;
 @property (nonatomic, assign) NSString *unit;
 @property (nonatomic, copy) NSString *speed;
 @property (nonatomic, assign) NSString *level;

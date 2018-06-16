@@ -9,10 +9,12 @@
 #import "PendingFlyingPlansViewController.h"
 #import "CellFlyingPlan.h"
 #import "Constants.h"
+#import "Fly.h"
+#import "FlyingPlanDetaillViewController.h"
 
 @interface PendingFlyingPlansViewController (){
     NSMutableArray *arr;
-    NSIndexPath *selectedIndex;
+    Fly *selectedFly;
 }
 
 @end
@@ -22,12 +24,46 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    // todo esto deberia desaparecer, es solo para una demo..
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+    [temp setValue:@"P" forKey:ModelFlystate];
+    [temp setValue:@"WFL-324" forKey:ModelFlynumber];
+    [temp setValue:@"ALTRV" forKey:ModelFlypriority];
+    [temp setValue:@"N422LA" forKey:ModelFlyenrollment];
+    [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
+    [temp setValue:@"I _ Vuelo con IRF" forKey:ModelFlyrule];
+    [temp setValue:@"S - Regular" forKey:ModelFlytype];
+    
+    [temp setValue:@"1" forKey:ModelFlyaeroplaneNumber];
+    [temp setValue:@"B763" forKey:ModelFlyaeroplaneType];
+    [temp setValue:@"H - Pesada" forKey:ModelFlycategory];
+    [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
+    
+    [temp setValue:@"ZZZZ" forKey:ModelFlyaerodrome];
+    [temp setValue:@"23-04-2018" forKey:ModelFlydate];
+    [temp setValue:@"22:30" forKey:ModelFlytime];
+    [temp setValue:@"N - Nodos" forKey:ModelFlyunit];
+    [temp setValue:@"N470" forKey:ModelFlyspeed];
+    [temp setValue:@"F320" forKey:ModelFlylevel];
+    
+    [temp setValue:@"SKBO" forKey:ModelFlyorigin];
+    [temp setValue:@"KMIA" forKey:ModelFlydestination];
+    [temp setValue:@"0313" forKey:ModelFlyEET];
+    [temp setValue:@"KBPI" forKey:ModelFlyalternative];
+    [temp setValue:@"Z1P1H ZIP W44" forKey:ModelFlyinformation];
+    
+    Fly *fly = [[Fly alloc] initWithDict:temp];
+    arr = [[NSMutableArray alloc] init];
+    
+    [arr addObject:fly];
+    
+    [self.tableviewPendingFlying reloadData];
 }
 
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 2;//[arr count];
+    return [arr count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -37,7 +73,7 @@
         [tableView registerNib:[UINib nibWithNibName:@"CellFlyingPlan" bundle:nil] forCellReuseIdentifier:@"CellFlyingPlan"];
         cell = [tableView dequeueReusableCellWithIdentifier:@"CellFlyingPlan"];
     }
-    [cell configureViews];
+    [cell configureWithFly:[arr objectAtIndex:indexPath.row]];
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleCellLongPress:)];
     [cell addGestureRecognizer:longPress];
     
@@ -46,9 +82,10 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    selectedIndex = indexPath;
 
-    [self performSegueWithIdentifier:@"SegueFlyingPlanDetail" sender:nil];
+    selectedFly = [arr objectAtIndex:indexPath.row];
+    
+    [self performSegueWithIdentifier:SegueFlyingPlanDetail sender:nil];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     // This will create a "invisible" footer
@@ -59,6 +96,15 @@
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 150.0f;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSString *segueId = segue.identifier;
+    
+    if ([segueId isEqualToString:SegueFlyingPlanDetail]) {
+        FlyingPlanDetaillViewController *vc = segue.destinationViewController;
+        vc.fly = selectedFly;
+    }
 }
 
 -(void) handleCellLongPress:(UIGestureRecognizer *)longPress {

@@ -14,15 +14,13 @@
 
 @interface FlyingPlanDetaillViewController(){
     
-    NSArray *arrFlyInformation;;
-    NSArray *arrAeroplaneInformation;
-    NSArray *arrAerodromeInformation;
-    NSArray *arrdestinationInformation;
+    NSMutableDictionary *arrFlyInformation;;
+    NSMutableDictionary *arrAeroplaneInformation;
+    NSMutableDictionary *arrAerodromeInformation;
+    NSMutableDictionary *arrdestinationInformation;
 
     NSDictionary *sections;
     NSArray *sectionTitles;
-    
-    NSMutableDictionary *dictFlyDetail;
 }
 @end
 
@@ -32,69 +30,44 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    dictFlyDetail = [[NSMutableDictionary alloc] init];
-    [dictFlyDetail setValue:@"AAA" forKey:ModelFlynumber];
-    [dictFlyDetail setValue:@"SSS" forKey:ModelFlypriority];
-    [dictFlyDetail setValue:@"DDD" forKey:ModelFlyenrollment];
-    [dictFlyDetail setValue:@"EEE" forKey:ModelFlycompany];
-    [dictFlyDetail setValue:@"WWW" forKey:ModelFlyrule];
-    [dictFlyDetail setValue:@"QQQ" forKey:ModelFlytype];
-    
-    [dictFlyDetail setValue:@"ZZZ" forKey:ModelFlyaeroplaneNumber];
-    [dictFlyDetail setValue:@"XXX" forKey:ModelFlyaeroplaneType];
-    [dictFlyDetail setValue:@"CCC" forKey:ModelFlycategory];
-    [dictFlyDetail setValue:@"VVV" forKey:ModelFlyequipment];
-    
-    [dictFlyDetail setValue:@"RRR" forKey:ModelFlyaerodrome];
-    [dictFlyDetail setValue:@"FFF" forKey:ModelFlydate];
-    [dictFlyDetail setValue:@"VVV" forKey:ModelFlytime];
-    [dictFlyDetail setValue:@"YYY" forKey:ModelFlyunit];
-    [dictFlyDetail setValue:@"UUU" forKey:ModelFlyspeed];
-    [dictFlyDetail setValue:@"HHH" forKey:ModelFlylevel];
-    
-    [dictFlyDetail setValue:@"III" forKey:ModelFlyorigin];
-    [dictFlyDetail setValue:@"OOO" forKey:ModelFlydestination];
-    [dictFlyDetail setValue:@"LLL" forKey:ModelFlyEET];
-    [dictFlyDetail setValue:@"ÑÑÑ" forKey:ModelFlyalternative];
-    [dictFlyDetail setValue:@"MMM" forKey:ModelFlyinformation];
-    
-    self.fly = [[Fly alloc] initWithDict:dictFlyDetail];
-
     [self displayTableData];
-
 }
 
 -(void) displayTableData{
     
-    arrFlyInformation = @[[dictFlyDetail valueForKey:ModelFlynumber],
-                          [dictFlyDetail valueForKey:ModelFlypriority],
-                          [dictFlyDetail valueForKey:ModelFlyenrollment],
-                          [dictFlyDetail valueForKey:ModelFlycompany],
-                          [dictFlyDetail valueForKey:ModelFlyrule],
-                          [dictFlyDetail valueForKey:ModelFlytype]];
-    
-    arrAeroplaneInformation = @[[dictFlyDetail valueForKey:ModelFlyaeroplaneNumber],
-                                [dictFlyDetail valueForKey:ModelFlyaeroplaneType],
-                                [dictFlyDetail valueForKey:ModelFlycategory],
-                                [dictFlyDetail valueForKey:ModelFlyequipment]];
-    
-    arrAerodromeInformation = @[[dictFlyDetail valueForKey:ModelFlyaerodrome],
-                                [dictFlyDetail valueForKey:ModelFlydate],
-                                [dictFlyDetail valueForKey:ModelFlytime],
-                                [dictFlyDetail valueForKey:ModelFlyunit],
-                                [dictFlyDetail valueForKey:ModelFlyspeed],
-                                [dictFlyDetail valueForKey:ModelFlylevel]];
-    
-    arrAeroplaneInformation = @[[dictFlyDetail valueForKey:ModelFlyorigin],
-                                [dictFlyDetail valueForKey:ModelFlydestination],
-                                [dictFlyDetail valueForKey:ModelFlyEET],
-                                [dictFlyDetail valueForKey:ModelFlyalternative],
-                                [dictFlyDetail valueForKey:ModelFlyinformation]];
-    
+    arrFlyInformation = [[NSMutableDictionary alloc] init];
+    [arrFlyInformation setValue:self.fly.number forKey:@"1Number"];
+    [arrFlyInformation setValue:self.fly.priority forKey:@"2Priority"];
+    [arrFlyInformation setValue:self.fly.enrollment forKey:@"3Enrollment"];
+    [arrFlyInformation setValue:self.fly.company forKey:@"4Company"];
+    [arrFlyInformation setValue:self.fly.rule forKey:@"5Rule"];
+    [arrFlyInformation setValue:self.fly.type forKey:@"6Type"];
+
+    arrAeroplaneInformation = [[NSMutableDictionary alloc] init];
+    [arrAeroplaneInformation setValue:self.fly.aeroplaneNumber forKey:@"1Number"];
+    [arrAeroplaneInformation setValue:self.fly.aeroplaneType forKey:@"2Type"];
+    [arrAeroplaneInformation setValue:self.fly.category forKey:@"3Category"];
+    [arrAeroplaneInformation setValue:self.fly.equipment forKey:@"4Equipment"];
+
+    arrAerodromeInformation = [[NSMutableDictionary alloc] init];
+    [arrAerodromeInformation setValue:self.fly.aerodrome forKey:@"1Aerodrome"];
+    [arrAerodromeInformation setValue:self.fly.date forKey:@"2Date"];
+    [arrAerodromeInformation setValue:self.fly.time forKey:@"3Time"];
+    [arrAerodromeInformation setValue:self.fly.unit forKey:@"4Unit"];
+    [arrAerodromeInformation setValue:self.fly.speed forKey:@"5Speed"];
+    [arrAerodromeInformation setValue:self.fly.level forKey:@"6Level"];
+
+    arrdestinationInformation = [[NSMutableDictionary alloc] init];
+    [arrdestinationInformation setValue:self.fly.origin forKey:@"1Origin"];
+    [arrdestinationInformation setValue:self.fly.destination forKey:@"2Destination"];
+    [arrdestinationInformation setValue:self.fly.EET forKey:@"3Total EET"];
+    [arrdestinationInformation setValue:self.fly.alternative forKey:@"4Alternative"];
+    [arrdestinationInformation setValue:self.fly.information forKey:@"5Util Information"];
+
     sections = @{@"A" : arrFlyInformation,
                  @"B" : arrAeroplaneInformation,
                  @"C" : arrAerodromeInformation,
-                 @"D" : arrAeroplaneInformation
+                 @"D" : arrdestinationInformation
                  };
     sectionTitles = [sections allKeys];
     
@@ -166,7 +139,7 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
     }
     
-    NSArray *aux = [[NSArray alloc] init];
+    NSDictionary *aux = [[NSDictionary alloc] init];
 
     switch (indexPath.section) {
         case 0:
@@ -183,8 +156,10 @@
             break;
     }
     
-    [cell.textLabel setText:@""];
-    [cell.detailTextLabel setText:[aux objectAtIndex:indexPath.row]];
+    NSArray *arr = [[NSArray alloc] initWithArray:[self sortDictValues:aux]];
+
+    [cell.textLabel setText:[self removeFirstCharFromString:[[aux allKeysForObject:[arr objectAtIndex:indexPath.row]] objectAtIndex:0]]];
+    [cell.detailTextLabel setText:[arr objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -204,5 +179,21 @@
     return [UIView new];
 }
 
+- (NSMutableArray *)sortDictValues:(NSDictionary *)dictionary {
+    
+    NSArray *keys = [dictionary allKeys];
+    NSArray *sKeys = [keys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+    NSMutableArray *sValues = [[NSMutableArray alloc] init];
+    
+    for(id k in sKeys) {
+        id val = [dictionary objectForKey:k];
+        [sValues addObject:val];
+    }
+    return sValues;
+}
 
+-(NSString*)removeFirstCharFromString:(NSString*)str{
+    NSString *newStr = [str substringWithRange:NSMakeRange(1, [str length]-1)];
+    return newStr;
+}
 @end
