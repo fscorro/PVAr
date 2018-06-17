@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <FXForms/FXForms.h>
 #import <RKDropdownAlert.h>
+#import <XLForm.h>
+#import <XLFormViewController.h>
 
-@interface CreateFlyingPlanViewController : FXFormViewController
+@interface CreateFlyingPlanViewController : XLFormViewController
+
+@property (weak, nonatomic) IBOutlet UITableView *tableViewCreateFly;
 
 @end

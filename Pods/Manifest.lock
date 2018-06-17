@@ -14,37 +14,33 @@ PODS:
   - AFNetworking/Serialization (3.1.0)
   - AFNetworking/UIKit (3.1.0):
     - AFNetworking/NSURLSession
-  - FXForms (1.2.14)
-  - JVFloatLabeledTextField (1.2.0)
   - MBProgressHUD (1.0.0)
   - RKDropdownAlert (0.3.0)
   - TYAlertController (1.1.8)
+  - XLForm (3.3.0)
 
 DEPENDENCIES:
   - AFNetworking
-  - FXForms
-  - JVFloatLabeledTextField
   - MBProgressHUD
   - RKDropdownAlert
   - TYAlertController
+  - XLForm
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  https://github.com/cocoapods/specs.git:
     - AFNetworking
-    - FXForms
-    - JVFloatLabeledTextField
     - MBProgressHUD
     - RKDropdownAlert
     - TYAlertController
+    - XLForm
 
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
-  FXForms: 724500c0c3f3eb3ba1004b3b83abcee55d3daf18
-  JVFloatLabeledTextField: 96c0c1b6739001801340d25b86aff990d67c4181
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   RKDropdownAlert: f4b3364c251829ad439dc666836a1f2dad26f4c7
   TYAlertController: 502d3dbc5d007e68559400b509c736f60ebc2cc1
+  XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: 8a74269d5b3af31387b3293c63e5c78f9fd4515d
+PODFILE CHECKSUM: 2c6016ee5f2dc6942ce604e67620aa2db24f2bf2
 
-COCOAPODS: 1.5.0
+COCOAPODS: 1.5.3

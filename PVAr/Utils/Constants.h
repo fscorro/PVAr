@@ -49,5 +49,6 @@
 
 #define SegueFlyingPlanDetail @"SegueFlyingPlanDetail"
 
+#define ValidationPlaceholderRequiered @"Requiered..."
 
 #endif /* Constants_h */
