@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <RKDropdownAlert.h>
+#import <XLForm.h>
+#import <XLFormViewController.h>
 #import "Fly.h"
 
-@interface FlyingPlanDetaillViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
-@property (strong, nonatomic) IBOutlet UITableView *FlyDetailTableview;
+@interface FlyingPlanDetaillViewController : XLFormViewController
 
 @property (strong, nonatomic) Fly *fly;
 

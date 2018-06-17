@@ -37,6 +37,8 @@ NSString *const KMoreInfo = @"KMoreInfo";
 
 NSString *const KButtonCreateFPL = @"FLPButton";
 
+NSInteger const maxAlternativesDestination = 2;
+
 @interface CreateFlyingPlanViewController(){
 
 }
@@ -206,6 +208,7 @@ NSString *const KButtonCreateFPL = @"FLPButton";
                                              sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
                                           sectionInsertMode:XLFormSectionInsertModeButton];
     section.multivaluedAddButton.title = @"Add Fly Alternative";
+    [section.multivaluedAddButton.cellConfig setObject:AppColor forKey:@"textLabel.color"];
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:KAlternative rowType:XLFormRowDescriptorTypeName];
     [[row cellConfig] setObject:@"..." forKey:@"textField.placeholder"];
@@ -267,6 +270,33 @@ NSString *const KButtonCreateFPL = @"FLPButton";
             [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
             [self updateFormRow:startDateDescriptor];
         }
+    }
+}
+
+-(void)formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath{
+    [super formRowHasBeenAdded:formRow atIndexPath:indexPath];
+    
+    //Disable add Row if is neccesary
+    NSInteger rowCount = indexPath.row + 1;
+    if (rowCount == maxAlternativesDestination) {
+        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:0];
+        XLFormRowDescriptor * row = [self.form formRowAtIndex:addIndexPath];
+        row.disabled = @YES;
+        
+        [self.tableView reloadRowsAtIndexPaths:@[addIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+}
+-(void)formRowHasBeenRemoved:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath{
+    [super formRowHasBeenRemoved:formRow atIndexPath:indexPath];
+    
+    NSInteger rowCount = indexPath.row;
+    if (rowCount < maxAlternativesDestination) {
+        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:0];
+        XLFormRowDescriptor * row = [self.form formRowAtIndex:addIndexPath];
+        row.disabled = @NO;
+        
+        [self.tableView reloadRowsAtIndexPaths:@[addIndexPath] withRowAnimation:UITableViewRowAnimationNone];
     }
 }
 

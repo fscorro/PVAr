@@ -8,18 +8,35 @@
 
 #import "FlyingPlanDetaillViewController.h"
 #import "Constants.h"
-#import "ShowAlert.h"
 #import "Fly.h"
+
+NSString *const KNumberDetail = @"KNumber";
+NSString *const KPriorityDetail = @"KPriority";
+NSString *const KEnrollmentDetail = @"KEnrollment";
+NSString *const KCompanyDetail = @"KCompany";
+NSString *const KruleDetail = @"Krule";
+NSString *const KTypeDetail = @"KType";
+
+NSString *const KAeroplaneNumberDetail = @"KAeroplaneNumber";
+NSString *const KAeroplaneTypeDetail = @"KAeroplaneType";
+NSString *const KCategoryDetail = @"KCategory";
+NSString *const KEquipmentDetail = @"KEquipment";
+
+NSString *const KAerodromeDetail = @"KAerodrome";
+NSString *const KDateTimeDetail = @"KDateTime";
+NSString *const KUnitDetail = @"KUnit";
+NSString *const KSpeedDetail = @"KSpeed";
+NSString *const KLevelDetail = @"KLevel";
+
+NSString *const KOriginDetail = @"KOrigin";
+NSString *const KDestinationDetail = @"KDestination";
+NSString *const KAlternativeDetail = @"KAlternative";
+NSString *const KTotalEETDetail = @"KTotalEET";
+
+NSString *const KMoreInfoDetail = @"KMoreInfo";
 
 @interface FlyingPlanDetaillViewController(){
     
-    NSMutableDictionary *arrFlyInformation;;
-    NSMutableDictionary *arrAeroplaneInformation;
-    NSMutableDictionary *arrAerodromeInformation;
-    NSMutableDictionary *arrdestinationInformation;
-
-    NSDictionary *sections;
-    NSArray *sectionTitles;
 }
 @end
 
@@ -29,170 +46,162 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    [self displayTableData];
+    [self initializeForm];
 }
 
--(void) displayTableData{
+-(void)initializeForm{
+    XLFormDescriptor * form;
+    XLFormSectionDescriptor * section;
+    XLFormRowDescriptor * row;
     
-    arrFlyInformation = [[NSMutableDictionary alloc] init];
-    [arrFlyInformation setValue:self.fly.number forKey:@"1Number"];
-    [arrFlyInformation setValue:self.fly.priority forKey:@"2Priority"];
-    [arrFlyInformation setValue:self.fly.enrollment forKey:@"3Enrollment"];
-    [arrFlyInformation setValue:self.fly.company forKey:@"4Company"];
-    [arrFlyInformation setValue:self.fly.rule forKey:@"5Rule"];
-    [arrFlyInformation setValue:self.fly.type forKey:@"6Type"];
-
-    arrAeroplaneInformation = [[NSMutableDictionary alloc] init];
-    [arrAeroplaneInformation setValue:self.fly.aeroplaneNumber forKey:@"1Number"];
-    [arrAeroplaneInformation setValue:self.fly.aeroplaneType forKey:@"2Type"];
-    [arrAeroplaneInformation setValue:self.fly.category forKey:@"3Category"];
-    [arrAeroplaneInformation setValue:self.fly.equipment forKey:@"4Equipment"];
-
-    arrAerodromeInformation = [[NSMutableDictionary alloc] init];
-    [arrAerodromeInformation setValue:self.fly.aerodrome forKey:@"1Aerodrome"];
-    [arrAerodromeInformation setValue:self.fly.date forKey:@"2Date"];
-    [arrAerodromeInformation setValue:self.fly.time forKey:@"3Time"];
-    [arrAerodromeInformation setValue:self.fly.unit forKey:@"4Unit"];
-    [arrAerodromeInformation setValue:self.fly.speed forKey:@"5Speed"];
-    [arrAerodromeInformation setValue:self.fly.level forKey:@"6Level"];
-
-    arrdestinationInformation = [[NSMutableDictionary alloc] init];
-    [arrdestinationInformation setValue:self.fly.origin forKey:@"1Origin"];
-    [arrdestinationInformation setValue:self.fly.destination forKey:@"2Destination"];
-    [arrdestinationInformation setValue:self.fly.EET forKey:@"3Total EET"];
-    [arrdestinationInformation setValue:self.fly.alternative forKey:@"4Alternative"];
-    [arrdestinationInformation setValue:self.fly.information forKey:@"5Util Information"];
-
-    sections = @{@"A" : arrFlyInformation,
-                 @"B" : arrAeroplaneInformation,
-                 @"C" : arrAerodromeInformation,
-                 @"D" : arrdestinationInformation
-                 };
-    sectionTitles = [sections allKeys];
+    form = [XLFormDescriptor formDescriptor];
     
-    [self.FlyDetailTableview reloadData];
-}
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KNumberDetail rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.number;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KPriorityDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Priority"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.priority]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.priority];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KEnrollmentDetail rowType:XLFormRowDescriptorTypeEmail title:@"Enrollment"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.enrollment;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KCompanyDetail rowType:XLFormRowDescriptorTypeEmail title:@"Company"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.company;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KruleDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.rule]];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.rule];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KTypeDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.type]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.type];
+    [section addFormRow:row];
+    
+    
+    // SECTION 2
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"AEROPLANE INFORMATION"];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAeroplaneNumberDetail rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.aeroplaneNumber;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAeroplaneTypeDetail rowType:XLFormRowDescriptorTypeEmail title:@"Type"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.aeroplaneType;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KCategoryDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Catefory"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.category]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.category];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KEquipmentDetail rowType:XLFormRowDescriptorTypeEmail title:@"Equipment"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.equipment;
+    [section addFormRow:row];
+    
+    
+    // SECTION 3
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAerodromeDetail rowType:XLFormRowDescriptorTypeEmail title:@"Aerodromo"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.aerodrome;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KDateTimeDetail rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
+    row.value = [NSDate new];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KUnitDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Units"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.unit]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.unit];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KSpeedDetail rowType:XLFormRowDescriptorTypeEmail title:@"Speed"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.speed;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KLevelDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Level"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.level]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.level];
+    [section addFormRow:row];
+    
+    
+    // SECTION 4
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KOriginDetail rowType:XLFormRowDescriptorTypeEmail title:@"Origin"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.origin;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KDestinationDetail rowType:XLFormRowDescriptorTypeEmail title:@"Destination"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.destination;
+    [section addFormRow:row];
+    
+    
+    // SECTION 5 - Alternative fly
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"];
 
-#pragma mark - Sections
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return [sectionTitles count];
-}
-
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-    switch (section) {
-        case 0:
-            return @"FLY INFORMATION";
-            break;
-        case 1:
-            return @"AEROPLANE INFORMATION";
-            break;
-        case 2:
-            return @" ";
-            break;
-        case 3:
-            return @" ";
-            break;
+    if([self.fly.alternative count] > 0){
+        for (int i = 0; i<[self.fly.alternative count]; i++) {
+            
+            row = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat:@"%@%d",KAlternativeDetail,i] rowType:XLFormRowDescriptorTypeText];
+            row.disabled = @YES;
+            row.value = [self.fly.alternative objectAtIndex:i];
+            [section addFormRow:row];
+        }
+        section.footerTitle = [NSString stringWithFormat:@"Number of alternatives destinations: %lu",(unsigned long)[self.fly.alternative count]];
+    }else{
+        section.footerTitle = @"No alternatives destinations";
     }
-    return @"";
-}
-
-//- (void)tableView:(UITableView *)tableView willDisplayHeaderView:(UIView *)view forSection:(NSInteger)section{
-//    // Set the text color of our header/footer text.
-//    UITableViewHeaderFooterView *header = (UITableViewHeaderFooterView *)view;
-//    [header.textLabel setTextColor:[UIColor whiteColor]];
-//
-//    // Set the background color of our header/footer.
-//    header.contentView.backgroundColor = [UIColor groupTableViewBackgroundColor];
-//
-//    // You can also do this to set the background color of our header/footer,
-//    //    but the gradients/other effects will be retained.
-//    // view.tintColor = [UIColor blackColor];
-//}
-
-#pragma mark - UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    switch (section) {
-        case 0:
-            return 6;
-            break;
-        case 1:
-            return 4;
-            break;
-        case 2:
-            return 6;
-            break;
-        case 3:
-            return 5;
-            break;
-    }
-    return 0;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    [form addFormSection:section];
     
-    static NSString *MyIdentifier = @"CellFlyDetail";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    // SECTION 6
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
     
-    if (cell == nil){
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:MyIdentifier];
-    }
     
-    NSDictionary *aux = [[NSDictionary alloc] init];
-
-    switch (indexPath.section) {
-        case 0:
-            aux = [sections objectForKey:@"A"];
-            break;
-        case 1:
-            aux = [sections objectForKey:@"B"];
-            break;
-        case 2:
-            aux = [sections objectForKey:@"C"];
-            break;
-        case 3:
-            aux = [sections objectForKey:@"D"];
-            break;
-    }
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KTotalEETDetail rowType:XLFormRowDescriptorTypeEmail title:@"Total EET"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.EET;
+    [section addFormRow:row];
     
-    NSArray *arr = [[NSArray alloc] initWithArray:[self sortDictValues:aux]];
-
-    [cell.textLabel setText:[self removeFirstCharFromString:[[aux allKeysForObject:[arr objectAtIndex:indexPath.row]] objectAtIndex:0]]];
-    [cell.detailTextLabel setText:[arr objectAtIndex:indexPath.row]];
     
-    return cell;
-}
-
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    // SECTION 7
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"More util information."];
+    [form addFormSection:section];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KMoreInfoDetail rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
+    row.value = self.fly.information;
+    [section addFormRow:row];
     
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    form.disabled = @YES;
+    self.form = form;
     
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
-    // This will create a "invisible" footer
-    return 0.01f;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
-    return [UIView new];
-}
-
-- (NSMutableArray *)sortDictValues:(NSDictionary *)dictionary {
-    
-    NSArray *keys = [dictionary allKeys];
-    NSArray *sKeys = [keys sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-    NSMutableArray *sValues = [[NSMutableArray alloc] init];
-    
-    for(id k in sKeys) {
-        id val = [dictionary objectForKey:k];
-        [sValues addObject:val];
-    }
-    return sValues;
-}
-
--(NSString*)removeFirstCharFromString:(NSString*)str{
-    NSString *newStr = [str substringWithRange:NSMakeRange(1, [str length]-1)];
-    return newStr;
 }
 @end

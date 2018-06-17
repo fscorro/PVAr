@@ -13,6 +13,4 @@
 
 @interface CreateFlyingPlanViewController : XLFormViewController
 
-@property (weak, nonatomic) IBOutlet UITableView *tableViewCreateFly;
-
 @end

@@ -50,7 +50,7 @@
     [temp setValue:@"EJOA" forKey:ModelFlyorigin];
     [temp setValue:@"JKLM" forKey:ModelFlydestination];
     [temp setValue:@"0313" forKey:ModelFlyEET];
-    [temp setValue:@"KBPI, KSIO" forKey:ModelFlyalternative];
+    [temp setValue:@[@"OMJP"] forKey:ModelFlyalternative];
     [temp setValue:@"Z1P1H W44" forKey:ModelFlyinformation];
     
     Fly *fly = [[Fly alloc] initWithDict:temp];

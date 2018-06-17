@@ -275,56 +275,13 @@
                     <view key="view" contentMode="scaleToFill" id="REF-6Z-OoX">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="tGv-tH-avF">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellFlyDetail" textLabel="11Q-q0-qi8" detailTextLabel="zQF-m3-5R9" rowHeight="44" style="IBUITableViewCellStyleValue1" id="znb-Hn-g7V">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="znb-Hn-g7V" id="tv1-QH-5l6">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="11Q-q0-qi8">
-                                                    <rect key="frame" x="15" y="12" width="36.5" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zQF-m3-5R9">
-                                                    <rect key="frame" x="261" y="12" width="44" height="20.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="WiR-NX-eTX" id="rw3-bz-f3p"/>
-                                    <outlet property="delegate" destination="WiR-NX-eTX" id="3SZ-y2-haj"/>
-                                </connections>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="tGv-tH-avF" secondAttribute="bottom" id="3IX-g5-Uiv"/>
-                            <constraint firstAttribute="trailing" secondItem="tGv-tH-avF" secondAttribute="trailing" id="ZOa-Tf-kBH"/>
-                            <constraint firstItem="tGv-tH-avF" firstAttribute="leading" secondItem="REF-6Z-OoX" secondAttribute="leading" id="bst-VN-5TH"/>
-                            <constraint firstItem="tGv-tH-avF" firstAttribute="top" secondItem="REF-6Z-OoX" secondAttribute="top" id="t9b-OQ-Ozo"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="ez4-IR-t52"/>
                     </view>
                     <navigationItem key="navigationItem" title="Details" id="Mud-o3-rU4">
                         <barButtonItem key="backBarButtonItem" title="-" id="7zR-ZV-Eo7"/>
                     </navigationItem>
                     <connections>
-                        <outlet property="FlyDetailTableview" destination="tGv-tH-avF" id="dP3-hc-7Bd"/>
                         <segue destination="7Bg-nO-png" kind="show" identifier="SegueFlyingPlanDetailExtra" id="Oek-wH-Cxq"/>
                     </connections>
                 </viewController>
@@ -432,6 +389,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <viewLayoutGuide key="safeArea" id="HLO-cl-w9k"/>
                     </view>
+                    <connections>
+                        <segue destination="WiR-NX-eTX" kind="show" identifier="SegueFlyingPlanDetail" id="eVK-8e-YgF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x34-kO-uQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -607,6 +567,6 @@
         <image name="icon_user" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="yGP-xH-Q8F"/>
+        <segue reference="eVK-8e-YgF"/>
     </inferredMetricsTieBreakers>
 </document>
