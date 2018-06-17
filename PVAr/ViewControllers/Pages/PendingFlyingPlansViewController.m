@@ -24,6 +24,8 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(ReloadPendingFPL:) name:@"ReloadPendingFPL" object:nil];
+    
     // todo esto deberia desaparecer, es solo para una demo..
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     [temp setValue:@"P" forKey:ModelFlystate];
@@ -131,5 +133,13 @@
 
         [self presentViewController:actionSheet animated:YES completion:nil];
     }
+}
+
+-(void) ReloadPendingFPL:(NSNotification *) obj{
+    Fly *newFly = [obj object];
+
+    [arr addObject:newFly];
+    [self.tableviewPendingFlying reloadData];
+    
 }
 @end

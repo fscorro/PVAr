@@ -36,6 +36,7 @@
 #define ModelFlycategory @"category"
 #define ModelFlyequipment @"equipment"
 #define ModelFlyaerodrome @"aerodrome"
+#define ModelFlydateTime @"dateTime"
 #define ModelFlydate @"date"
 #define ModelFlytime @"time"
 #define ModelFlyunit @"unit"

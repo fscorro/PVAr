@@ -10,30 +10,30 @@
 #import "Constants.h"
 #import "ShowAlert.h"
 
-NSString *const KNumber = @"KNumber";
-NSString *const KPriority = @"KPriority";
-NSString *const KEnrollment = @"KEnrollment";
-NSString *const KCompany = @"KCompany";
-NSString *const Krule = @"Krule";
-NSString *const KType = @"KType";
-
-NSString *const KAeroplaneNumber = @"KAeroplaneNumber";
-NSString *const KAeroplaneType = @"KAeroplaneType";
-NSString *const KCategory = @"KCategory";
-NSString *const KEquipment = @"KEquipment";
-
-NSString *const KAerodrome = @"KAerodrome";
-NSString *const KDateTime = @"KDateTime";
-NSString *const KUnit = @"KUnit";
-NSString *const KSpeed = @"KSpeed";
-NSString *const KLevel = @"KLevel";
-
-NSString *const KOrigin = @"KOrigin";
-NSString *const KDestination = @"KDestination";
-NSString *const KAlternative = @"KAlternative";
-NSString *const KTotalEET = @"KTotalEET";
-
-NSString *const KMoreInfo = @"KMoreInfo";
+//NSString *const KNumber = @"KNumber";
+//NSString *const KPriority = @"KPriority";
+//NSString *const KEnrollment = @"KEnrollment";
+//NSString *const KCompany = @"KCompany";
+//NSString *const Krule = @"Krule";
+//NSString *const KType = @"KType";
+//
+//NSString *const KAeroplaneNumber = @"KAeroplaneNumber";
+//NSString *const KAeroplaneType = @"KAeroplaneType";
+//NSString *const KCategory = @"KCategory";
+//NSString *const KEquipment = @"KEquipment";
+//
+//NSString *const KAerodrome = @"KAerodrome";
+//NSString *const KDateTime = @"KDateTime";
+//NSString *const KUnit = @"KUnit";
+//NSString *const KSpeed = @"KSpeed";
+//NSString *const KLevel = @"KLevel";
+//
+//NSString *const KOrigin = @"KOrigin";
+//NSString *const KDestination = @"KDestination";
+//NSString *const KAlternative = @"KAlternative";
+//NSString *const KTotalEET = @"KTotalEET";
+//
+//NSString *const KMoreInfo = @"KMoreInfo";
 
 NSString *const KButtonCreateFPL = @"FLPButton";
 
@@ -62,13 +62,13 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KNumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlynumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KPriority rowType:XLFormRowDescriptorTypeSelectorPush title:@"Priority"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlypriority rowType:XLFormRowDescriptorTypeSelectorPush title:@"Priority"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"ATFMX"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"FFR"],
@@ -86,19 +86,19 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"];
     [section addFormRow:row];
    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KEnrollment rowType:XLFormRowDescriptorTypeEmail title:@"Enrollment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyenrollment rowType:XLFormRowDescriptorTypeEmail title:@"Enrollment"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KCompany rowType:XLFormRowDescriptorTypeEmail title:@"Company"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycompany rowType:XLFormRowDescriptorTypeEmail title:@"Company"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:Krule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I - Vuelo con IFR"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V - Vuelo con VFR"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y - IFR con cambio de regla de vuelo"],
@@ -107,7 +107,7 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I - Vuelo con IFR"];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KType rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S - Regular"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N - No regular"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G - General"],
@@ -122,19 +122,19 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"AEROPLANE INFORMATION"];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAeroplaneNumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneNumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAeroplaneType rowType:XLFormRowDescriptorTypeEmail title:@"Type"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneType rowType:XLFormRowDescriptorTypeEmail title:@"Type"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KCategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Catefory"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"H - Pesada"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"M - Media"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"L - Liviana"]
@@ -142,7 +142,7 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"H - Pesada"];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KEquipment rowType:XLFormRowDescriptorTypeEmail title:@"Equipment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeEmail title:@"Equipment"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
@@ -153,17 +153,17 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAerodrome rowType:XLFormRowDescriptorTypeEmail title:@"Aerodromo"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaerodrome rowType:XLFormRowDescriptorTypeEmail title:@"Aerodromo"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KDateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
     row.value = [NSDate new];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KUnit rowType:XLFormRowDescriptorTypeSelectorPush title:@"Units"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyunit rowType:XLFormRowDescriptorTypeSelectorPush title:@"Units"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"K - Kilometros"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N - Nodos"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"M - Número de Mach"]
@@ -171,13 +171,13 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"K - Kilometros"];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KSpeed rowType:XLFormRowDescriptorTypeEmail title:@"Speed"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeEmail title:@"Speed"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KLevel rowType:XLFormRowDescriptorTypeSelectorPush title:@"Level"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeSelectorPush title:@"Level"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"F - Nivel de vuelo"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"S - Nivel metrico"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"A - Altitud centenares de pies"],
@@ -191,13 +191,13 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KOrigin rowType:XLFormRowDescriptorTypeEmail title:@"Origin"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyorigin rowType:XLFormRowDescriptorTypeEmail title:@"Origin"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KDestination rowType:XLFormRowDescriptorTypeEmail title:@"Destination"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestination rowType:XLFormRowDescriptorTypeEmail title:@"Destination"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
@@ -210,7 +210,7 @@ NSInteger const maxAlternativesDestination = 2;
     section.multivaluedAddButton.title = @"Add Fly Alternative";
     [section.multivaluedAddButton.cellConfig setObject:AppColor forKey:@"textLabel.color"];
 
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAlternative rowType:XLFormRowDescriptorTypeName];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeName];
     [[row cellConfig] setObject:@"..." forKey:@"textField.placeholder"];
     section.multivaluedRowTemplate = row;
     [form addFormSection:section];
@@ -221,7 +221,7 @@ NSInteger const maxAlternativesDestination = 2;
     [form addFormSection:section];
     
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KTotalEET rowType:XLFormRowDescriptorTypeEmail title:@"Total EET"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeEmail title:@"Total EET"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
@@ -231,7 +231,7 @@ NSInteger const maxAlternativesDestination = 2;
     // SECTION 7
     section = [XLFormSectionDescriptor formSectionWithTitle:@"More util information."];
     [form addFormSection:section];
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KMoreInfo rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyinformation rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
     row.required = NO;
     [section addFormRow:row];
     
@@ -250,12 +250,13 @@ NSInteger const maxAlternativesDestination = 2;
 
 #pragma mark - XLFormDescriptorDelegate
 
--(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)rowDescriptor oldValue:(id)oldValue newValue:(id)newValue
-{
+-(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)rowDescriptor oldValue:(id)oldValue newValue:(id)newValue{
     [super formRowDescriptorValueHasChanged:rowDescriptor oldValue:oldValue newValue:newValue];
-    if ([rowDescriptor.tag isEqualToString:KDateTime]){
-        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:KDateTime];
-
+    
+    if ([rowDescriptor.tag isEqualToString:ModelFlydateTime]){
+        
+        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydateTime];
+        
         XLFormDateCell * dateCell = (XLFormDateCell *)[startDateDescriptor cellForFormController:self];
         if ([[NSDate new] compare:startDateDescriptor.value] == NSOrderedDescending) {
             // startDateDescriptor is later than endDateDescriptor
@@ -279,7 +280,7 @@ NSInteger const maxAlternativesDestination = 2;
     //Disable add Row if is neccesary
     NSInteger rowCount = indexPath.row + 1;
     if (rowCount == maxAlternativesDestination) {
-        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:0];
+        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:indexPath.section];
         XLFormRowDescriptor * row = [self.form formRowAtIndex:addIndexPath];
         row.disabled = @YES;
         
@@ -292,7 +293,7 @@ NSInteger const maxAlternativesDestination = 2;
     
     NSInteger rowCount = indexPath.row;
     if (rowCount < maxAlternativesDestination) {
-        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:0];
+        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:indexPath.section];
         XLFormRowDescriptor * row = [self.form formRowAtIndex:addIndexPath];
         row.disabled = @NO;
         
@@ -305,44 +306,73 @@ NSInteger const maxAlternativesDestination = 2;
     NSArray * array = [self formValidationErrors];
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         XLFormValidationStatus * validationStatus = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
-        if ([validationStatus.rowDescriptor.tag isEqualToString:KNumber]){
+        if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlynumber]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
         }
-        else if ([validationStatus.rowDescriptor.tag isEqualToString:KEnrollment]){
+        else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyenrollment]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KCompany]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlycompany]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KAeroplaneNumber]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyaeroplaneNumber]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KAeroplaneType]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyaeroplaneType]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KEnrollment]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyequipment]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KAerodrome]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyaerodrome]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KSpeed]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyspeed]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KOrigin]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyorigin]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KDestination]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlydestination]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:KTotalEET]){
+        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyEET]){
             UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
             [self animateCell:cell];
         }
     }];
     if([array count] == 0){
+        NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+        [temp setValue:@"P" forKey:ModelFlystate];
+        
+        NSMutableArray *arrAlternatives = [[NSMutableArray alloc] init];
+
+        for(int i = 0; i < [[self.form formSections] count] ; i++){
+            for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
+                if([row.rowType isEqualToString:XLFormRowDescriptorTypeSelectorPush]){
+                    [temp setValue:[row.value displayText] forKey:row.tag];
+                }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeDateInline]){
+                    // convertir fecha a string o enviar en formato fecha
+                    
+                }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeName]){
+                    if (row.value != nil) {
+                        [arrAlternatives addObject:row.value];
+                        [temp setValue:arrAlternatives forKey:ModelFlyalternative];
+                        
+                    }
+                }else{
+                    if (row.value != nil) {
+                        [temp setValue:row.value forKey:row.tag];
+                    }
+                }
+            }
+        }
+        Fly *newFly = [[Fly alloc] initWithDict:temp];
+        
         [ShowAlert ShowAlertWithTitle:@"Submit Successfull" andMessage:@"Your FPL was created successfully" acceptBlock:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadPendingFPL" object:newFly];
+
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }else{
