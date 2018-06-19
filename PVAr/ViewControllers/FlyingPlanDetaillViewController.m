@@ -106,7 +106,7 @@ NSString *const KMoreInfoDetail = @"KMoreInfo";
     row.value = self.fly.aeroplaneType;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KCategoryDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Catefory"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KCategoryDetail rowType:XLFormRowDescriptorTypeSelectorPush title:@"Category"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.category]
                             ];
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.category];
@@ -122,7 +122,7 @@ NSString *const KMoreInfoDetail = @"KMoreInfo";
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAerodromeDetail rowType:XLFormRowDescriptorTypeEmail title:@"Aerodromo"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:KAerodromeDetail rowType:XLFormRowDescriptorTypeEmail title:@"Aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.value = self.fly.aerodrome;
     [section addFormRow:row];
@@ -148,7 +148,6 @@ NSString *const KMoreInfoDetail = @"KMoreInfo";
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.level];
     [section addFormRow:row];
     
-    
     // SECTION 4
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
@@ -162,12 +161,12 @@ NSString *const KMoreInfoDetail = @"KMoreInfo";
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.value = self.fly.destination;
     [section addFormRow:row];
-    
-    
-    // SECTION 5 - Alternative fly
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"];
+
 
     if([self.fly.alternative count] > 0){
+        // SECTION 5 - Alternative fly
+        section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"];
+        
         for (int i = 0; i<[self.fly.alternative count]; i++) {
             
             row = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat:@"%@%d",KAlternativeDetail,i] rowType:XLFormRowDescriptorTypeText];
@@ -176,10 +175,11 @@ NSString *const KMoreInfoDetail = @"KMoreInfo";
             [section addFormRow:row];
         }
         section.footerTitle = [NSString stringWithFormat:@"Number of alternatives destinations: %lu",(unsigned long)[self.fly.alternative count]];
+        
+        [form addFormSection:section];
     }else{
         section.footerTitle = @"No alternatives destinations";
     }
-    [form addFormSection:section];
     
     
     // SECTION 6

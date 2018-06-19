@@ -134,7 +134,7 @@ NSInteger const maxAlternativesDestination = 2;
     row.required = YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Catefory"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Category"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"H - Pesada"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"M - Media"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"L - Liviana"]
@@ -153,7 +153,7 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaerodrome rowType:XLFormRowDescriptorTypeEmail title:@"Aerodromo"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaerodrome rowType:XLFormRowDescriptorTypeEmail title:@"Aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
@@ -376,7 +376,7 @@ NSInteger const maxAlternativesDestination = 2;
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }else{
-        [RKDropdownAlert title:@"Submit failure" message:@"Please complete all fields and try again." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
+        [RKDropdownAlert title:@"Submit failure" message:@"Complete all requiered fields and try again." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
     }
 
     [self deselectFormRow:sender];

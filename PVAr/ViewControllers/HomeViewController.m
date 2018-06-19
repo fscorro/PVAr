@@ -20,6 +20,7 @@ const int tabsNumber = 3;
 @interface HomeViewController(){
     NSArray *viewControllers;
     NSArray *tagTitles;
+    NSInteger segmentIndex;
 }
 @property (nonatomic, weak) ContainerViewController *containerViewController;
 
@@ -31,6 +32,33 @@ const int tabsNumber = 3;
     [super viewDidLoad];
     
     [self.scrollSegmentControll setContentSize:CGSizeMake(self.scrollSegmentControll.contentSize.width, 0)];
+    
+    UISwipeGestureRecognizer * swipeleft=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipeleft:)];
+    swipeleft.direction=UISwipeGestureRecognizerDirectionLeft;
+    [self.view addGestureRecognizer:swipeleft];
+
+    UISwipeGestureRecognizer * swiperight=[[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swiperight:)];
+    swiperight.direction=UISwipeGestureRecognizerDirectionRight;
+    [self.view addGestureRecognizer:swiperight];
+    
+}
+
+-(void)swipeleft:(UISwipeGestureRecognizer*)gestureRecognizer{
+    segmentIndex = self.segmentControll.selectedSegmentIndex;
+    if (0 <= segmentIndex && segmentIndex < self.segmentControll.numberOfSegments) {
+        ++segmentIndex;
+        self.segmentControll.selectedSegmentIndex = segmentIndex;
+        [self updateViewController];
+    }
+}
+
+-(void)swiperight:(UISwipeGestureRecognizer*)gestureRecognizer{
+    segmentIndex = self.segmentControll.selectedSegmentIndex;
+    if (0 < segmentIndex && segmentIndex <= self.segmentControll.numberOfSegments) {
+        --segmentIndex;
+        self.segmentControll.selectedSegmentIndex = segmentIndex;
+        [self updateViewController];
+    }
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -49,6 +77,12 @@ const int tabsNumber = 3;
 }
 
 - (IBAction)ChangeSegmentControllPage:(id)sender {
+    segmentIndex = self.segmentControll.selectedSegmentIndex;
+
+    [self updateViewController];
+}
+
+-(void) updateViewController{
     UIStoryboard *sb = [[AppDelegate sharedAppDelegate] grabStoryboard];
     UIViewController *vc = nil;
     
@@ -70,7 +104,7 @@ const int tabsNumber = 3;
         // change view controller
         vc = [sb instantiateViewControllerWithIdentifier:@"CancelledFlyingPlansViewController"];
     }
-
+    
     [self.containerViewController swapViewControllers:vc];
 }
 @end

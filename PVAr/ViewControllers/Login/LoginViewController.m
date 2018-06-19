@@ -139,6 +139,8 @@
 }
 
 - (IBAction)Login:(id)sender {
+    [self dismissTextfield];
+    
     if([self validateLogin] == true){
         [self performSegueWithIdentifier:@"SegueHome" sender:nil];
     }
