@@ -29,10 +29,10 @@
     self.loginButton.clipsToBounds = true;
     
     [self.imageTextfieldUser setImage:[self changeImagen:[UIImage imageNamed:@"icon_user"]]];
-    [self.imageTextfieldUser setTintColor:AppColor];
+    [self.imageTextfieldUser setTintColor:AppColorLight];
 
     [self.imageTextfieldPassword setImage:[self changeImagen:[UIImage imageNamed:@"icon_password"]]];
-    [self.imageTextfieldPassword setTintColor:AppColor];
+    [self.imageTextfieldPassword setTintColor:AppColorLight];
     
     self.viewTextfieldUser.layer.cornerRadius = 5.0f;
     self.viewTextfieldUser.layer.borderWidth = 1.0f;

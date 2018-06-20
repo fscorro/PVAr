@@ -106,7 +106,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Eo-ym-6q7">
                                         <rect key="frame" x="187" y="104" width="109" height="28"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                        <color key="tintColor" red="0.0" green="0.1843137255" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="0.0" green="0.23137254900000001" blue="0.40784313729999999" alpha="1" colorSpace="deviceRGB"/>
                                         <state key="normal" title="Restore Password"/>
                                         <connections>
                                             <action selector="ForgotPassword:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Stx-Pi-QCJ"/>
@@ -127,7 +127,7 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65z-vL-fqT">
                                 <rect key="frame" x="24" y="326.5" width="272" height="40"/>
-                                <color key="backgroundColor" red="0.0" green="0.18431372549019609" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.23137254900000001" blue="0.40784313729999999" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="UFW-AK-uJu"/>
                                 </constraints>
@@ -138,8 +138,8 @@
                                     <action selector="Login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iTt-6y-OTO"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogo" translatesAutoresizingMaskIntoConstraints="NO" id="E6D-dj-psI">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppLogoBanner" translatesAutoresizingMaskIntoConstraints="NO" id="E6D-dj-psI">
+                                <rect key="frame" x="24" y="0.0" width="272" height="128"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="128" id="Wc9-xs-vZr"/>
                                 </constraints>
@@ -148,10 +148,10 @@
                                 <rect key="frame" x="0.0" y="438" width="320" height="66"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hup-yc-Clk">
-                                        <rect key="frame" x="70.5" y="0.0" width="179.5" height="66"/>
+                                        <rect key="frame" x="69.5" y="0.0" width="181.5" height="66"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K5n-we-WL9">
-                                                <rect key="frame" x="74.5" y="13" width="105" height="40"/>
+                                                <rect key="frame" x="76.5" y="13" width="105" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="5s0-KJ-c19"/>
                                                 </constraints>
@@ -172,7 +172,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="fjH-RV-eEF" firstAttribute="leading" secondItem="hup-yc-Clk" secondAttribute="leading" id="E1R-u5-KtU"/>
-                                            <constraint firstItem="K5n-we-WL9" firstAttribute="leading" secondItem="fjH-RV-eEF" secondAttribute="trailing" constant="2" id="VRz-Db-bjP"/>
+                                            <constraint firstItem="K5n-we-WL9" firstAttribute="leading" secondItem="fjH-RV-eEF" secondAttribute="trailing" constant="4" id="VRz-Db-bjP"/>
                                             <constraint firstAttribute="trailing" secondItem="K5n-we-WL9" secondAttribute="trailing" id="Yz3-S4-ydp"/>
                                             <constraint firstItem="fjH-RV-eEF" firstAttribute="centerY" secondItem="hup-yc-Clk" secondAttribute="centerY" id="h6E-1b-ERq"/>
                                             <constraint firstItem="K5n-we-WL9" firstAttribute="centerY" secondItem="hup-yc-Clk" secondAttribute="centerY" id="tSQ-eD-2hu"/>
@@ -192,14 +192,14 @@
                         <constraints>
                             <constraint firstItem="65z-vL-fqT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="1UA-u5-s8a"/>
                             <constraint firstItem="E6D-dj-psI" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="38D-SG-tCG"/>
-                            <constraint firstItem="E6D-dj-psI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MWv-lo-hhh"/>
+                            <constraint firstItem="E6D-dj-psI" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="24" id="MWv-lo-hhh"/>
                             <constraint firstAttribute="trailing" secondItem="65z-vL-fqT" secondAttribute="trailing" constant="24" id="MXX-7G-6Yl"/>
                             <constraint firstItem="3zt-fR-yGj" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mz8-fV-SiK"/>
                             <constraint firstAttribute="bottom" secondItem="3zt-fR-yGj" secondAttribute="bottom" id="PI4-3B-paA"/>
                             <constraint firstItem="SaR-iz-Gd1" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="QAe-eB-M9a"/>
                             <constraint firstItem="65z-vL-fqT" firstAttribute="top" secondItem="SaR-iz-Gd1" secondAttribute="bottom" constant="8" id="ReT-i0-N8Q"/>
                             <constraint firstAttribute="trailing" secondItem="SaR-iz-Gd1" secondAttribute="trailing" id="cJl-9n-r0r"/>
-                            <constraint firstAttribute="trailing" secondItem="E6D-dj-psI" secondAttribute="trailing" id="coa-Jp-DH2"/>
+                            <constraint firstAttribute="trailing" secondItem="E6D-dj-psI" secondAttribute="trailing" constant="24" id="coa-Jp-DH2"/>
                             <constraint firstItem="SaR-iz-Gd1" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="djS-zH-z01"/>
                             <constraint firstAttribute="trailing" secondItem="3zt-fR-yGj" secondAttribute="trailing" id="sBn-qD-g88"/>
                         </constraints>
@@ -397,7 +397,7 @@
             </objects>
             <point key="canvasLocation" x="1768" y="3113"/>
         </scene>
-        <!--Home-->
+        <!--Home View Controller-->
         <scene sceneID="e07-hg-gHr">
             <objects>
                 <viewController id="jeA-fP-7ci" customClass="HomeViewController" sceneMemberID="viewController">
@@ -410,7 +410,7 @@
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="UV8-Nz-FZ1">
                                         <rect key="frame" x="8" y="10" width="304" height="31"/>
-                                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                        <color key="backgroundColor" red="0.0" green="0.23137254901960785" blue="0.40784313725490196" alpha="1" colorSpace="deviceRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="vWI-Sv-e6j"/>
                                         </constraints>
@@ -419,13 +419,13 @@
                                             <segment title="Accepted plans"/>
                                             <segment title="Cancelled plans"/>
                                         </segments>
-                                        <color key="tintColor" red="0.0" green="0.1843137255" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="ChangeSegmentControllPage:" destination="jeA-fP-7ci" eventType="valueChanged" id="DrW-HE-prY"/>
                                         </connections>
                                     </segmentedControl>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="backgroundColor" red="0.0" green="0.19215686274509802" blue="0.36862745098039218" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstItem="UV8-Nz-FZ1" firstAttribute="leading" secondItem="ZlZ-Mt-SWC" secondAttribute="leading" constant="8" id="7fy-GZ-eA3"/>
                                     <constraint firstItem="UV8-Nz-FZ1" firstAttribute="centerY" secondItem="ZlZ-Mt-SWC" secondAttribute="centerY" id="d3d-6F-yHi"/>
@@ -452,7 +452,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sQa-d1-bfG"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="XDO-BG-D6z">
+                    <navigationItem key="navigationItem" id="XDO-BG-D6z">
                         <barButtonItem key="backBarButtonItem" title="-" id="lEz-Py-fPe"/>
                         <barButtonItem key="leftBarButtonItem" image="icon_logout" id="7Gt-Yg-0pZ">
                             <connections>
@@ -517,7 +517,11 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="6tU-Di-bfI">
                         <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.0" green="0.1843137255" blue="0.40000000000000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" red="0.0" green="0.15294117647058825" blue="0.32941176470588235" alpha="1" colorSpace="deviceRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -550,7 +554,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="AppLogo" width="67" height="65"/>
+        <image name="AppLogoBanner" width="1230" height="297"/>
         <image name="icon_logout" width="21" height="21"/>
         <image name="icon_more" width="21" height="21"/>
         <image name="icon_password" width="21" height="21"/>

@@ -9,7 +9,9 @@
 #ifndef Constants_h
 #define Constants_h
 
-#define AppColor [UIColor colorWithRed:(0/255.0) green:(47/255.0) blue:(102/255.0) alpha:1]
+#define AppColorLight [UIColor colorWithRed:(0/255.0) green:(59/255.0) blue:(104/255.0) alpha:1]
+#define AppColorMid [UIColor colorWithRed:(0/255.0) green:(49/255.0) blue:(94/255.0) alpha:1]
+#define AppColorDark [UIColor colorWithRed:(0/255.0) green:(39/255.0) blue:(84/255.0) alpha:1]
 
 #define FlyStatePendingColor [UIColor colorWithRed:(255/255.0) green:(235/255.0) blue:(59/255.0) alpha:1]
 #define FlyStateAcceptedColor [UIColor colorWithRed:(56/255.0) green:(142/255.0) blue:(60/255.0) alpha:1]

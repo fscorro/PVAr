@@ -41,7 +41,7 @@ NSString *const kButton = @"button";
     [form addFormSection:section];
     
     // Email
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:kEmail rowType:XLFormRowDescriptorTypeText title:@"Email"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:kEmail rowType:XLFormRowDescriptorTypeEmail title:@"Email"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
@@ -63,6 +63,7 @@ NSString *const kButton = @"button";
     // Button
     XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:kButton rowType:XLFormRowDescriptorTypeButton title:@"Create user"];
     buttonRow.action.formSelector = @selector(didTouchButton:);
+    [buttonRow.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
     [section addFormRow:buttonRow];
     
     self.form = form;

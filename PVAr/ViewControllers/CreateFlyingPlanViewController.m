@@ -10,31 +10,6 @@
 #import "Constants.h"
 #import "ShowAlert.h"
 
-//NSString *const KNumber = @"KNumber";
-//NSString *const KPriority = @"KPriority";
-//NSString *const KEnrollment = @"KEnrollment";
-//NSString *const KCompany = @"KCompany";
-//NSString *const Krule = @"Krule";
-//NSString *const KType = @"KType";
-//
-//NSString *const KAeroplaneNumber = @"KAeroplaneNumber";
-//NSString *const KAeroplaneType = @"KAeroplaneType";
-//NSString *const KCategory = @"KCategory";
-//NSString *const KEquipment = @"KEquipment";
-//
-//NSString *const KAerodrome = @"KAerodrome";
-//NSString *const KDateTime = @"KDateTime";
-//NSString *const KUnit = @"KUnit";
-//NSString *const KSpeed = @"KSpeed";
-//NSString *const KLevel = @"KLevel";
-//
-//NSString *const KOrigin = @"KOrigin";
-//NSString *const KDestination = @"KDestination";
-//NSString *const KAlternative = @"KAlternative";
-//NSString *const KTotalEET = @"KTotalEET";
-//
-//NSString *const KMoreInfo = @"KMoreInfo";
-
 NSString *const KButtonCreateFPL = @"FLPButton";
 
 NSInteger const maxAlternativesDestination = 2;
@@ -208,7 +183,7 @@ NSInteger const maxAlternativesDestination = 2;
                                              sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
                                           sectionInsertMode:XLFormSectionInsertModeButton];
     section.multivaluedAddButton.title = @"Add Fly Alternative";
-    [section.multivaluedAddButton.cellConfig setObject:AppColor forKey:@"textLabel.color"];
+    [section.multivaluedAddButton.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeName];
     [[row cellConfig] setObject:@"..." forKey:@"textField.placeholder"];
@@ -242,6 +217,8 @@ NSInteger const maxAlternativesDestination = 2;
     
     XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:KButtonCreateFPL rowType:XLFormRowDescriptorTypeButton title:@"Create FPL"];
     buttonRow.action.formSelector = @selector(CreateFPL:);
+    [buttonRow.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
+
     [section addFormRow:buttonRow];
     
     self.form = form;
@@ -306,40 +283,14 @@ NSInteger const maxAlternativesDestination = 2;
     NSArray * array = [self formValidationErrors];
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         XLFormValidationStatus * validationStatus = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
-        if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlynumber]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }
-        else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyenrollment]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlycompany]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyaeroplaneNumber]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyaeroplaneType]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyequipment]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyaerodrome]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyspeed]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyorigin]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlydestination]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }else if ([validationStatus.rowDescriptor.tag isEqualToString:ModelFlyEET]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
+        
+        for(int i = 0; i < [[self.form formSections] count] ; i++){
+            for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
+                if(row.required == true && row.value == nil){
+                    UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
+                    [self animateCell:cell];
+                }
+            }
         }
     }];
     if([array count] == 0){

@@ -48,13 +48,13 @@
     self.cellContentViewCustom.clipsToBounds = true;
     
     self.imageViewOrigin.image = [self.imageViewOrigin.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.imageViewOrigin setTintColor:AppColor];
+    [self.imageViewOrigin setTintColor:AppColorLight];
     
     self.imageViewRoad.image = [self.imageViewRoad.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.imageViewRoad setTintColor:AppColor];
+    [self.imageViewRoad setTintColor:AppColorLight];
     
     self.imageViewDestination.image = [self.imageViewDestination.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
-    [self.imageViewDestination setTintColor:AppColor];
+    [self.imageViewDestination setTintColor:AppColorLight];
     
 }
 @end

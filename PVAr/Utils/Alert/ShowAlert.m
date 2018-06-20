@@ -27,12 +27,12 @@
     
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:title message:message];
     
-    [alertView setButtonDefaultBgColor:AppColor];
+    [alertView setButtonDefaultBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Accept" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         accept();
     }]];
 
-    [alertView setButtonCancelBgColor:AppColor];
+    [alertView setButtonCancelBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Cancel" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         cancel();
     }]];
@@ -48,7 +48,7 @@
     [alertView addAction:[TYAlertAction actionWithTitle:@"Accept" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         accept();
     }]];
-    [alertView setButtonDefaultBgColor:AppColor];
+    [alertView setButtonDefaultBgColor:AppColorLight];
 
     // first way to show ,use UIView Category
     [TYShowAlertView showAlertViewWithView:alertView originY:200 backgoundTapDismissEnable:YES];
@@ -58,12 +58,12 @@
     
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:title message:@"Enter your email"];
     
-    [alertView setButtonDefaultBgColor:AppColor];
+    [alertView setButtonDefaultBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Accept" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         accept();
     }]];
     
-    [alertView setButtonCancelBgColor:AlertColorError];
+    [alertView setButtonCancelBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Cancel" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         cancel();
     }]];
@@ -88,12 +88,12 @@
     
     NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
     
-    [alertView setButtonDefaultBgColor:AppColor];
+    [alertView setButtonDefaultBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Accept" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         accept(dic);
     }]];
     
-    [alertView setButtonCancelBgColor:AppColor];
+    [alertView setButtonCancelBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Cancel" style:TYAlertActionStyleCancel handler:^(TYAlertAction *action) {
         cancel();
     }]];
