@@ -14,6 +14,7 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *moreButton;
 @property (weak, nonatomic) IBOutlet UISegmentedControl *segmentControll;
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollSegmentControll;
+@property (strong, nonatomic) IBOutlet UIView *container;
 
 - (IBAction)Logout:(id)sender;
 - (IBAction)ChangeSegmentControllPage:(id)sender;

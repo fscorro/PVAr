@@ -282,52 +282,21 @@
                         <barButtonItem key="backBarButtonItem" title="-" id="7zR-ZV-Eo7"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="7Bg-nO-png" kind="show" identifier="SegueFlyingPlanDetailExtra" id="Oek-wH-Cxq"/>
+                        <segue destination="7Bg-nO-png" kind="show" identifier="SegueSupplementaryInformation" id="Oek-wH-Cxq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="209-9g-fCs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1037" y="4027"/>
         </scene>
-        <!--View Controller-->
+        <!--Detail Supplementary Information-->
         <scene sceneID="Aig-Hi-t26">
             <objects>
-                <viewController id="7Bg-nO-png" sceneMemberID="viewController">
+                <viewController id="7Bg-nO-png" customClass="DetailSupplementaryInformation" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qZ4-8m-cUD">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4hn-Fg-rcG">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CellFlyDetailExtra" textLabel="3EY-KV-QG2" style="IBUITableViewCellStyleDefault" id="VXC-jl-Mxv">
-                                        <rect key="frame" x="0.0" y="28" width="320" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VXC-jl-Mxv" id="vzw-qw-4gU">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3EY-KV-QG2">
-                                                    <rect key="frame" x="15" y="0.0" width="290" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="4hn-Fg-rcG" firstAttribute="top" secondItem="qZ4-8m-cUD" secondAttribute="top" id="2uX-bU-OYI"/>
-                            <constraint firstAttribute="trailing" secondItem="4hn-Fg-rcG" secondAttribute="trailing" id="LnN-Yp-AiL"/>
-                            <constraint firstAttribute="bottom" secondItem="4hn-Fg-rcG" secondAttribute="bottom" id="Zwo-J0-lxH"/>
-                            <constraint firstItem="4hn-Fg-rcG" firstAttribute="leading" secondItem="qZ4-8m-cUD" secondAttribute="leading" id="xr2-QW-rB5"/>
-                        </constraints>
                         <viewLayoutGuide key="safeArea" id="gHX-in-n4y"/>
                     </view>
                     <navigationItem key="navigationItem" id="j5e-J8-i2z"/>
@@ -387,6 +356,7 @@
                     <view key="view" contentMode="scaleToFill" id="aUW-Ui-Bmz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <viewLayoutGuide key="safeArea" id="HLO-cl-w9k"/>
                     </view>
                     <connections>
@@ -466,6 +436,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="container" destination="WrD-rK-HqP" id="zmz-XS-lrW"/>
                         <outlet property="logoutButton" destination="7Gt-Yg-0pZ" id="BCS-IO-Kxy"/>
                         <outlet property="moreButton" destination="9QE-tT-Sat" id="4sK-lo-XeQ"/>
                         <outlet property="segmentControll" destination="UV8-Nz-FZ1" id="Het-DW-1K1"/>
@@ -488,10 +459,31 @@
                     <navigationItem key="navigationItem" title="Create new plan" id="Jp4-vF-Uee">
                         <barButtonItem key="backBarButtonItem" title="-" id="yoa-wF-BrK"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="pSH-eH-HKw" kind="show" identifier="SegueSupplementaryInformation" id="Bv4-8T-apX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aaf-dK-uv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1792.5" y="1592.9577464788733"/>
+        </scene>
+        <!--Supplementary Information-->
+        <scene sceneID="dXk-j9-ZRK">
+            <objects>
+                <viewController id="pSH-eH-HKw" customClass="CreateSupplementaryInformation" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rH7-Hq-6Ub">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="3mZ-ZR-DXI"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Supplementary Information" id="Lct-2f-MGD">
+                        <barButtonItem key="backBarButtonItem" title="-" id="3Ej-uw-F6Y"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kjf-Vv-O4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2556" y="1594"/>
         </scene>
         <!--Registration-->
         <scene sceneID="OV5-lq-02f">

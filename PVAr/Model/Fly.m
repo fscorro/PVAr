@@ -41,6 +41,18 @@
         self.alternative = [dict valueForKey:ModelFlyalternative];
         self.information = [dict valueForKey:ModelFlyinformation];
         
+        self.endurance = [dict valueForKey:ModelFlyEndurance];
+        self.personsOnBoard = [dict valueForKey:ModelFlyPersonsOnBoard];
+        self.options1 = [dict valueForKey:ModelFlyOptions1];
+        self.options2 = [dict valueForKey:ModelFlyOptions2];
+        self.numberSupplementary = [dict valueForKey:ModelFlyNumberSupplementary];
+        self.capacity = [dict valueForKey:ModelFlyCapacity];
+        self.hasCover = [dict valueForKey:ModelFlyHasCover];
+        self.coverColor = [dict valueForKey:ModelFlyCoverColor];
+        self.aircraftColor = [dict valueForKey:ModelFlyAircraftColor];
+        self.observations = [dict valueForKey:ModelFlyObservations];
+        self.licence = [dict valueForKey:ModelFlyLicence];
+        self.licenceNumber = [dict valueForKey:ModelFlyLicenceNumber];
     }
     return self;
 }

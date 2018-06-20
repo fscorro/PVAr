@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE9ACA20D40D0300DCC890 /* Fly.m */; };
+		2CEAB23120DAE0C8005E77AD /* CreateSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */; };
+		2CEAB23420DAE7B8005E77AD /* DetailSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23320DAE7B8005E77AD /* DetailSupplementaryInformation.m */; };
 		7E9AB02B460547CA97F08212 /* libPods-PVAr.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 362CAA3C7C78608863D902A0 /* libPods-PVAr.a */; };
 		C406E60420D15ECF0061398A /* PendingFlyingPlansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406E60320D15ECF0061398A /* PendingFlyingPlansViewController.m */; };
 		C406E60720D15EDB0061398A /* AcceptedFlyingPlansViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C406E60620D15EDB0061398A /* AcceptedFlyingPlansViewController.m */; };
@@ -39,6 +41,10 @@
 /* Begin PBXFileReference section */
 		2CCE9AC920D40D0300DCC890 /* Fly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fly.h; sourceTree = "<group>"; };
 		2CCE9ACA20D40D0300DCC890 /* Fly.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fly.m; sourceTree = "<group>"; };
+		2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateSupplementaryInformation.h; sourceTree = "<group>"; };
+		2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateSupplementaryInformation.m; sourceTree = "<group>"; };
+		2CEAB23220DAE7B8005E77AD /* DetailSupplementaryInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailSupplementaryInformation.h; sourceTree = "<group>"; };
+		2CEAB23320DAE7B8005E77AD /* DetailSupplementaryInformation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailSupplementaryInformation.m; sourceTree = "<group>"; };
 		362CAA3C7C78608863D902A0 /* libPods-PVAr.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PVAr.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		462A8754F2656FC5F404F163 /* Pods-PVAr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVAr.release.xcconfig"; path = "Pods/Target Support Files/Pods-PVAr/Pods-PVAr.release.xcconfig"; sourceTree = "<group>"; };
 		62676AF3737E7D53E993D776 /* Pods-PVAr.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PVAr.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PVAr/Pods-PVAr.debug.xcconfig"; sourceTree = "<group>"; };
@@ -241,8 +247,12 @@
 				C43C542520D01BC1004BB923 /* HomeViewController.m */,
 				C435CFE020D29A8B00BEF664 /* CreateFlyingPlanViewController.h */,
 				C435CFE120D29A8B00BEF664 /* CreateFlyingPlanViewController.m */,
+				2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */,
+				2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */,
 				C435CFE920D2EEA800BEF664 /* FlyingPlanDetaillViewController.h */,
 				C435CFEA20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m */,
+				2CEAB23220DAE7B8005E77AD /* DetailSupplementaryInformation.h */,
+				2CEAB23320DAE7B8005E77AD /* DetailSupplementaryInformation.m */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -390,6 +400,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CEAB23420DAE7B8005E77AD /* DetailSupplementaryInformation.m in Sources */,
 				C43C542620D01BC1004BB923 /* HomeViewController.m in Sources */,
 				C435CFE620D29BDA00BEF664 /* CellFlyingPlan.m in Sources */,
 				C406E60420D15ECF0061398A /* PendingFlyingPlansViewController.m in Sources */,
@@ -397,6 +408,7 @@
 				C406E60720D15EDB0061398A /* AcceptedFlyingPlansViewController.m in Sources */,
 				C4D6193720D066B10010F04A /* Reachability.m in Sources */,
 				2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */,
+				2CEAB23120DAE0C8005E77AD /* CreateSupplementaryInformation.m in Sources */,
 				C43C541C20D01B37004BB923 /* LoginViewController.m in Sources */,
 				C435CFEB20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m in Sources */,
 				C43C540E20D01AF8004BB923 /* main.m in Sources */,

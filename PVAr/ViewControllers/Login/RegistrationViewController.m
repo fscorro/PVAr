@@ -71,36 +71,28 @@ NSString *const kButton = @"button";
 }
 
 -(void)didTouchButton:(XLFormRowDescriptor *)sender{
-    NSArray * array = [self formValidationErrors];
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XLFormValidationStatus * validationStatus = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
-        if ([validationStatus.rowDescriptor.tag isEqualToString:kEmail]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
+
+    [self deselectFormRow:sender];
+
+    NSArray * validationErrors = [self formValidationErrors];
+
+    if (validationErrors.count > 0){
+        for (id obj in validationErrors) {
+            XLFormValidationStatus * validationStatus = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
+            if ([validationStatus.rowDescriptor.tag isEqualToString:kEmail]){
+                [RKDropdownAlert title:@"Registration failure" message:@"Invalid email address." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+                return;
+            } else if ([validationStatus.rowDescriptor.tag isEqualToString:kPassword]){
+                [RKDropdownAlert title:@"Registration failure" message:@"Invalid password." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+            }
         }
-        else if ([validationStatus.rowDescriptor.tag isEqualToString:kPassword]){
-            UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-            [self animateCell:cell];
-        }
-    }];
-    if([array count] == 0){
+        return;
+    }
+
+    if([validationErrors count] == 0){
         [ShowAlert ShowAlertWithTitle:@"Registration Successfull" andMessage:@"Your user was created successfully" acceptBlock:^{
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }
-
-    [self deselectFormRow:sender];
-}
-
--(void)animateCell:(UITableViewCell *)cell{
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    animation.keyPath = @"position.x";
-    animation.values =  @[ @0, @20, @-20, @10, @0];
-    animation.keyTimes = @[@0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1];
-    animation.duration = 0.3;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    animation.additive = YES;
-    
-    [cell.layer addAnimation:animation forKey:@"shake"];
 }
 @end

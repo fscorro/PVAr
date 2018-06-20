@@ -21,7 +21,6 @@
 #define AlertColorSuccess [UIColor colorWithRed:(27/255.0) green:(94/255.0) blue:(32/255.0) alpha:1]
 #define CellSelectedColor [UIColor colorWithRed:(0/255.0) green:(47/255.0) blue:(102/255.0) alpha:0.45f]
 
-
 #define ModelUserEmailKEY @"email"
 #define ModelUserPasswordKEY @"password"
 #define ModelUserRepeatPasswordKEY @"repeatPassword"
@@ -49,6 +48,19 @@
 #define ModelFlyEET @"EET"
 #define ModelFlyalternative @"alternative"
 #define ModelFlyinformation @"information"
+
+#define ModelFlyEndurance @"endurance"
+#define ModelFlyPersonsOnBoard @"personsOnBoard"
+#define ModelFlyOptions1 @"options1"
+#define ModelFlyOptions2 @"options2"
+#define ModelFlyNumberSupplementary @"number"
+#define ModelFlyCapacity @"capacity"
+#define ModelFlyHasCover @"hasCover"
+#define ModelFlyCoverColor @"coverColor"
+#define ModelFlyAircraftColor @"aircraftColor"
+#define ModelFlyObservations @"observations"
+#define ModelFlyLicence @"licence"
+#define ModelFlyLicenceNumber @"licenceNumber"
 
 #define SegueFlyingPlanDetail @"SegueFlyingPlanDetail"
 

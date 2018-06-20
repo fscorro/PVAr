@@ -78,13 +78,15 @@ const int tabsNumber = 3;
 
 - (IBAction)ChangeSegmentControllPage:(id)sender {
     segmentIndex = self.segmentControll.selectedSegmentIndex;
-
+    
     [self updateViewController];
 }
 
 -(void) updateViewController{
     UIStoryboard *sb = [[AppDelegate sharedAppDelegate] grabStoryboard];
     UIViewController *vc = nil;
+    
+    [self fadeAnimation];
     
     if (self.segmentControll.selectedSegmentIndex == 0) {
         // automatic scroll
@@ -106,5 +108,25 @@ const int tabsNumber = 3;
     }
     
     [self.containerViewController swapViewControllers:vc];
+}
+
+-(void) fadeAnimation{
+    [self.container setAlpha:1.0f];
+    
+    //fade in
+    [UIView animateWithDuration:0.1f animations:^{
+        
+        [self.container setAlpha:0.0f];
+        
+    } completion:^(BOOL finished) {
+        
+        //fade out
+        [UIView animateWithDuration:0.1f animations:^{
+            
+            [self.container setAlpha:1.0f];
+            
+        } completion:nil];
+        
+    }];
 }
 @end

@@ -37,6 +37,19 @@
 @property (nonatomic, strong) NSArray *alternative;
 @property (nonatomic, copy) NSString *information;
 
+@property (nonatomic, copy) NSString *endurance;
+@property (nonatomic, copy) NSString *personsOnBoard;
+@property (nonatomic, strong) NSArray *options1;
+@property (nonatomic, strong) NSArray *options2;
+@property (nonatomic, copy) NSString *numberSupplementary;
+@property (nonatomic, copy) NSString *capacity;
+@property BOOL hasCover;
+@property (nonatomic, copy) NSString *coverColor;
+@property (nonatomic, copy) NSString *aircraftColor;
+@property (nonatomic, copy) NSString *observations;
+@property (nonatomic, copy) NSString *licence;
+@property (nonatomic, copy) NSString *licenceNumber;
+
 -(instancetype)initWithDict:(NSDictionary *)dict;
 
 @end

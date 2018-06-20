@@ -15,7 +15,7 @@ NSString *const KButtonCreateFPL = @"FLPButton";
 NSInteger const maxAlternativesDestination = 2;
 
 @interface CreateFlyingPlanViewController(){
-
+    NSMutableArray *oldValidation;
 }
 @end
 
@@ -23,6 +23,8 @@ NSInteger const maxAlternativesDestination = 2;
 
 -(void)viewDidLoad{
     [super viewDidLoad];
+    
+    oldValidation = [[NSMutableArray alloc] init];
     
     [self initializeForm];
 }
@@ -37,10 +39,11 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlynumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlynumber rowType:XLFormRowDescriptorTypeText title:@"Fly Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlypriority rowType:XLFormRowDescriptorTypeSelectorPush title:@"Priority"];
@@ -61,16 +64,18 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"];
     [section addFormRow:row];
    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyenrollment rowType:XLFormRowDescriptorTypeEmail title:@"Enrollment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyenrollment rowType:XLFormRowDescriptorTypeText title:@"Enrollment"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycompany rowType:XLFormRowDescriptorTypeEmail title:@"Company"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycompany rowType:XLFormRowDescriptorTypeText title:@"Company"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
@@ -97,16 +102,18 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"AEROPLANE INFORMATION"];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneNumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneNumber rowType:XLFormRowDescriptorTypeText title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aeroplane %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,2}$"]]; // FIX 1 o 2 caracteres
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneType rowType:XLFormRowDescriptorTypeEmail title:@"Type"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneType rowType:XLFormRowDescriptorTypeText title:@"Type"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aeroplane %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{2,4}$"]]; // FIX 2 o 4 caracteres
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Category"];
@@ -117,7 +124,7 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"H - Pesada"];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeEmail title:@"Equipment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeText title:@"Equipment"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
@@ -128,10 +135,11 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaerodrome rowType:XLFormRowDescriptorTypeEmail title:@"Aerodrome"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaerodrome rowType:XLFormRowDescriptorTypeText title:@"Aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
@@ -146,10 +154,11 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"K - Kilometros"];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeEmail title:@"Speed"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeText title:@"Speed"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,5}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeSelectorPush title:@"Level"];
@@ -166,16 +175,18 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyorigin rowType:XLFormRowDescriptorTypeEmail title:@"Origin"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyorigin rowType:XLFormRowDescriptorTypeText title:@"Origin"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestination rowType:XLFormRowDescriptorTypeEmail title:@"Destination"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestination rowType:XLFormRowDescriptorTypeText title:@"Destination"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
     // SECTION 5 - Alternative fly
@@ -185,8 +196,9 @@ NSInteger const maxAlternativesDestination = 2;
     section.multivaluedAddButton.title = @"Add Fly Alternative";
     [section.multivaluedAddButton.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
 
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeName];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeText];
     [[row cellConfig] setObject:@"..." forKey:@"textField.placeholder"];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     section.multivaluedRowTemplate = row;
     [form addFormSection:section];
     
@@ -196,10 +208,11 @@ NSInteger const maxAlternativesDestination = 2;
     [form addFormSection:section];
     
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeEmail title:@"Total EET"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeText title:@"Total EET"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
     
@@ -208,8 +221,18 @@ NSInteger const maxAlternativesDestination = 2;
     [form addFormSection:section];
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyinformation rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
     row.required = NO;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9/].{1,16}$"]];
     [section addFormRow:row];
+    section.footerTitle = @"Less than 16 charachers";
     
+    
+    // SECTION SUPPLEMENTARY INFORMATION
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    XLFormRowDescriptor * buttonWithSegueId = [XLFormRowDescriptor formRowDescriptorWithTag:@"SuplementaryInfo" rowType:XLFormRowDescriptorTypeButton title:@"Supplementary Information"];
+    buttonWithSegueId.action.formSegueIdentifier = @"SegueSupplementaryInformation";
+    [section addFormRow:buttonWithSegueId];
+    [form addFormSection:section];
+
     
     // SECTION BUTTON
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
@@ -280,25 +303,19 @@ NSInteger const maxAlternativesDestination = 2;
 
 -(void)CreateFPL:(XLFormRowDescriptor *)sender{
     
-    NSArray * array = [self formValidationErrors];
-    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        XLFormValidationStatus * validationStatus = [[obj userInfo] objectForKey:XLValidationStatusErrorKey];
-        
-        for(int i = 0; i < [[self.form formSections] count] ; i++){
-            for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
-                if(row.required == true && row.value == nil){
-                    UITableViewCell * cell = [self.tableView cellForRowAtIndexPath:[self.form indexPathOfFormRow:validationStatus.rowDescriptor]];
-                    [self animateCell:cell];
-                }
-            }
-        }
-    }];
-    if([array count] == 0){
+    NSArray * validationErrors = [self formValidationErrors];
+    if (validationErrors.count > 0){
+        [RKDropdownAlert title:@"Submit failure" message:[[validationErrors firstObject] localizedDescription] backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+        [self deselectFormRow:sender];
+        return;
+    }
+    
+    if([validationErrors count] == 0){
         NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
         [temp setValue:@"P" forKey:ModelFlystate];
         
         NSMutableArray *arrAlternatives = [[NSMutableArray alloc] init];
-
+        
         for(int i = 0; i < [[self.form formSections] count] ; i++){
             for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
                 if([row.rowType isEqualToString:XLFormRowDescriptorTypeSelectorPush]){
@@ -306,7 +323,7 @@ NSInteger const maxAlternativesDestination = 2;
                 }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeDateInline]){
                     // convertir fecha a string o enviar en formato fecha
                     
-                }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeName]){
+                }else if(row.tag == nil){
                     if (row.value != nil) {
                         [arrAlternatives addObject:row.value];
                         [temp setValue:arrAlternatives forKey:ModelFlyalternative];
@@ -323,26 +340,12 @@ NSInteger const maxAlternativesDestination = 2;
         
         [ShowAlert ShowAlertWithTitle:@"Submit Successfull" andMessage:@"Your FPL was created successfully" acceptBlock:^{
             [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadPendingFPL" object:newFly];
-
+            
             [self.navigationController popViewControllerAnimated:YES];
         }];
-    }else{
-        [RKDropdownAlert title:@"Submit failure" message:@"Complete all requiered fields and try again." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
     }
-
-    [self deselectFormRow:sender];
-}
-
--(void)animateCell:(UITableViewCell *)cell{
-    CAKeyframeAnimation *animation = [CAKeyframeAnimation animation];
-    animation.keyPath = @"position.x";
-    animation.values =  @[ @0, @20, @-20, @10, @0];
-    animation.keyTimes = @[@0, @(1 / 6.0), @(3 / 6.0), @(5 / 6.0), @1];
-    animation.duration = 0.3;
-    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    animation.additive = YES;
     
-    [cell.layer addAnimation:animation forKey:@"shake"];
+    [self deselectFormRow:sender];
 }
 
 @end
