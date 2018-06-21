@@ -49,6 +49,7 @@
 #define ModelFlyalternative @"alternative"
 #define ModelFlyinformation @"information"
 
+#define ModelFlySupplementaryDictionary @"supplementary"
 #define ModelFlyEndurance @"endurance"
 #define ModelFlyPersonsOnBoard @"personsOnBoard"
 #define ModelFlyOptions1 @"options1"

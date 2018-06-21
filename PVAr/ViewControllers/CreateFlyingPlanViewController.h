@@ -11,8 +11,9 @@
 #import <XLForm.h>
 #import <XLFormViewController.h>
 #import "Fly.h"
+#import "CreateSupplementaryInformation.h"
 
-@interface CreateFlyingPlanViewController : XLFormViewController
+@interface CreateFlyingPlanViewController : XLFormViewController <CreateSupplementaryInformationDelegate>
 
 
 @end

@@ -16,6 +16,7 @@ NSInteger const maxAlternativesDestination = 2;
 
 @interface CreateFlyingPlanViewController(){
     NSMutableArray *oldValidation;
+    NSMutableDictionary *dicSupp;
 }
 @end
 
@@ -336,6 +337,7 @@ NSInteger const maxAlternativesDestination = 2;
                 }
             }
         }
+        [temp setValue:dicSupp forKey:ModelFlySupplementaryDictionary];
         Fly *newFly = [[Fly alloc] initWithDict:temp];
         
         [ShowAlert ShowAlertWithTitle:@"Submit Successfull" andMessage:@"Your FPL was created successfully" acceptBlock:^{
@@ -348,4 +350,16 @@ NSInteger const maxAlternativesDestination = 2;
     [self deselectFormRow:sender];
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSString *segueId = segue.identifier;
+    
+    if ([segueId isEqualToString:@"SegueSupplementaryInformation"]) {
+        CreateSupplementaryInformation *vc = segue.destinationViewController;
+        vc.delegate = self;
+    }
+}
+
+-(void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary *)dic{
+    dicSupp = [[NSMutableDictionary alloc] initWithDictionary:dic];
+}
 @end

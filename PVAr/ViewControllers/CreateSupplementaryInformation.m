@@ -9,6 +9,11 @@
 #import "CreateSupplementaryInformation.h"
 #import "Constants.h"
 
+@interface CreateSupplementaryInformation(){
+    NSMutableDictionary *dic;
+}
+@end
+
 @implementation CreateSupplementaryInformation
 
 -(void)viewDidLoad{
@@ -108,5 +113,28 @@
     
     self.form = form;
 
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    if ([self.delegate respondsToSelector:@selector(delegateVC:dicSupplementary:)]) {
+        
+        for(int i = 0; i < [[self.form formSections] count] ; i++){
+            for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
+                if([row.tag isEqualToString:ModelFlyOptions1]){
+                    [dic setValue:row.value forKey:row.tag];
+                }else if([row.tag isEqualToString:ModelFlyOptions2]){
+                    // convertir fecha a string o enviar en formato fecha
+                    [dic setValue:row.value forKey:row.tag];
+                }else if([row.tag isEqualToString:ModelFlyHasCover]){
+                    [dic setValue:@([row.value boolValue]) forKey:row.tag];
+                }else{
+                    [dic setValue:[row.value displayText] forKey:row.tag];
+                }
+            }
+        }
+        
+        [self.delegate delegateVC:self dicSupplementary:dic];
+    }
 }
 @end
