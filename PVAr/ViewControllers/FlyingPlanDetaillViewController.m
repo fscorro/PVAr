@@ -9,6 +9,7 @@
 #import "FlyingPlanDetaillViewController.h"
 #import "Constants.h"
 #import "Fly.h"
+#import "DetailSupplementaryInformation.h"
 
 @interface FlyingPlanDetaillViewController(){
     
@@ -206,5 +207,14 @@
     //form.disabled = @YES;
     self.form = form;
     
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSString *segueId = segue.identifier;
+    
+    if ([segueId isEqualToString:@"SegueSupplementaryInformation"]) {
+        DetailSupplementaryInformation *vc = segue.destinationViewController;
+        vc.fly = self.fly;
+    }
 }
 @end

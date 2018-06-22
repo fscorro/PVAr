@@ -40,19 +40,21 @@
         self.EET = [dict valueForKey:ModelFlyEET];
         self.alternative = [dict valueForKey:ModelFlyalternative];
         self.information = [dict valueForKey:ModelFlyinformation];
+
+        self.supplementary = [dict valueForKey:ModelFlySupplementaryDictionary];
         
-        self.endurance = [dict valueForKey:ModelFlyEndurance];
-        self.personsOnBoard = [dict valueForKey:ModelFlyPersonsOnBoard];
-        self.options1 = [dict valueForKey:ModelFlyOptions1];
-        self.options2 = [dict valueForKey:ModelFlyOptions2];
-        self.numberSupplementary = [dict valueForKey:ModelFlyNumberSupplementary];
-        self.capacity = [dict valueForKey:ModelFlyCapacity];
-        self.hasCover = [dict valueForKey:ModelFlyHasCover];
-        self.coverColor = [dict valueForKey:ModelFlyCoverColor];
-        self.aircraftColor = [dict valueForKey:ModelFlyAircraftColor];
-        self.observations = [dict valueForKey:ModelFlyObservations];
-        self.licence = [dict valueForKey:ModelFlyLicence];
-        self.licenceNumber = [dict valueForKey:ModelFlyLicenceNumber];
+        self.endurance = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyEndurance];
+        self.personsOnBoard = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyPersonsOnBoard];
+        self.options1 = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyOptions1];
+        self.options2 = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyOptions2];
+        self.numberSupplementary = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyNumberSupplementary];
+        self.capacity = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyCapacity];
+        self.hasCover = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyHasCover];
+        self.coverColor = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyCoverColor];
+        self.aircraftColor = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyAircraftColor];
+        self.observations = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyObservations];
+        self.licence = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyLicence];
+        self.licenceNumber = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyLicenceNumber];
     }
     return self;
 }

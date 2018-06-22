@@ -37,6 +37,8 @@
 @property (nonatomic, strong) NSArray *alternative;
 @property (nonatomic, copy) NSString *information;
 
+@property (nonatomic, strong) NSDictionary *supplementary;
+
 @property (nonatomic, copy) NSString *endurance;
 @property (nonatomic, copy) NSString *personsOnBoard;
 @property (nonatomic, strong) NSArray *options1;
