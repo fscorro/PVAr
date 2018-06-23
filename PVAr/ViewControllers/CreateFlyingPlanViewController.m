@@ -359,6 +359,7 @@ NSInteger const maxAlternativesDestination = 2;
     if ([segueId isEqualToString:@"SegueSupplementaryInformation"]) {
         CreateSupplementaryInformation *vc = segue.destinationViewController;
         vc.delegate = self;
+        vc.dicSupplementary = dicSupp;
     }
 }
 

@@ -11,5 +11,6 @@
 @interface AcceptedFlyingPlansViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITableView *tableviewAcceptedFlying;
+@property (strong, nonatomic) IBOutlet UIView *viewEmptyMessage;
 
 @end

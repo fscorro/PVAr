@@ -57,7 +57,14 @@
     
     [arr addObject:fly];
     
-    [self.tableviewAcceptedFlying reloadData];
+    if ([arr count] > 0) {
+        [self.viewEmptyMessage setHidden:true];
+        [self.tableviewAcceptedFlying setHidden:false];
+        [self.tableviewAcceptedFlying reloadData];
+    }else{
+        [self.viewEmptyMessage setHidden:false];
+        [self.tableviewAcceptedFlying setHidden:true];
+    }
 }
 
 

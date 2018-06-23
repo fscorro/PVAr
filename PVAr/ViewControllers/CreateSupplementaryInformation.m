@@ -10,7 +10,7 @@
 #import "Constants.h"
 
 @interface CreateSupplementaryInformation(){
-    NSMutableDictionary *dic;
+
 }
 @end
 
@@ -18,8 +18,6 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    
-    dic = [[NSMutableDictionary alloc] init];
     
     [self initializeForm];
 }
@@ -37,24 +35,29 @@
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeText title:@"Endurance"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,4}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeText title:@"Persons on board"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] != nil ? [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] : nil;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Emergency radio"];
     row.selectorOptions = @[@"U",@"V",@"E"];
+    row.value = [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] != nil ? [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] : nil;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Survival equipment"];
     row.selectorOptions = @[@"S",@"P",@"M",@"J"];
+    row.value = [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] != nil ? [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] : nil;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Jackets"];
     row.selectorOptions = @[@"L",@"F",@"U",@"V"];
+    row.value = [self.dicSupplementary valueForKey:ModelFlyJackets] != nil ? [self.dicSupplementary valueForKey:ModelFlyJackets] : nil;
     [section addFormRow:row];
     
     
@@ -62,7 +65,7 @@
     [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies"];
-    row.value = @NO;
+    row.value = @([[self.dicSupplementary valueForKey:ModelFlyDinghies] boolValue]);
     [section addFormRow:row];
 
     
@@ -73,22 +76,25 @@
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesNumber rowType:XLFormRowDescriptorTypeText title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyDinghiesNumber] != nil ? [self.dicSupplementary valueForKey:ModelFlyDinghiesNumber] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,2}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCapacity rowType:XLFormRowDescriptorTypeText title:@"Capacity"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyDinghiesCapacity] != nil ? [self.dicSupplementary valueForKey:ModelFlyDinghiesCapacity] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,4}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesHasCover rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Cover"];
-    row.value = @NO;
+    row.value = @([[self.dicSupplementary valueForKey:ModelFlyDinghiesHasCover] boolValue]);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCoverColor rowType:XLFormRowDescriptorTypeText title:@"Colour"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyDinghiesCoverColor] != nil ? [self.dicSupplementary valueForKey:ModelFlyDinghiesCoverColor] : nil;
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyDinghiesHasCover];
     [section addFormRow:row];
     
@@ -99,16 +105,19 @@
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeText title:@"Aircraft color and marking"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyAircraftColor] != nil ? [self.dicSupplementary valueForKey:ModelFlyAircraftColor] : nil;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeText title:@"Remarks"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyRemakrs] != nil ? [self.dicSupplementary valueForKey:ModelFlyRemakrs] : nil;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeText title:@"Pilot in-command"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] : nil;
     [section addFormRow:row];
     
     
@@ -116,6 +125,7 @@
     [form addFormSection:section];
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAditionalRequirements rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
     row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyAditionalRequirements] != nil ? [self.dicSupplementary valueForKey:ModelFlyAditionalRequirements] : nil;
     [section addFormRow:row];
     
     
@@ -130,30 +140,30 @@
         for(int i = 0; i < [[self.form formSections] count] ; i++){
             for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
                 if([row.tag isEqualToString:ModelFlyEmergencyRadio]){
-                    [dic setValue:row.value forKey:row.tag];
+                    [self.dicSupplementary setValue:row.value forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlySurvivalEquipment]){
-                    [dic setValue:row.value forKey:row.tag];
+                    [self.dicSupplementary setValue:row.value forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlyJackets]){
-                    [dic setValue:row.value forKey:row.tag];
+                    [self.dicSupplementary setValue:row.value forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlyDinghies]){
-                    [dic setValue:@([row.value boolValue]) forKey:row.tag];
+                    [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlyDinghiesHasCover]){
-                    [dic setValue:@([row.value boolValue]) forKey:row.tag];
+                    [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
                 }else{
-                    [dic setValue:[row.value displayText] forKey:row.tag];
+                    [self.dicSupplementary setValue:[row.value displayText] forKey:row.tag];
                 }
             }
         }
         
-        if([[dic objectForKey:ModelFlyDinghies] boolValue] == false){
-            for (NSString *key in [dic allKeys]) {
+        if([[self.dicSupplementary objectForKey:ModelFlyDinghies] boolValue] == false){
+            for (NSString *key in [self.dicSupplementary allKeys]) {
                 if([key containsString:[ModelFlyDinghies lowercaseString]]){
-                    [dic removeObjectForKey:key];
+                    [self.dicSupplementary removeObjectForKey:key];
                 }
             }
         }
         
-        [self.delegate delegateVC:self dicSupplementary:dic];
+        [self.delegate delegateVC:self dicSupplementary:self.dicSupplementary];
     }
 }
 @end

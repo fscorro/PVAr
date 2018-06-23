@@ -231,7 +231,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bfR-UT-KuX">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bfR-UT-KuX">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -249,18 +249,39 @@
                                     <outlet property="delegate" destination="Pn2-WB-dCx" id="z0u-CS-6gK"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sc2-gI-NNN">
+                                <rect key="frame" x="0.0" y="261" width="320" height="66"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No pending plans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgw-hb-fKQ">
+                                        <rect key="frame" x="93" y="23" width="134" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="lgw-hb-fKQ" firstAttribute="centerX" secondItem="Sc2-gI-NNN" secondAttribute="centerX" id="2SJ-nk-sxT"/>
+                                    <constraint firstItem="lgw-hb-fKQ" firstAttribute="centerY" secondItem="Sc2-gI-NNN" secondAttribute="centerY" id="8xK-rm-tcc"/>
+                                    <constraint firstAttribute="height" constant="66" id="mgF-dI-kaa"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="bfR-UT-KuX" secondAttribute="trailing" id="0T1-pP-gWM"/>
+                            <constraint firstItem="Sc2-gI-NNN" firstAttribute="leading" secondItem="0TW-mz-br1" secondAttribute="leading" id="BXD-Zk-QEL"/>
                             <constraint firstAttribute="bottom" secondItem="bfR-UT-KuX" secondAttribute="bottom" id="phY-hC-hlN"/>
                             <constraint firstItem="bfR-UT-KuX" firstAttribute="leading" secondItem="0TW-mz-br1" secondAttribute="leading" id="sij-pE-elk"/>
                             <constraint firstItem="bfR-UT-KuX" firstAttribute="top" secondItem="0TW-mz-br1" secondAttribute="top" id="xjf-Sz-Gay"/>
+                            <constraint firstAttribute="trailing" secondItem="Sc2-gI-NNN" secondAttribute="trailing" id="y9R-6b-VLT"/>
+                            <constraint firstItem="Sc2-gI-NNN" firstAttribute="centerY" secondItem="qNp-1o-E8z" secondAttribute="centerY" id="ygA-th-xpU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="qNp-1o-E8z"/>
                     </view>
                     <connections>
                         <outlet property="tableviewPendingFlying" destination="bfR-UT-KuX" id="YTN-mW-kxW"/>
+                        <outlet property="viewEmptyMessage" destination="Sc2-gI-NNN" id="1BP-wS-Sgo"/>
                         <segue destination="WiR-NX-eTX" kind="show" identifier="SegueFlyingPlanDetail" id="32b-Un-qTF"/>
                     </connections>
                 </viewController>
@@ -315,7 +336,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-BD-r2n">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NEq-BD-r2n">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -333,17 +354,39 @@
                                     <outlet property="delegate" destination="Wbt-8c-OvC" id="H7Y-6p-MB3"/>
                                 </connections>
                             </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pfV-sI-YHU">
+                                <rect key="frame" x="0.0" y="261" width="320" height="66"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No accepted plans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9nT-JM-J5q">
+                                        <rect key="frame" x="89" y="23" width="143.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="QMF-IO-1ce"/>
+                                    <constraint firstItem="9nT-JM-J5q" firstAttribute="centerX" secondItem="pfV-sI-YHU" secondAttribute="centerX" id="jaj-HF-D3T"/>
+                                    <constraint firstItem="9nT-JM-J5q" firstAttribute="centerY" secondItem="pfV-sI-YHU" secondAttribute="centerY" id="vXD-y9-GTY"/>
+                                </constraints>
+                            </view>
                         </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NEq-BD-r2n" firstAttribute="leading" secondItem="hW3-N1-JvK" secondAttribute="leading" id="64O-tN-s5E"/>
+                            <constraint firstItem="pfV-sI-YHU" firstAttribute="centerY" secondItem="bAr-YA-SOR" secondAttribute="centerY" id="ByZ-zE-L7b"/>
+                            <constraint firstItem="pfV-sI-YHU" firstAttribute="leading" secondItem="hW3-N1-JvK" secondAttribute="leading" id="Ijn-9u-VQL"/>
                             <constraint firstAttribute="trailing" secondItem="NEq-BD-r2n" secondAttribute="trailing" id="Srx-24-QgH"/>
                             <constraint firstAttribute="bottom" secondItem="NEq-BD-r2n" secondAttribute="bottom" id="fCg-RD-u92"/>
                             <constraint firstItem="NEq-BD-r2n" firstAttribute="top" secondItem="hW3-N1-JvK" secondAttribute="top" id="iud-aG-TAL"/>
+                            <constraint firstAttribute="trailing" secondItem="pfV-sI-YHU" secondAttribute="trailing" id="uet-6w-drA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="bAr-YA-SOR"/>
                     </view>
                     <connections>
                         <outlet property="tableviewAcceptedFlying" destination="NEq-BD-r2n" id="hKS-Ag-kWq"/>
+                        <outlet property="viewEmptyMessage" destination="pfV-sI-YHU" id="jnf-LV-bQd"/>
                         <segue destination="WiR-NX-eTX" kind="show" identifier="SegueFlyingPlanDetail" id="yGP-xH-Q8F"/>
                     </connections>
                 </viewController>
@@ -380,8 +423,8 @@
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Z0-is-mfi">
                                 <rect key="frame" x="0.0" y="261" width="320" height="66"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No flights canceled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5W-6J-gfk">
-                                        <rect key="frame" x="86.5" y="23" width="147.5" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No canceled plans" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5W-6J-gfk">
+                                        <rect key="frame" x="90" y="23" width="141" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>

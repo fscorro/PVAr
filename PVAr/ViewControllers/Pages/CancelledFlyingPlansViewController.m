@@ -28,6 +28,7 @@
 
     if ([arr count] > 0) {
         [self.viewEmptyMessage setHidden:true];
+        [self.tableviewCancelledFlying setHidden:false];
         [self.tableviewCancelledFlying reloadData];
     }else{
         [self.viewEmptyMessage setHidden:false];
