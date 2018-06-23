@@ -9,6 +9,14 @@
 #import "LoginViewController.h"
 #import "Constants.h"
 
+typedef NS_ENUM(NSInteger, LoginState) {
+    loginSuccess = 0,
+    loginError,
+    loginEmpty,
+    loginInvalidPassword,
+    loginInvalidMail
+};
+
 @interface LoginViewController(){
     
 }
@@ -127,12 +135,17 @@
     [UIView commitAnimations];
 }
 
--(BOOL)validateLogin{
-    if([self.textfieldUser.text length] <= 0 || [self.textfieldPassword.text length] <= 0){
-        [RKDropdownAlert title:@"Login failure" message:@"Please complete all fields and try again." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
-        return false;
+-(NSInteger)validateLogin{
+    if([self.textfieldUser.text isEqualToString:@"admin@gmail.com"] && [self.textfieldPassword.text isEqualToString:@"admin123"]){
+        return loginSuccess;
+    } else if([self.textfieldUser.text length] <= 0 || [self.textfieldPassword.text length] <= 0){
+        return loginEmpty;
+    } else if([self.textfieldUser.text length] <= 0 || ![self.textfieldUser.text isEqualToString:@"admin@gmail.com"]){
+        return loginInvalidMail;
+    } else if([self.textfieldPassword.text length] <= 0 || ![self.textfieldPassword.text isEqualToString:@"admin123"]){
+        return loginInvalidPassword;
     }
-    return true;
+    return loginError;
 }
 
 - (IBAction)ForgotPassword:(id)sender {
@@ -141,8 +154,25 @@
 - (IBAction)Login:(id)sender {
     [self dismissTextfield];
     
-    if([self validateLogin] == true){
-        [self performSegueWithIdentifier:@"SegueHome" sender:nil];
+//    [self.textfieldUser setText:@"admin@gmail.com"];
+//    [self.textfieldPassword setText:@"admin123"];
+    
+    switch ([self validateLogin]) {
+        case loginSuccess:
+            [self performSegueWithIdentifier:@"SegueHome" sender:nil];
+            break;
+        case loginError:
+            [RKDropdownAlert title:@"Login failure" message:@"Please verify the entered values." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
+            break;
+        case loginEmpty:
+            [RKDropdownAlert title:@"Login failure" message:@"Please complete all fields and try again.." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
+            break;
+        case loginInvalidPassword:
+            [RKDropdownAlert title:@"Login failure" message:@"Please verify the entered password." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
+            break;
+        case loginInvalidMail:
+            [RKDropdownAlert title:@"Login failure" message:@"Please verify the entered email." backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:2];
+            break;
     }
 }
 @end

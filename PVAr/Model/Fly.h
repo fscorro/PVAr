@@ -13,23 +13,24 @@
 @property (nonatomic, copy) NSString *flyState;
 
 @property (nonatomic, copy) NSString *number;
-@property (nonatomic, assign) NSString *priority;
+@property (nonatomic, copy) NSString *priority;
 @property (nonatomic, copy) NSString *enrollment;
 @property (nonatomic, copy) NSString *company;
-@property (nonatomic, assign) NSString *rule;
-@property (nonatomic, assign) NSString *type;
+@property (nonatomic, copy) NSString *rule;
+@property (nonatomic, copy) NSString *type;
 
 @property (nonatomic, copy) NSString *aeroplaneNumber;
 @property (nonatomic, copy) NSString *aeroplaneType;
-@property (nonatomic, assign) NSString *category;
+@property (nonatomic, copy) NSString *category;
 @property (nonatomic, copy) NSString *equipment;
 
 @property (nonatomic, copy) NSString *aerodrome;
-@property (nonatomic, strong) NSString *date;
-@property (nonatomic, strong) NSString *time;
-@property (nonatomic, assign) NSString *unit;
+@property (nonatomic, copy) NSString *date;
+@property (nonatomic, copy) NSString *time;
+@property (nonatomic, copy) NSString *unit;
 @property (nonatomic, copy) NSString *speed;
-@property (nonatomic, assign) NSString *level;
+@property (nonatomic, copy) NSString *level;
+@property (nonatomic, copy) NSString *route;
 
 @property (nonatomic, copy) NSString *origin;
 @property (nonatomic, copy) NSString *destination;
@@ -41,16 +42,18 @@
 
 @property (nonatomic, copy) NSString *endurance;
 @property (nonatomic, copy) NSString *personsOnBoard;
-@property (nonatomic, strong) NSArray *options1;
-@property (nonatomic, strong) NSArray *options2;
-@property (nonatomic, copy) NSString *numberSupplementary;
-@property (nonatomic, copy) NSString *capacity;
-@property BOOL hasCover;
-@property (nonatomic, copy) NSString *coverColor;
+@property (nonatomic, strong) NSArray *emergencyRadio;
+@property (nonatomic, strong) NSArray *survivalEquipment;
+@property (nonatomic, strong) NSArray *jackets;
+@property BOOL dinghies;
+@property (nonatomic, copy) NSString *dinghiesNumber;
+@property (nonatomic, copy) NSString *dinghiesCapacity;
+@property BOOL cover;
+@property (nonatomic, copy) NSString *coverColour;
 @property (nonatomic, copy) NSString *aircraftColor;
-@property (nonatomic, copy) NSString *observations;
-@property (nonatomic, copy) NSString *licence;
-@property (nonatomic, copy) NSString *licenceNumber;
+@property (nonatomic, copy) NSString *remarks;
+@property (nonatomic, copy) NSString *pilotInCommand;
+@property (nonatomic, copy) NSString *aditionalRequirements;
 
 -(instancetype)initWithDict:(NSDictionary *)dict;
 

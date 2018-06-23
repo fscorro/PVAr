@@ -31,20 +31,20 @@
     [temp setValue:@"P" forKey:ModelFlystate];
     [temp setValue:@"WFL-324" forKey:ModelFlynumber];
     [temp setValue:@"ALTRV" forKey:ModelFlypriority];
-    [temp setValue:@"N422LA" forKey:ModelFlyenrollment];
+    [temp setValue:@"N422LA" forKey:ModelFlyRegister];
     [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
-    [temp setValue:@"I _ Vuelo con IRF" forKey:ModelFlyrule];
-    [temp setValue:@"S - Regular" forKey:ModelFlytype];
+    [temp setValue:@"I" forKey:ModelFlyrule];
+    [temp setValue:@"S" forKey:ModelFlytype];
     
     [temp setValue:@"1" forKey:ModelFlyaeroplaneNumber];
     [temp setValue:@"B763" forKey:ModelFlyaeroplaneType];
-    [temp setValue:@"H - Pesada" forKey:ModelFlycategory];
+    [temp setValue:@"H" forKey:ModelFlycategory];
     [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
     
     [temp setValue:@"ZZZZ" forKey:ModelFlyaerodrome];
     [temp setValue:@"23-04-2018" forKey:ModelFlydate];
     [temp setValue:@"22:30" forKey:ModelFlytime];
-    [temp setValue:@"N - Nodos" forKey:ModelFlyunit];
+    [temp setValue:@"N" forKey:ModelFlyunit];
     [temp setValue:@"N470" forKey:ModelFlyspeed];
     [temp setValue:@"F320" forKey:ModelFlylevel];
     

@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface CancelledFlyingPlansViewController : UIViewController
+@interface CancelledFlyingPlansViewController : UIViewController  <UITableViewDelegate, UITableViewDataSource>
+
+@property (weak, nonatomic) IBOutlet UITableView *tableviewCancelledFlying;
+@property (strong, nonatomic) IBOutlet UIView *viewEmptyMessage;
 
 @end

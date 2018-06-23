@@ -289,7 +289,7 @@
             </objects>
             <point key="canvasLocation" x="1037" y="4027"/>
         </scene>
-        <!--Detail Supplementary Information-->
+        <!--Supplementary Information-->
         <scene sceneID="Aig-Hi-t26">
             <objects>
                 <viewController id="7Bg-nO-png" customClass="DetailSupplementaryInformation" sceneMemberID="viewController">
@@ -299,7 +299,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="gHX-in-n4y"/>
                     </view>
-                    <navigationItem key="navigationItem" id="j5e-J8-i2z"/>
+                    <navigationItem key="navigationItem" title="Supplementary Information" id="j5e-J8-i2z">
+                        <barButtonItem key="backBarButtonItem" title="-" id="gpu-37-Ixx"/>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QGj-d7-S2Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -356,16 +358,64 @@
                     <view key="view" contentMode="scaleToFill" id="aUW-Ui-Bmz">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QuU-P3-e5t">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="150" id="WJS-kC-6yp">
+                                        <rect key="frame" x="0.0" y="28" width="320" height="150"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WJS-kC-6yp" id="3mU-LE-8at">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="Bgr-9d-sRv" id="gAW-bW-Yvi"/>
+                                    <outlet property="delegate" destination="Bgr-9d-sRv" id="7Da-VN-lRQ"/>
+                                </connections>
+                            </tableView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Z0-is-mfi">
+                                <rect key="frame" x="0.0" y="261" width="320" height="66"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No flights canceled" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5W-6J-gfk">
+                                        <rect key="frame" x="86.5" y="23" width="147.5" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="66" id="W5T-UW-9te"/>
+                                    <constraint firstItem="J5W-6J-gfk" firstAttribute="centerY" secondItem="3Z0-is-mfi" secondAttribute="centerY" id="YDa-Y0-zfc"/>
+                                    <constraint firstItem="J5W-6J-gfk" firstAttribute="centerX" secondItem="3Z0-is-mfi" secondAttribute="centerX" id="f5h-Xc-Au9"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Z0-is-mfi" firstAttribute="leading" secondItem="QuU-P3-e5t" secondAttribute="leading" id="0LQ-fH-UgH"/>
+                            <constraint firstAttribute="trailing" secondItem="QuU-P3-e5t" secondAttribute="trailing" id="7Bg-AA-dcl"/>
+                            <constraint firstItem="3Z0-is-mfi" firstAttribute="centerY" secondItem="HLO-cl-w9k" secondAttribute="centerY" id="KMv-Sf-4dJ"/>
+                            <constraint firstItem="QuU-P3-e5t" firstAttribute="leading" secondItem="aUW-Ui-Bmz" secondAttribute="leading" id="Keb-eU-8rI"/>
+                            <constraint firstItem="3Z0-is-mfi" firstAttribute="trailing" secondItem="QuU-P3-e5t" secondAttribute="trailing" id="apB-kQ-DfR"/>
+                            <constraint firstAttribute="bottom" secondItem="QuU-P3-e5t" secondAttribute="bottom" id="cPT-h5-Jlv"/>
+                            <constraint firstItem="QuU-P3-e5t" firstAttribute="top" secondItem="aUW-Ui-Bmz" secondAttribute="top" id="o93-7T-9ad"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="HLO-cl-w9k"/>
                     </view>
                     <connections>
+                        <outlet property="tableviewCancelledFlying" destination="QuU-P3-e5t" id="1pl-Ck-ula"/>
+                        <outlet property="viewEmptyMessage" destination="3Z0-is-mfi" id="drU-kz-nPJ"/>
                         <segue destination="WiR-NX-eTX" kind="show" identifier="SegueFlyingPlanDetail" id="eVK-8e-YgF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x34-kO-uQ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768" y="3113"/>
+            <point key="canvasLocation" x="1766.25" y="3111.9718309859154"/>
         </scene>
         <!--Home View Controller-->
         <scene sceneID="e07-hg-gHr">
@@ -387,7 +437,7 @@
                                         <segments>
                                             <segment title="Pending plans"/>
                                             <segment title="Accepted plans"/>
-                                            <segment title="Cancelled plans"/>
+                                            <segment title="Canceled plans"/>
                                         </segments>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
@@ -446,7 +496,7 @@
             </objects>
             <point key="canvasLocation" x="1036.875" y="1594.0140845070423"/>
         </scene>
-        <!--Create new plan-->
+        <!--New PFL-->
         <scene sceneID="kl3-Cq-Daq">
             <objects>
                 <viewController id="OgT-SS-8oB" customClass="CreateFlyingPlanViewController" sceneMemberID="viewController">
@@ -456,7 +506,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="rMG-O9-03O"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Create new plan" id="Jp4-vF-Uee">
+                    <navigationItem key="navigationItem" title="New PFL" id="Jp4-vF-Uee">
                         <barButtonItem key="backBarButtonItem" title="-" id="yoa-wF-BrK"/>
                     </navigationItem>
                     <connections>

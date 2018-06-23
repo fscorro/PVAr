@@ -18,7 +18,7 @@
 
         self.number = [dict valueForKey:ModelFlynumber];
         self.priority = [dict valueForKey:ModelFlypriority];
-        self.enrollment = [dict valueForKey:ModelFlyenrollment];
+        self.enrollment = [dict valueForKey:ModelFlyRegister];
         self.company = [dict valueForKey:ModelFlycompany];
         self.rule = [dict valueForKey:ModelFlyrule];
         self.type = [dict valueForKey:ModelFlytype];
@@ -34,6 +34,7 @@
         self.unit = [dict valueForKey:ModelFlyunit];
         self.speed = [dict valueForKey:ModelFlyspeed];
         self.level = [dict valueForKey:ModelFlylevel];
+        self.route = [dict valueForKey:ModelFlyroute];
 
         self.origin = [dict valueForKey:ModelFlyorigin];
         self.destination = [dict valueForKey:ModelFlydestination];
@@ -41,20 +42,24 @@
         self.alternative = [dict valueForKey:ModelFlyalternative];
         self.information = [dict valueForKey:ModelFlyinformation];
 
+        
         self.supplementary = [dict valueForKey:ModelFlySupplementaryDictionary];
         
         self.endurance = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyEndurance];
         self.personsOnBoard = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyPersonsOnBoard];
-        self.options1 = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyOptions1];
-        self.options2 = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyOptions2];
-        self.numberSupplementary = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyNumberSupplementary];
-        self.capacity = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyCapacity];
-        self.hasCover = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyHasCover];
-        self.coverColor = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyCoverColor];
+        self.emergencyRadio = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyEmergencyRadio];
+        self.survivalEquipment = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlySurvivalEquipment];
+        self.jackets = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyJackets];
+        self.dinghies = [[[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghies] boolValue];
+        self.dinghiesNumber = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghiesNumber];
+        self.dinghiesCapacity = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghiesCapacity];
+        self.cover = [[[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghiesHasCover] boolValue];
+        self.coverColour = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghiesCoverColor];
         self.aircraftColor = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyAircraftColor];
-        self.observations = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyObservations];
-        self.licence = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyLicence];
-        self.licenceNumber = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyLicenceNumber];
+        self.remarks = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyRemakrs];
+        self.pilotInCommand = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyPilotInCommand];
+        self.aditionalRequirements = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyAditionalRequirements];
+
     }
     return self;
 }

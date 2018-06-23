@@ -39,32 +39,21 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyOptions1 rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Options"];
-    row.selectorOptions = @[@"UHF",@"VHF",@"ELT"];
-    row.value = self.fly.options1 != nil ?  self.fly.options1 : @[@"None"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Emergency radio"];
+    row.selectorOptions = self.fly.emergencyRadio != nil ? self.fly.emergencyRadio : @[@"None"];
+    row.value = self.fly.emergencyRadio != nil ?  self.fly.emergencyRadio : @[@"None"];
     row.disabled = @YES;
     [section addFormRow:row];
     
-    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
-    [form addFormSection:section];
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyOptions2 rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Options"];
-    row.selectorOptions = @[@"Polar",@"Desert",@"Maritime",@"Jungle",@"Light",@"Fluores",@"UHF",@"VHF"];
-    row.value = self.fly.options2 != nil ?  self.fly.options2 : @[@"None"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Survival equipment"];
+    row.selectorOptions = self.fly.survivalEquipment != nil ?  self.fly.survivalEquipment : @[@"None"];
+    row.value = self.fly.survivalEquipment != nil ?  self.fly.survivalEquipment : @[@"None"];
     row.disabled = @YES;
     [section addFormRow:row];
     
-    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
-    [form addFormSection:section];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyNumberSupplementary rowType:XLFormRowDescriptorTypeText title:@"Number"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.numberSupplementary != nil ?  self.fly.numberSupplementary : @"None";
-    row.disabled = @YES;
-    [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyCapacity rowType:XLFormRowDescriptorTypeText title:@"Capacity"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.capacity != nil ?  self.fly.capacity : @"None";
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Jackets"];
+    row.selectorOptions = self.fly.jackets != nil ?  self.fly.jackets : @[@"None"];
+    row.value = self.fly.jackets != nil ?  self.fly.jackets : @[@"None"];
     row.disabled = @YES;
     [section addFormRow:row];
     
@@ -72,20 +61,43 @@
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasCover rowType:XLFormRowDescriptorTypeText title:@"Has cover"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.hasCover ?  @"Yes" : @"No";
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies"];
+    row.value = @(self.fly.dinghies);
     row.disabled = @YES;
     [section addFormRow:row];
-//    [section addFormRow:[XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasCover rowType:XLFormRowDescriptorTypeBooleanCheck title:@"Has cover"]];
-//    row.value = @(self.fly.hasCover);
-//    row.disabled = @YES;
-
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyCoverColor rowType:XLFormRowDescriptorTypeText title:@"Color"];
+    
+    
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    section.hidden = @(!self.fly.dinghies);
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesNumber rowType:XLFormRowDescriptorTypeText title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.coverColor != nil ?  self.fly.coverColor : @"None";
+    row.value = self.fly.dinghiesNumber != nil ?  self.fly.dinghiesNumber : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCapacity rowType:XLFormRowDescriptorTypeText title:@"Capacity"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.dinghiesNumber != nil ?  self.fly.dinghiesNumber : @"None";
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesHasCover rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Cover"];
+    row.value = @(self.fly.cover);
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCoverColor rowType:XLFormRowDescriptorTypeText title:@"Colour"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.hidden = @(!self.fly.cover);
+    row.value = self.fly.coverColour != nil ?  self.fly.coverColour : @"None";
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeText title:@"Aircraft color and marking"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
@@ -93,29 +105,26 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
-    
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"Observations."];
-    [form addFormSection:section];
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyObservations rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
-    row.value = self.fly.observations != nil ?  self.fly.observations : @"None";
-    row.disabled = @YES;
-    [section addFormRow:row];
-    
-    
-    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
-    [form addFormSection:section];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyLicence rowType:XLFormRowDescriptorTypeText title:@"Licence"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeText title:@"Remarks"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.licence != nil ?  self.fly.licence : @"None";
+    row.value = self.fly.remarks != nil ?  self.fly.remarks : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyLicenceNumber rowType:XLFormRowDescriptorTypeText title:@"Number"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeText title:@"Pilot in-command"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.licenceNumber != nil ?  self.fly.licenceNumber : @"None";
+    row.value = self.fly.pilotInCommand != nil ?  self.fly.pilotInCommand : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
+    
+    
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Aditional requirements."];
+    [form addFormSection:section];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAditionalRequirements rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
+    row.value = self.fly.aditionalRequirements != nil ?  self.fly.aditionalRequirements : @"None";
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
     
     self.form = form;
     

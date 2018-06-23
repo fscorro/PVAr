@@ -45,10 +45,10 @@
     
     TYAlertView *alertView = [TYAlertView alertViewWithTitle:title message:message];
     
+    [alertView setButtonDefaultBgColor:AppColorLight];
     [alertView addAction:[TYAlertAction actionWithTitle:@"Accept" style:TYAlertActionStyleDefault handler:^(TYAlertAction *action) {
         accept();
     }]];
-    [alertView setButtonDefaultBgColor:AppColorLight];
 
     // first way to show ,use UIView Category
     [TYShowAlertView showAlertViewWithView:alertView originY:200 backgoundTapDismissEnable:YES];

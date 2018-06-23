@@ -48,7 +48,7 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyenrollment rowType:XLFormRowDescriptorTypeEmail title:@"Enrollment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRegister rowType:XLFormRowDescriptorTypeEmail title:@"Register"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.value = self.fly.enrollment;
     row.disabled = @YES;
@@ -138,6 +138,12 @@
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.level];
     row.disabled = @YES;
     [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
+    row.value = self.fly.route;
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
     
     // SECTION 4
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
