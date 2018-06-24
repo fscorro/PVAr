@@ -68,6 +68,7 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies"];
     row.value = @(self.fly.dinghies);
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.disabled = @YES;
     [section addFormRow:row];
     
@@ -90,6 +91,7 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesHasCover rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Cover"];
     row.value = @(self.fly.cover);
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.disabled = @YES;
     [section addFormRow:row];
     

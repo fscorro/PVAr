@@ -12,8 +12,9 @@
 #import <XLFormViewController.h>
 #import "Fly.h"
 #import "CreateSupplementaryInformation.h"
+#import "CustomSelectorViewController.h"
 
-@interface CreateFlyingPlanViewController : XLFormViewController <CreateSupplementaryInformationDelegate>
+@interface CreateFlyingPlanViewController : XLFormViewController <CreateSupplementaryInformationDelegate, CustomSelectorDelegate>
 
 
 @end

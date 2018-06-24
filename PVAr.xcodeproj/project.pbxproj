@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2C74544420E01AE500F24691 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544320E01AE500F24691 /* Utils.m */; };
+		2C74544720E0266100F24691 /* CustomSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544620E0266100F24691 /* CustomSelectorViewController.m */; };
 		2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE9ACA20D40D0300DCC890 /* Fly.m */; };
 		2CEAB23120DAE0C8005E77AD /* CreateSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */; };
 		2CEAB23420DAE7B8005E77AD /* DetailSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23320DAE7B8005E77AD /* DetailSupplementaryInformation.m */; };
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		2C74544220E01AE500F24691 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		2C74544320E01AE500F24691 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
+		2C74544520E0266100F24691 /* CustomSelectorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomSelectorViewController.h; sourceTree = "<group>"; };
+		2C74544620E0266100F24691 /* CustomSelectorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomSelectorViewController.m; sourceTree = "<group>"; };
 		2CCE9AC920D40D0300DCC890 /* Fly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fly.h; sourceTree = "<group>"; };
 		2CCE9ACA20D40D0300DCC890 /* Fly.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fly.m; sourceTree = "<group>"; };
 		2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateSupplementaryInformation.h; sourceTree = "<group>"; };
@@ -254,6 +257,8 @@
 				C435CFE120D29A8B00BEF664 /* CreateFlyingPlanViewController.m */,
 				2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */,
 				2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */,
+				2C74544520E0266100F24691 /* CustomSelectorViewController.h */,
+				2C74544620E0266100F24691 /* CustomSelectorViewController.m */,
 				C435CFE920D2EEA800BEF664 /* FlyingPlanDetaillViewController.h */,
 				C435CFEA20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m */,
 				2CEAB23220DAE7B8005E77AD /* DetailSupplementaryInformation.h */,
@@ -420,6 +425,7 @@
 				2C74544420E01AE500F24691 /* Utils.m in Sources */,
 				C406E60A20D15EE60061398A /* CancelledFlyingPlansViewController.m in Sources */,
 				C4D6192420D040A90010F04A /* User.m in Sources */,
+				2C74544720E0266100F24691 /* CustomSelectorViewController.m in Sources */,
 				C43C540020D01AF6004BB923 /* AppDelegate.m in Sources */,
 				C435CFE220D29A8B00BEF664 /* CreateFlyingPlanViewController.m in Sources */,
 				C4D6193B20D0672F0010F04A /* ServiceBase.m in Sources */,

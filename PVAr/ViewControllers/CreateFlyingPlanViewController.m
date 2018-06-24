@@ -8,7 +8,19 @@
 
 #import "CreateFlyingPlanViewController.h"
 #import "Constants.h"
+#import "Utils.h"
 #import "ShowAlert.h"
+
+typedef NS_ENUM(NSInteger, CustomSelector) {
+    CrouissingSpeed = 0,
+    Level
+};
+
+typedef NS_ENUM(NSInteger, DateStatus) {
+    DateStatusEqual = 0,
+    DateStatusLater,
+    DateStatusEarlier
+};
 
 NSString *const KButtonCreateFPL = @"FLPButton";
 
@@ -17,6 +29,17 @@ NSInteger const maxAlternativesDestination = 2;
 @interface CreateFlyingPlanViewController(){
     NSMutableArray *oldValidation;
     NSMutableDictionary *dicSupp;
+    
+    UIButton *buttonCruissingSpeed;
+    UIButton *buttonLevel;
+    BOOL cruissingSpeedSelector;
+    
+    BOOL dateHasChange;
+    NSInteger actualDateStatus;
+    BOOL invalidDate;
+
+    BOOL invalidTime;
+
 }
 @end
 
@@ -152,32 +175,38 @@ NSInteger const maxAlternativesDestination = 2;
     row.value = [NSDate new];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyunit rowType:XLFormRowDescriptorTypeSelectorPush title:@"Units"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"K"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"M"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"K"];
-    [section addFormRow:row];
+    buttonCruissingSpeed = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonCruissingSpeed addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonCruissingSpeed setTitle:@"K" forState:UIControlStateNormal];
+    [buttonCruissingSpeed setBackgroundColor:AppColorLight];
+    buttonCruissingSpeed.tag = CrouissingSpeed;
+    buttonCruissingSpeed.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeText title:@"Speed"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeText title:@"Cruissing speed"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:buttonCruissingSpeed forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeSelectorPush title:@"Level"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"F"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"S"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"A"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"VRF"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"F"];
+    buttonLevel = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonLevel addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonLevel setTitle:@"F" forState:UIControlStateNormal];
+    [buttonLevel setBackgroundColor:AppColorLight];
+    buttonLevel.tag = Level;
+    buttonLevel.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeText title:@"Level"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:buttonLevel forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
-
-
+    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
     row.required = NO;
     [section addFormRow:row];
@@ -263,13 +292,29 @@ NSInteger const maxAlternativesDestination = 2;
 -(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)rowDescriptor oldValue:(id)oldValue newValue:(id)newValue{
     [super formRowDescriptorValueHasChanged:rowDescriptor oldValue:oldValue newValue:newValue];
     
-    if ([rowDescriptor.tag isEqualToString:ModelFlydate] || [rowDescriptor.tag isEqualToString:ModelFlytime]){
+    if ([rowDescriptor.tag isEqualToString:ModelFlydate]){
+        dateHasChange = true;
         
-        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydateTime];
+        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydate];
         
         XLFormDateCell * dateCell = (XLFormDateCell *)[startDateDescriptor cellForFormController:self];
-        if ([[NSDate new] compare:startDateDescriptor.value] == NSOrderedDescending) {
-            // startDateDescriptor is later than endDateDescriptor
+        
+        if([[[Utils sharedUtils] dateFormnat:startDateDescriptor.value] isEqualToString:[[Utils sharedUtils] dateFormnat:[NSDate new]]]){
+            actualDateStatus = DateStatusEqual;
+            invalidDate = false;
+        }else{
+            if ( ([startDateDescriptor.value compare:[NSDate new]]) == NSOrderedDescending ) {// later
+                actualDateStatus = DateStatusLater;
+                invalidDate = false;
+            }else{// earlier
+                actualDateStatus = DateStatusEarlier;
+                invalidDate = true;
+            }
+        }
+        if(invalidDate == false){
+            [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
+            [self updateFormRow:startDateDescriptor];
+        }else{
             [dateCell update]; // force detailTextLabel update
             NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:@1
                                                                                forKey:NSStrikethroughStyleAttributeName];
@@ -277,9 +322,43 @@ NSInteger const maxAlternativesDestination = 2;
             [startDateDescriptor.cellConfig setObject:strikeThroughText forKey:@"detailTextLabel.attributedText"];
             [self updateFormRow:startDateDescriptor];
         }
-        else{
-            [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
-            [self updateFormRow:startDateDescriptor];
+    }
+    
+    if ([rowDescriptor.tag isEqualToString:ModelFlytime] || dateHasChange == true){
+        dateHasChange = false;
+        XLFormRowDescriptor * timeRow = [self.form formRowWithTag:ModelFlytime];
+        
+        XLFormDateCell * timeCell = (XLFormDateCell *)[timeRow cellForFormController:self];
+        
+        switch (actualDateStatus) {
+            case DateStatusEqual:
+                if([[[Utils sharedUtils] timeFormnat:timeRow.value] isEqualToString:[[Utils sharedUtils] timeFormnat:[NSDate new]]]){
+                    invalidTime = true;
+                }else{
+                    if ( ([timeRow.value compare:[NSDate new]]) == NSOrderedDescending ) {// later
+                        invalidTime = false;
+                    }else{// earlier
+                        invalidTime = true;
+                    }
+                }
+                break;
+            case DateStatusLater:
+                invalidTime = false;
+                break;
+            case DateStatusEarlier:
+                invalidTime = true;
+                break;
+        }
+        if(invalidTime == false){
+            [timeRow.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
+            [self updateFormRow:timeRow];
+        }else{
+            [timeCell update]; // force detailTextLabel update
+            NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:@1
+                                                                               forKey:NSStrikethroughStyleAttributeName];
+            NSAttributedString* strikeThroughText = [[NSAttributedString alloc] initWithString:timeCell.detailTextLabel.text attributes:strikeThroughAttribute];
+            [timeRow.cellConfig setObject:strikeThroughText forKey:@"detailTextLabel.attributedText"];
+            [self updateFormRow:timeRow];
         }
     }
 }
@@ -320,6 +399,16 @@ NSInteger const maxAlternativesDestination = 2;
         return;
     }
     
+    if(invalidDate == true){
+        [RKDropdownAlert title:@"Submit failure" message:@"Verify selected date" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+        [self deselectFormRow:sender];
+        return;
+    }else if(invalidTime == true){
+        [RKDropdownAlert title:@"Submit failure" message:@"Verify selected time" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+        [self deselectFormRow:sender];
+        return;
+    }
+    
     if([validationErrors count] == 0){
         NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
         [temp setValue:@"P" forKey:ModelFlystate];
@@ -331,8 +420,7 @@ NSInteger const maxAlternativesDestination = 2;
                 if([row.rowType isEqualToString:XLFormRowDescriptorTypeSelectorPush]){
                     [temp setValue:[row.value displayText] forKey:row.tag];
                 }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeDateInline] || [row.rowType isEqualToString:XLFormRowDescriptorTypeTimeInline]){
-                    // convertir fecha a string o enviar en formato fecha
-                    
+                    [temp setValue:row.value forKey:row.tag];
                 }else if(row.tag == nil){
                     if (row.value != nil) {
                         [arrAlternatives addObject:row.value];
@@ -340,7 +428,13 @@ NSInteger const maxAlternativesDestination = 2;
                     }
                 }else{
                     if (row.value != nil) {
-                        [temp setValue:row.value forKey:row.tag];
+                        if([row.tag isEqualToString:ModelFlyspeed]){
+                            [temp setValue:[NSString stringWithFormat:@"%@%@",buttonCruissingSpeed.titleLabel.text,row.value] forKey:row.tag];
+                        }else if([row.tag isEqualToString:ModelFlylevel]){
+                            [temp setValue:[NSString stringWithFormat:@"%@%@",buttonLevel.titleLabel.text,row.value] forKey:row.tag];
+                        }else{
+                            [temp setValue:row.value forKey:row.tag];
+                        }
                     }
                 }
             }
@@ -365,10 +459,34 @@ NSInteger const maxAlternativesDestination = 2;
         CreateSupplementaryInformation *vc = segue.destinationViewController;
         vc.delegate = self;
         vc.dicSupplementary = dicSupp;
+    }else if ([segueId isEqualToString:@"SegueCustomSelector"]) {
+        CustomSelectorViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+        vc.selectedOption = cruissingSpeedSelector == true ? buttonCruissingSpeed.titleLabel.text : buttonLevel.titleLabel.text;
+        vc.tag = cruissingSpeedSelector == true ? ModelFlyspeed : ModelFlylevel;
     }
+}
+
+-(void) ShowCustomSelector:(UIButton*)sender{
+    switch (sender.tag) {
+        case CrouissingSpeed:
+            cruissingSpeedSelector = true;
+            break;
+        case Level:
+            cruissingSpeedSelector = false;
+            break;
+    }
+    [self performSegueWithIdentifier:@"SegueCustomSelector" sender:self];
 }
 
 -(void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary *)dic{
     dicSupp = [[NSMutableDictionary alloc] initWithDictionary:dic];
+}
+-(void)delegateVC:(CustomSelectorViewController *)vc option:(NSString *)option{
+    if(cruissingSpeedSelector == true){
+        [buttonCruissingSpeed setTitle:option forState:UIControlStateNormal];
+    }else{
+        [buttonLevel setTitle:option forState:UIControlStateNormal];
+    }
 }
 @end

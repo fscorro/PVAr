@@ -46,7 +46,7 @@
     [temp setValue:[NSDate new] forKey:ModelFlytime];
     [temp setValue:@"N" forKey:ModelFlyunit];
     [temp setValue:@"N470" forKey:ModelFlyspeed];
-    [temp setValue:@"F320" forKey:ModelFlylevel];
+    [temp setValue:@"VFR320" forKey:ModelFlylevel];
     
     [temp setValue:@"SKBO" forKey:ModelFlyorigin];
     [temp setValue:@"KMIA" forKey:ModelFlydestination];

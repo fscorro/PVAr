@@ -71,6 +71,7 @@
     [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyDinghies] boolValue]);
     [section addFormRow:row];
 
@@ -95,6 +96,7 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesHasCover rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Cover"];
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyDinghiesHasCover] boolValue]);
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCoverColor rowType:XLFormRowDescriptorTypeText title:@"Colour"];
