@@ -41,8 +41,8 @@
     [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
     
     [temp setValue:@"ZZZZ" forKey:ModelFlyaerodrome];
-    [temp setValue:@"20-04-2018" forKey:ModelFlydate];
-    [temp setValue:@"17:45" forKey:ModelFlytime];
+    [temp setValue:[NSDate new] forKey:ModelFlydate];
+    [temp setValue:[NSDate new] forKey:ModelFlytime];
     [temp setValue:@"K" forKey:ModelFlyunit];
     [temp setValue:@"N370" forKey:ModelFlyspeed];
     [temp setValue:@"F280" forKey:ModelFlylevel];

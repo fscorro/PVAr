@@ -8,6 +8,7 @@
 
 #import "CellFlyingPlan.h"
 #import "Constants.h"
+#import "Utils.h"
 
 @implementation CellFlyingPlan
 
@@ -28,8 +29,8 @@
         [self.viewFlyState setBackgroundColor:FlyStateCancelledColor];
     }
     [self.labelFlyNumber setText:fly.number];
-    [self.labelFlyDate setText:fly.date];
-    [self.labelFlyTime setText:fly.time];
+    [self.labelFlyDate setText:[[Utils sharedUtils]dateFormnat:fly.date]];
+    [self.labelFlyTime setText:[[Utils sharedUtils]timeFormnat:fly.time]];
     [self.labelFlyOrigin setText:[NSString stringWithFormat:@"Origin: %@", fly.origin]];
     [self.labelFlyDestination setText:[NSString stringWithFormat:@"Destination: %@", fly.destination]];
     [self.labelFlySpeed setText:fly.speed];

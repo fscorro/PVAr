@@ -25,8 +25,8 @@
 @property (nonatomic, copy) NSString *equipment;
 
 @property (nonatomic, copy) NSString *aerodrome;
-@property (nonatomic, copy) NSString *date;
-@property (nonatomic, copy) NSString *time;
+@property (nonatomic, strong) NSDate *date;
+@property (nonatomic, strong) NSDate *time;
 @property (nonatomic, copy) NSString *unit;
 @property (nonatomic, copy) NSString *speed;
 @property (nonatomic, copy) NSString *level;

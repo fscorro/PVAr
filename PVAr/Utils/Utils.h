@@ -18,4 +18,7 @@
 - (CALayer*)addRightBorderToView:(UIView*)view;
 - (UIView*)leftViewForTextfieldWithLabelText:(NSString*)text isEnabled:(BOOL)enabled;
 
+-(NSString *) dateFormnat:(NSDate*)date;
+-(NSString *) timeFormnat:(NSDate*)time;
+
 @end

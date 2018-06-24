@@ -114,8 +114,14 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
-    row.value = [NSDate new];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydate rowType:XLFormRowDescriptorTypeDateInline title:@"Date"];
+    row.value = self.fly.date;
+    row.disabled = @YES;
+    [row.cellConfigAtConfigure setObject:[NSLocale localeWithLocaleIdentifier:@"FR_fr" ] forKey:@"locale"];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytime rowType:XLFormRowDescriptorTypeTimeInline title:@"Time"];
+    row.value = self.fly.time;
     row.disabled = @YES;
     [section addFormRow:row];
     

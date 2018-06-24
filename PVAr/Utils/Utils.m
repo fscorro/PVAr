@@ -7,6 +7,7 @@
 //
 
 #import "Utils.h"
+#import "Constants.h"
 
 @implementation Utils
 
@@ -76,4 +77,19 @@
     
     return view;
 }
+
+-(NSString *) dateFormnat:(NSDate*)date{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:DateFormat];
+    NSString *strDate = [formatter stringFromDate:date];
+    return strDate;
+}
+
+-(NSString *) timeFormnat:(NSDate*)time{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:TimeFormat];
+    NSString *strTime = [formatter stringFromDate:time];
+    return strTime;
+}
+
 @end

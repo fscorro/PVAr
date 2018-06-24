@@ -143,7 +143,12 @@ NSInteger const maxAlternativesDestination = 2;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydate rowType:XLFormRowDescriptorTypeDateInline title:@"Date"];
+    row.value = [NSDate new];
+    [row.cellConfigAtConfigure setObject:[NSLocale localeWithLocaleIdentifier:@"FR_fr" ] forKey:@"locale"];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytime rowType:XLFormRowDescriptorTypeTimeInline title:@"Time"];
     row.value = [NSDate new];
     [section addFormRow:row];
     
@@ -258,7 +263,7 @@ NSInteger const maxAlternativesDestination = 2;
 -(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)rowDescriptor oldValue:(id)oldValue newValue:(id)newValue{
     [super formRowDescriptorValueHasChanged:rowDescriptor oldValue:oldValue newValue:newValue];
     
-    if ([rowDescriptor.tag isEqualToString:ModelFlydateTime]){
+    if ([rowDescriptor.tag isEqualToString:ModelFlydate] || [rowDescriptor.tag isEqualToString:ModelFlytime]){
         
         XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydateTime];
         
@@ -325,7 +330,7 @@ NSInteger const maxAlternativesDestination = 2;
             for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
                 if([row.rowType isEqualToString:XLFormRowDescriptorTypeSelectorPush]){
                     [temp setValue:[row.value displayText] forKey:row.tag];
-                }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeDateInline]){
+                }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeDateInline] || [row.rowType isEqualToString:XLFormRowDescriptorTypeTimeInline]){
                     // convertir fecha a string o enviar en formato fecha
                     
                 }else if(row.tag == nil){
