@@ -8,6 +8,7 @@
 
 #import "DetailSupplementaryInformation.h"
 #import "Constants.h"
+#import "Utils.h"
 
 @implementation DetailSupplementaryInformation
 
@@ -29,12 +30,16 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeText title:@"Endurance"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:false] forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.endurance != nil ?  self.fly.endurance : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeText title:@"Persons on board"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"P" isEnabled:false] forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.personsOnBoard != nil ?  self.fly.personsOnBoard : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
@@ -101,18 +106,24 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeText title:@"Aircraft color and marking"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"A" isEnabled:false] forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.aircraftColor != nil ?  self.fly.aircraftColor : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeText title:@"Remarks"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"N" isEnabled:false] forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.remarks != nil ?  self.fly.remarks : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeText title:@"Pilot in-command"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"C" isEnabled:false] forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.pilotInCommand != nil ?  self.fly.pilotInCommand : @"None";
     row.disabled = @YES;
     [section addFormRow:row];

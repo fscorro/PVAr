@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C74544420E01AE500F24691 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544320E01AE500F24691 /* Utils.m */; };
 		2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE9ACA20D40D0300DCC890 /* Fly.m */; };
 		2CEAB23120DAE0C8005E77AD /* CreateSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */; };
 		2CEAB23420DAE7B8005E77AD /* DetailSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23320DAE7B8005E77AD /* DetailSupplementaryInformation.m */; };
@@ -39,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C74544220E01AE500F24691 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
+		2C74544320E01AE500F24691 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		2CCE9AC920D40D0300DCC890 /* Fly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fly.h; sourceTree = "<group>"; };
 		2CCE9ACA20D40D0300DCC890 /* Fly.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fly.m; sourceTree = "<group>"; };
 		2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateSupplementaryInformation.h; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				C4D6193520D066B10010F04A /* Reachability.m */,
 				C435CFDB20D2928E00BEF664 /* EmptySegue.h */,
 				C435CFDA20D2928E00BEF664 /* EmptySegue.m */,
+				2C74544220E01AE500F24691 /* Utils.h */,
+				2C74544320E01AE500F24691 /* Utils.m */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -412,6 +417,7 @@
 				C43C541C20D01B37004BB923 /* LoginViewController.m in Sources */,
 				C435CFEB20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m in Sources */,
 				C43C540E20D01AF8004BB923 /* main.m in Sources */,
+				2C74544420E01AE500F24691 /* Utils.m in Sources */,
 				C406E60A20D15EE60061398A /* CancelledFlyingPlansViewController.m in Sources */,
 				C4D6192420D040A90010F04A /* User.m in Sources */,
 				C43C540020D01AF6004BB923 /* AppDelegate.m in Sources */,
