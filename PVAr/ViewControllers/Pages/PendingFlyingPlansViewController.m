@@ -36,7 +36,7 @@
     [temp setValue:@"I" forKey:ModelFlyrule];
     [temp setValue:@"S" forKey:ModelFlytype];
     
-    [temp setValue:@"1" forKey:ModelFlyaeroplaneNumber];
+    [temp setValue:@"A8" forKey:ModelFlyaeroplaneNumber];
     [temp setValue:@"B763" forKey:ModelFlyaeroplaneType];
     [temp setValue:@"H" forKey:ModelFlycategory];
     [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
@@ -51,6 +51,12 @@
     [temp setValue:@"0313" forKey:ModelFlyEET];
     [temp setValue:@[@"KBPI",@"SDIP"] forKey:ModelFlyalternative];
     [temp setValue:@"Z1P1H ZIP W44" forKey:ModelFlyinformation];
+    
+    NSMutableDictionary *dicSupp = [[NSMutableDictionary alloc] init];
+    [dicSupp setValue:@"Felipe S. Corro" forKey:ModelFlyPilotInCommand];
+    [dicSupp setValue:@"M240-CMD" forKey:ModelFlyPilotLicence];
+
+    [temp setValue:dicSupp forKey:ModelFlySupplementaryDictionary];
     
     Fly *fly = [[Fly alloc] initWithDict:temp];
     arr = [[NSMutableArray alloc] init];

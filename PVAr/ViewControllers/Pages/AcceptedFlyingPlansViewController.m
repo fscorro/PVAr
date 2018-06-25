@@ -35,7 +35,7 @@
     [temp setValue:@"V" forKey:ModelFlyrule];
     [temp setValue:@"N" forKey:ModelFlytype];
     
-    [temp setValue:@"1" forKey:ModelFlyaeroplaneNumber];
+    [temp setValue:@"F5" forKey:ModelFlyaeroplaneNumber];
     [temp setValue:@"B763" forKey:ModelFlyaeroplaneType];
     [temp setValue:@"L" forKey:ModelFlycategory];
     [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
@@ -49,6 +49,13 @@
     
     [temp setValue:@"0313" forKey:ModelFlyEET];
     [temp setValue:@"Z1P1H W44" forKey:ModelFlyinformation];
+    
+    
+    NSMutableDictionary *dicSupp = [[NSMutableDictionary alloc] init];
+    [dicSupp setValue:@"Roberto Daviduk" forKey:ModelFlyPilotInCommand];
+    [dicSupp setValue:@"M257-OKO" forKey:ModelFlyPilotLicence];
+    
+    [temp setValue:dicSupp forKey:ModelFlySupplementaryDictionary];
     
     Fly *fly = [[Fly alloc] initWithDict:temp];
     arr = [[NSMutableArray alloc] init];

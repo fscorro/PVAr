@@ -15,7 +15,8 @@
 
 @property (strong, nonatomic) IBOutlet UIView *viewFlyState;
 @property (strong, nonatomic) IBOutlet UIView *viewFlingNumber;
-@property (strong, nonatomic) IBOutlet UILabel *labelFlyNumber;
+@property (strong, nonatomic) IBOutlet UILabel *labelFlyAeroplaneID;
+@property (strong, nonatomic) IBOutlet UILabel *labelFlyAeroplaneType;
 @property (strong, nonatomic) IBOutlet UILabel *labelFlyDate;
 @property (strong, nonatomic) IBOutlet UILabel *labelFlyTime;
 
@@ -24,7 +25,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *labelFlySpeed;
 @property (strong, nonatomic) IBOutlet UILabel *labelFlyLevel;
-@property (strong, nonatomic) IBOutlet UILabel *labelFlyEnrollment;
+@property (strong, nonatomic) IBOutlet UILabel *labelFlyTotalEET;
 
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewOrigin;
 @property (weak, nonatomic) IBOutlet UIImageView *imageViewRoad;

@@ -44,22 +44,43 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Emergency radio"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasEmergencyRadio rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Emergency radio"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @(self.fly.hasEmergencyRadio);
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
     row.selectorOptions = self.fly.emergencyRadio != nil ? self.fly.emergencyRadio : @[@"None"];
     row.value = self.fly.emergencyRadio != nil ?  self.fly.emergencyRadio : @[@"None"];
     row.disabled = @YES;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasEmergencyRadio];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Survival equipment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasSurvivalEquipment rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Survival equipment"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @(self.fly.hasSurvivalEquipment);
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
     row.selectorOptions = self.fly.survivalEquipment != nil ?  self.fly.survivalEquipment : @[@"None"];
     row.value = self.fly.survivalEquipment != nil ?  self.fly.survivalEquipment : @[@"None"];
     row.disabled = @YES;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasSurvivalEquipment];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Jackets"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasJackets rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Jackets"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @(self.fly.hasJackets);
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
     row.selectorOptions = self.fly.jackets != nil ?  self.fly.jackets : @[@"None"];
     row.value = self.fly.jackets != nil ?  self.fly.jackets : @[@"None"];
     row.disabled = @YES;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasJackets];
     [section addFormRow:row];
     
     
@@ -85,7 +106,7 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCapacity rowType:XLFormRowDescriptorTypeText title:@"Capacity"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.dinghiesNumber != nil ?  self.fly.dinghiesNumber : @"None";
+    row.value = self.fly.dinghiesCapacity != nil ?  self.fly.dinghiesCapacity : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
@@ -127,6 +148,12 @@
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"C" isEnabled:false] forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.pilotInCommand != nil ?  self.fly.pilotInCommand : @"None";
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeText title:@"Licence"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.pilotLicence != nil ?  self.fly.pilotLicence : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
