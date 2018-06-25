@@ -29,10 +29,10 @@
     // todo esto deberia desaparecer, es solo para una demo..
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     [temp setValue:@"P" forKey:ModelFlystate];
-    [temp setValue:@"WFL-324" forKey:ModelFlynumber];
-    [temp setValue:@"ALTRV" forKey:ModelFlypriority];
-    [temp setValue:@"N422LA" forKey:ModelFlyRegister];
-    [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
+//    [temp setValue:@"WFL-324" forKey:ModelFlynumber];
+//    [temp setValue:@"ALTRV" forKey:ModelFlypriority];
+//    [temp setValue:@"N422LA" forKey:ModelFlyRegister];
+//    [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
     [temp setValue:@"I" forKey:ModelFlyrule];
     [temp setValue:@"S" forKey:ModelFlytype];
     
@@ -41,15 +41,13 @@
     [temp setValue:@"H" forKey:ModelFlycategory];
     [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
     
-    [temp setValue:@"ZZZZ" forKey:ModelFlyaerodrome];
-    [temp setValue:[NSDate new] forKey:ModelFlydate];
-    [temp setValue:[NSDate new] forKey:ModelFlytime];
+    [temp setValue:@"SKBO" forKey:ModelFlyoriginAerodrome];
+    [temp setValue:@"KMIA" forKey:ModelFlydestinationAerodrome];
+    [temp setValue:[NSDate new] forKey:ModelFlydateTime];
     [temp setValue:@"N" forKey:ModelFlyunit];
     [temp setValue:@"N470" forKey:ModelFlyspeed];
     [temp setValue:@"VFR320" forKey:ModelFlylevel];
     
-    [temp setValue:@"SKBO" forKey:ModelFlyorigin];
-    [temp setValue:@"KMIA" forKey:ModelFlydestination];
     [temp setValue:@"0313" forKey:ModelFlyEET];
     [temp setValue:@[@"KBPI",@"SDIP"] forKey:ModelFlyalternative];
     [temp setValue:@"Z1P1H ZIP W44" forKey:ModelFlyinformation];

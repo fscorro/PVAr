@@ -19,7 +19,9 @@
 
 -(void)viewDidLoad{
     [super viewDidLoad];
-    
+    if(self.dicSupplementary == nil){
+        self.dicSupplementary = [[NSMutableDictionary alloc] init];
+    }
     [self initializeForm];
 }
 
@@ -51,19 +53,37 @@
     row.value = [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] != nil ? [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] : nil;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Emergency radio"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasEmergencyRadio rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Emergency radio"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasEmergencyRadio] boolValue]);
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
     row.selectorOptions = @[@"U",@"V",@"E"];
     row.value = [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] != nil ? [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] : nil;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasEmergencyRadio];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Survival equipment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasSurvivalEquipment rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Survival equipment"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasSurvivalEquipment] boolValue]);
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
     row.selectorOptions = @[@"S",@"P",@"M",@"J"];
     row.value = [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] != nil ? [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] : nil;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasSurvivalEquipment];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Jackets"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasJackets rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Jackets"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasJackets] boolValue]);
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
     row.selectorOptions = @[@"L",@"F",@"U",@"V"];
     row.value = [self.dicSupplementary valueForKey:ModelFlyJackets] != nil ? [self.dicSupplementary valueForKey:ModelFlyJackets] : nil;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasJackets];
     [section addFormRow:row];
     
     
@@ -134,6 +154,12 @@
     row.value = [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] : nil;
     [section addFormRow:row];
     
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeText title:@"Licence"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyPilotLicence] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotLicence] : nil;
+    [section addFormRow:row];
+    
     
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Aditional requirements."];
     [form addFormSection:section];
@@ -153,15 +179,12 @@
         
         for(int i = 0; i < [[self.form formSections] count] ; i++){
             for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
-                if([row.tag isEqualToString:ModelFlyEmergencyRadio]){
-                    [self.dicSupplementary setValue:row.value forKey:row.tag];
-                }else if([row.tag isEqualToString:ModelFlySurvivalEquipment]){
-                    [self.dicSupplementary setValue:row.value forKey:row.tag];
-                }else if([row.tag isEqualToString:ModelFlyJackets]){
-                    [self.dicSupplementary setValue:row.value forKey:row.tag];
-                }else if([row.tag isEqualToString:ModelFlyDinghies]){
+                
+                if([row.tag isEqualToString:ModelFlyHasEmergencyRadio] || [row.tag isEqualToString:ModelFlyHasSurvivalEquipment] || [row.tag isEqualToString:ModelFlyHasJackets]){
                     [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
-                }else if([row.tag isEqualToString:ModelFlyDinghiesHasCover]){
+                }else if([row.tag isEqualToString:ModelFlyEmergencyRadio] || [row.tag isEqualToString:ModelFlySurvivalEquipment] || [row.tag isEqualToString:ModelFlyJackets]){
+                    [self.dicSupplementary setValue:row.value forKey:row.tag];
+                }else if([row.tag isEqualToString:ModelFlyDinghies] || [row.tag isEqualToString:ModelFlyDinghiesHasCover]){
                     [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
                 }else{
                     [self.dicSupplementary setValue:[row.value displayText] forKey:row.tag];
@@ -169,10 +192,19 @@
             }
         }
         
-        if([[self.dicSupplementary objectForKey:ModelFlyDinghies] boolValue] == false){
-            for (NSString *key in [self.dicSupplementary allKeys]) {
-                if([key containsString:[ModelFlyDinghies lowercaseString]]){
+        for (NSString *key in [self.dicSupplementary allKeys]) {
+            if([key isEqualToString:ModelFlyHasEmergencyRadio] || [key isEqualToString:ModelFlyHasSurvivalEquipment] || [key isEqualToString:ModelFlyHasJackets]){
+                BOOL switchKey = [[self.dicSupplementary objectForKey:key] boolValue];
+                if(switchKey == false){
                     [self.dicSupplementary removeObjectForKey:key];
+                }
+            }else if ([key isEqualToString:ModelFlyDinghies]){
+                if([[self.dicSupplementary objectForKey:ModelFlyDinghies] boolValue] == false){
+                    for (NSString *key in [self.dicSupplementary allKeys]) {
+                        if([key containsString:[ModelFlyDinghies lowercaseString]]){
+                            [self.dicSupplementary removeObjectForKey:key];
+                        }
+                    }
                 }
             }
         }

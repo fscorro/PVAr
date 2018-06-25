@@ -29,10 +29,10 @@
         [self.viewFlyState setBackgroundColor:FlyStateCancelledColor];
     }
     [self.labelFlyNumber setText:fly.number];
-    [self.labelFlyDate setText:[[Utils sharedUtils]dateFormnat:fly.date]];
-    [self.labelFlyTime setText:[[Utils sharedUtils]timeFormnat:fly.time]];
-    [self.labelFlyOrigin setText:[NSString stringWithFormat:@"Origin: %@", fly.origin]];
-    [self.labelFlyDestination setText:[NSString stringWithFormat:@"Destination: %@", fly.destination]];
+    [self.labelFlyDate setText:[[Utils sharedUtils]dateFormnat:fly.dateTime]];
+    [self.labelFlyTime setText:[[Utils sharedUtils]timeFormnat:fly.dateTime]];
+    [self.labelFlyOrigin setText:[NSString stringWithFormat:@"Origin: %@", fly.originAerodrome]];
+    [self.labelFlyDestination setText:[NSString stringWithFormat:@"Destination: %@", fly.destinationAerodrome]];
     [self.labelFlySpeed setText:fly.speed];
     [self.labelFlyLevel setText:fly.level];
     [self.labelFlyEnrollment setText:fly.enrollment];

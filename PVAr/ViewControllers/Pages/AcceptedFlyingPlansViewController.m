@@ -28,10 +28,10 @@
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     [temp setValue:@"A" forKey:ModelFlystate];
     
-    [temp setValue:@"WFL-336" forKey:ModelFlynumber];
-    [temp setValue:@"FFR" forKey:ModelFlypriority];
-    [temp setValue:@"N357EL" forKey:ModelFlyRegister];
-    [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
+//    [temp setValue:@"WFL-336" forKey:ModelFlynumber];
+//    [temp setValue:@"FFR" forKey:ModelFlypriority];
+//    [temp setValue:@"N357EL" forKey:ModelFlyRegister];
+//    [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
     [temp setValue:@"V" forKey:ModelFlyrule];
     [temp setValue:@"N" forKey:ModelFlytype];
     
@@ -40,15 +40,13 @@
     [temp setValue:@"L" forKey:ModelFlycategory];
     [temp setValue:@"SDFGHIRWXYZ H" forKey:ModelFlyequipment];
     
-    [temp setValue:@"ZZZZ" forKey:ModelFlyaerodrome];
-    [temp setValue:[NSDate new] forKey:ModelFlydate];
-    [temp setValue:[NSDate new] forKey:ModelFlytime];
+    [temp setValue:@"EJOA" forKey:ModelFlyoriginAerodrome];
+    [temp setValue:@"JKLM" forKey:ModelFlydestinationAerodrome];
+    [temp setValue:[NSDate new] forKey:ModelFlydateTime];
     [temp setValue:@"K" forKey:ModelFlyunit];
     [temp setValue:@"N370" forKey:ModelFlyspeed];
     [temp setValue:@"F280" forKey:ModelFlylevel];
     
-    [temp setValue:@"EJOA" forKey:ModelFlyorigin];
-    [temp setValue:@"JKLM" forKey:ModelFlydestination];
     [temp setValue:@"0313" forKey:ModelFlyEET];
     [temp setValue:@"Z1P1H W44" forKey:ModelFlyinformation];
     

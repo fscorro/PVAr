@@ -60,66 +60,66 @@ NSInteger const maxAlternativesDestination = 2;
     
     form = [XLFormDescriptor formDescriptor];
     
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
-    [form addFormSection:section];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlynumber rowType:XLFormRowDescriptorTypeText title:@"Fly Number"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
-    [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlypriority rowType:XLFormRowDescriptorTypeSelectorPush title:@"Priority"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"ATFMX"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"FFR"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"FLTCK"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"HAZMAT"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(6) displayText:@"HEAD"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(7) displayText:@"HOSP"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(8) displayText:@"HUM"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(9) displayText:@"MARSA"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(10) displayText:@"MEDEVAC"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(11) displayText:@"NONRVSM"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(12) displayText:@"SAR"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(13) displayText:@"STATUS"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"];
-    [section addFormRow:row];
-   
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRegister rowType:XLFormRowDescriptorTypeText title:@"Register"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
-    [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycompany rowType:XLFormRowDescriptorTypeText title:@"Company"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
-    [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"Z"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
-    [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"X"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"];
-    [section addFormRow:row];
+//    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
+//    [form addFormSection:section];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlynumber rowType:XLFormRowDescriptorTypeText title:@"Fly Number"];
+//    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+//    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+//    row.required = YES;
+//    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
+//    [section addFormRow:row];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlypriority rowType:XLFormRowDescriptorTypeSelectorPush title:@"Priority"];
+//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"ATFMX"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"FFR"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"FLTCK"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"HAZMAT"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(6) displayText:@"HEAD"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(7) displayText:@"HOSP"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(8) displayText:@"HUM"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(9) displayText:@"MARSA"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(10) displayText:@"MEDEVAC"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(11) displayText:@"NONRVSM"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(12) displayText:@"SAR"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(13) displayText:@"STATUS"]
+//                            ];
+//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"ALTRV"];
+//    [section addFormRow:row];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRegister rowType:XLFormRowDescriptorTypeText title:@"Register"];
+//    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+//    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+//    row.required = YES;
+//    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
+//    [section addFormRow:row];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycompany rowType:XLFormRowDescriptorTypeText title:@"Company"];
+//    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+//    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+//    row.required = YES;
+//    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
+//    [section addFormRow:row];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
+//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"Z"]
+//                            ];
+//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
+//    [section addFormRow:row];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
+//                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"X"]
+//                            ];
+//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"];
+//    [section addFormRow:row];
     
     
     // SECTION 2
@@ -159,19 +159,21 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaerodrome rowType:XLFormRowDescriptorTypeText title:@"Aerodrome"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyoriginAerodrome rowType:XLFormRowDescriptorTypeText title:@"Origin aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydate rowType:XLFormRowDescriptorTypeDateInline title:@"Date"];
-    row.value = [NSDate new];
-    [row.cellConfigAtConfigure setObject:[NSLocale localeWithLocaleIdentifier:@"FR_fr" ] forKey:@"locale"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestinationAerodrome rowType:XLFormRowDescriptorTypeText title:@"Destination aerodrome"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytime rowType:XLFormRowDescriptorTypeTimeInline title:@"Time"];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
     row.value = [NSDate new];
     [section addFormRow:row];
     
@@ -212,23 +214,23 @@ NSInteger const maxAlternativesDestination = 2;
     [section addFormRow:row];
 
     
-    // SECTION 4
-    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
-    [form addFormSection:section];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyorigin rowType:XLFormRowDescriptorTypeText title:@"Origin"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
-    [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestination rowType:XLFormRowDescriptorTypeText title:@"Destination"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
-    [section addFormRow:row];
+//    // SECTION 4
+//    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+//    [form addFormSection:section];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyorigin rowType:XLFormRowDescriptorTypeText title:@"Origin"];
+//    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+//    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+//    row.required = YES;
+//    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+//    [section addFormRow:row];
+//
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestination rowType:XLFormRowDescriptorTypeText title:@"Destination"];
+//    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+//    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+//    row.required = YES;
+//    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+//    [section addFormRow:row];
     
     // SECTION 5 - Alternative fly
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"
@@ -292,29 +294,13 @@ NSInteger const maxAlternativesDestination = 2;
 -(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)rowDescriptor oldValue:(id)oldValue newValue:(id)newValue{
     [super formRowDescriptorValueHasChanged:rowDescriptor oldValue:oldValue newValue:newValue];
     
-    if ([rowDescriptor.tag isEqualToString:ModelFlydate]){
-        dateHasChange = true;
+    if ([rowDescriptor.tag isEqualToString:ModelFlydateTime]){
         
-        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydate];
+        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydateTime];
         
         XLFormDateCell * dateCell = (XLFormDateCell *)[startDateDescriptor cellForFormController:self];
-        
-        if([[[Utils sharedUtils] dateFormnat:startDateDescriptor.value] isEqualToString:[[Utils sharedUtils] dateFormnat:[NSDate new]]]){
-            actualDateStatus = DateStatusEqual;
-            invalidDate = false;
-        }else{
-            if ( ([startDateDescriptor.value compare:[NSDate new]]) == NSOrderedDescending ) {// later
-                actualDateStatus = DateStatusLater;
-                invalidDate = false;
-            }else{// earlier
-                actualDateStatus = DateStatusEarlier;
-                invalidDate = true;
-            }
-        }
-        if(invalidDate == false){
-            [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
-            [self updateFormRow:startDateDescriptor];
-        }else{
+        if ([[NSDate new] compare:startDateDescriptor.value] == NSOrderedDescending) {
+            // startDateDescriptor is later than endDateDescriptor
             [dateCell update]; // force detailTextLabel update
             NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:@1
                                                                                forKey:NSStrikethroughStyleAttributeName];
@@ -322,43 +308,9 @@ NSInteger const maxAlternativesDestination = 2;
             [startDateDescriptor.cellConfig setObject:strikeThroughText forKey:@"detailTextLabel.attributedText"];
             [self updateFormRow:startDateDescriptor];
         }
-    }
-    
-    if ([rowDescriptor.tag isEqualToString:ModelFlytime] || dateHasChange == true){
-        dateHasChange = false;
-        XLFormRowDescriptor * timeRow = [self.form formRowWithTag:ModelFlytime];
-        
-        XLFormDateCell * timeCell = (XLFormDateCell *)[timeRow cellForFormController:self];
-        
-        switch (actualDateStatus) {
-            case DateStatusEqual:
-                if([[[Utils sharedUtils] timeFormnat:timeRow.value] isEqualToString:[[Utils sharedUtils] timeFormnat:[NSDate new]]]){
-                    invalidTime = true;
-                }else{
-                    if ( ([timeRow.value compare:[NSDate new]]) == NSOrderedDescending ) {// later
-                        invalidTime = false;
-                    }else{// earlier
-                        invalidTime = true;
-                    }
-                }
-                break;
-            case DateStatusLater:
-                invalidTime = false;
-                break;
-            case DateStatusEarlier:
-                invalidTime = true;
-                break;
-        }
-        if(invalidTime == false){
-            [timeRow.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
-            [self updateFormRow:timeRow];
-        }else{
-            [timeCell update]; // force detailTextLabel update
-            NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:@1
-                                                                               forKey:NSStrikethroughStyleAttributeName];
-            NSAttributedString* strikeThroughText = [[NSAttributedString alloc] initWithString:timeCell.detailTextLabel.text attributes:strikeThroughAttribute];
-            [timeRow.cellConfig setObject:strikeThroughText forKey:@"detailTextLabel.attributedText"];
-            [self updateFormRow:timeRow];
+        else{
+            [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
+            [self updateFormRow:startDateDescriptor];
         }
     }
 }
