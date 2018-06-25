@@ -28,10 +28,7 @@
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     [temp setValue:@"A" forKey:ModelFlystate];
     
-//    [temp setValue:@"WFL-336" forKey:ModelFlynumber];
-//    [temp setValue:@"FFR" forKey:ModelFlypriority];
-//    [temp setValue:@"N357EL" forKey:ModelFlyRegister];
-//    [temp setValue:@"ZZZZ" forKey:ModelFlycompany];
+    [temp setValue:@"L597AA0" forKey:ModelFlyaeroplaneID];
     [temp setValue:@"V" forKey:ModelFlyrule];
     [temp setValue:@"N" forKey:ModelFlytype];
     

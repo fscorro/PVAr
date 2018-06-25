@@ -16,10 +16,7 @@
     if(self){
         self.flyState = [dict valueForKey:ModelFlystate];
 
-//        self.number = [dict valueForKey:ModelFlynumber];
-//        self.priority = [dict valueForKey:ModelFlypriority];
-//        self.enrollment = [dict valueForKey:ModelFlyRegister];
-//        self.company = [dict valueForKey:ModelFlycompany];
+        self.aeroplaneID = [dict valueForKey:ModelFlyaeroplaneID];
         self.rule = [dict valueForKey:ModelFlyrule];
         self.type = [dict valueForKey:ModelFlytype];
 

@@ -29,10 +29,7 @@
 #define ModelUserRepeatPasswordKEY @"repeatPassword"
 
 #define ModelFlystate @"state"
-//#define ModelFlynumber @"number"
-//#define ModelFlypriority @"priority"
-//#define ModelFlyRegister @"Register"
-//#define ModelFlycompany @"company"
+#define ModelFlyaeroplaneID @"aeroplaneID"
 #define ModelFlyrule @"rule"
 #define ModelFlytype @"type"
 #define ModelFlyaeroplaneNumber @"aeroplaneNumber"

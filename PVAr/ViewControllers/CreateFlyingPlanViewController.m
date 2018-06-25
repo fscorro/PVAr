@@ -22,6 +22,21 @@ typedef NS_ENUM(NSInteger, DateStatus) {
     DateStatusEarlier
 };
 
+typedef NS_ENUM(NSInteger, TextfieldTag) {
+    TextfieldTagAeroplaneIdentifier = 1,
+    TextfieldTagAeroplaneNumber,
+    TextfieldTagAeroplaneType,
+    TextfieldTagEquipment,
+    TextfieldTagOrigin,
+    TextfieldTagDestination,
+    TextfieldTagSpeed,
+    TextfieldTagLevel,
+    TextfieldTagRoute,
+    TextfieldTagAlternative,
+    TextfieldTagEET,
+    TextfieldTagInfo
+};
+
 NSString *const KButtonCreateFPL = @"FLPButton";
 
 NSInteger const maxAlternativesDestination = 2;
@@ -54,43 +69,57 @@ NSInteger const maxAlternativesDestination = 2;
     XLFormRowDescriptor * row;
     
     form = [XLFormDescriptor formDescriptor];
+
+    // SECTION 2
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"AIRCRAFT INFORMATION"];
+    [form addFormSection:section];
     
-//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
-//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"Z"]
-//                            ];
-//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
-//    [section addFormRow:row];
-//
-//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
-//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
-//                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"X"]
-//                            ];
-//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"];
-//    [section addFormRow:row];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneID rowType:XLFormRowDescriptorTypeZipCode title:@"Identifier"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAeroplaneIdentifier) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"Z"]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
+    [section addFormRow:row];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"X"]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"];
+    [section addFormRow:row];
     
     
     // SECTION 2
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"AEROPLANE INFORMATION"];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneNumber rowType:XLFormRowDescriptorTypeZipCode title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAeroplaneNumber) forKey:@"textField.tag"];
     row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aeroplane %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,2}$"]];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,2}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneType rowType:XLFormRowDescriptorTypeZipCode title:@"Type"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAeroplaneType) forKey:@"textField.tag"];
     row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aeroplane %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Category"];
@@ -104,17 +133,19 @@ NSInteger const maxAlternativesDestination = 2;
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeZipCode title:@"Equipment"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagEquipment) forKey:@"textField.tag"];
     row.required = YES;
     [section addFormRow:row];
     
     
     // SECTION 3
-    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
     [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyoriginAerodrome rowType:XLFormRowDescriptorTypeZipCode title:@"Origin aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagOrigin) forKey:@"textField.tag"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
@@ -122,6 +153,7 @@ NSInteger const maxAlternativesDestination = 2;
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestinationAerodrome rowType:XLFormRowDescriptorTypeZipCode title:@"Destination aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagDestination) forKey:@"textField.tag"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
@@ -138,11 +170,12 @@ NSInteger const maxAlternativesDestination = 2;
     buttonCruissingSpeed.tag = CrouissingSpeed;
     buttonCruissingSpeed.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeZipCode title:@"Cruissing speed"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeInteger title:@"Cruissing speed"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     [row.cellConfig setObject:buttonCruissingSpeed forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    [row.cellConfig setObject:@(TextfieldTagSpeed) forKey:@"textField.tag"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
@@ -154,11 +187,12 @@ NSInteger const maxAlternativesDestination = 2;
     buttonLevel.tag = Level;
     buttonLevel.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeZipCode title:@"Level"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeInteger title:@"Level"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     [row.cellConfig setObject:buttonLevel forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    [row.cellConfig setObject:@(TextfieldTagLevel) forKey:@"textField.tag"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
@@ -176,7 +210,8 @@ NSInteger const maxAlternativesDestination = 2;
     [section.multivaluedAddButton.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeZipCode];
-    [[row cellConfig] setObject:@"..." forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@"..." forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAlternative) forKey:@"textField.tag"];
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     section.multivaluedRowTemplate = row;
     [form addFormSection:section];
@@ -190,6 +225,7 @@ NSInteger const maxAlternativesDestination = 2;
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeZipCode title:@"Total EET"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagEET) forKey:@"textField.tag"];
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
@@ -199,6 +235,7 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"More util information."];
     [form addFormSection:section];
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyinformation rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
+//    [row.cellConfig setObject:@(TextfieldTagInfo) forKey:@"textField.tag"];
     row.required = NO;
     [section addFormRow:row];
     
@@ -365,9 +402,68 @@ NSInteger const maxAlternativesDestination = 2;
     [self performSegueWithIdentifier:@"SegueCustomSelector" sender:self];
 }
 
+#pragma mark - Textfield Delegate - Real time limit character
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    // Prevent crashing undo bug – see note below.
+    if(range.length + range.location > textField.text.length){
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if(textField.tag == TextfieldTagAeroplaneIdentifier){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 7);
+            return stringIsValid;
+        }
+        return newLength <= 7;
+    }else if(textField.tag == TextfieldTagAeroplaneNumber){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 2);
+            return stringIsValid;
+        }
+        return newLength <= 2;
+    }else if(textField.tag == TextfieldTagAeroplaneType){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            return stringIsValid;
+        }
+        return newLength <= 4;
+    }else if(textField.tag == TextfieldTagOrigin || textField.tag == TextfieldTagEET){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 8);
+            return stringIsValid;
+        }
+        return newLength <= 8;
+    }else if(textField.tag == TextfieldTagDestination || textField.tag == TextfieldTagSpeed || textField.tag == TextfieldTagLevel || textField.tag == TextfieldTagAlternative){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            return stringIsValid;
+        }
+        return newLength <= 4;
+    }
+    return newLength <= 50;
+}
+
+#pragma mark - Custom Delegates
 -(void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary *)dic{
     dicSupp = [[NSMutableDictionary alloc] initWithDictionary:dic];
 }
+
 -(void)delegateVC:(CustomSelectorViewController *)vc option:(NSString *)option{
     if(cruissingSpeedSelector == true){
         [buttonCruissingSpeed setTitle:option forState:UIControlStateNormal];

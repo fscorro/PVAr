@@ -28,7 +28,7 @@
     }else if([fly.flyState isEqualToString:@"C"]){
         [self.viewFlyState setBackgroundColor:FlyStateCancelledColor];
     }
-    [self.labelFlyAeroplaneID setText:[NSString stringWithFormat:@"Number: %@", fly.aeroplaneNumber]];
+    [self.labelFlyAeroplaneID setText:[NSString stringWithFormat:@"ID: %@", fly.aeroplaneID]];
     [self.labelFlyAeroplaneType setText:[NSString stringWithFormat:@"Type: %@", fly.aeroplaneType]];
     [self.labelFlyDate setText:[[Utils sharedUtils]dateFormnat:fly.dateTime]];
     [self.labelFlyTime setText:[[Utils sharedUtils]timeFormnat:fly.dateTime]];

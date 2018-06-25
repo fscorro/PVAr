@@ -161,7 +161,7 @@
     section = [XLFormSectionDescriptor formSectionWithTitle:@"Aditional requirements."];
     [form addFormSection:section];
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAditionalRequirements rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
-    row.value = self.fly.aditionalRequirements != nil ?  self.fly.aditionalRequirements : @"None";
+    row.value = self.fly.aditionalRequirements;
     row.disabled = @YES;
     [section addFormRow:row];
     

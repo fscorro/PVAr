@@ -12,10 +12,7 @@
 
 @property (nonatomic, copy) NSString *flyState;
 
-@property (nonatomic, copy) NSString *number;
-@property (nonatomic, copy) NSString *priority;
-@property (nonatomic, copy) NSString *enrollment;
-@property (nonatomic, copy) NSString *company;
+@property (nonatomic, copy) NSString *aeroplaneID;
 @property (nonatomic, copy) NSString *rule;
 @property (nonatomic, copy) NSString *type;
 

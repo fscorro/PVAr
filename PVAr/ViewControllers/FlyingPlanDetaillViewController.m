@@ -33,25 +33,32 @@
     
     form = [XLFormDescriptor formDescriptor];
     
-//    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
-//    [form addFormSection:section];
-//
-//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
-//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.rule]];
-//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.rule];
-//    row.disabled = @YES;
-//    [section addFormRow:row];
-//
-//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
-//    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.type]
-//                            ];
-//    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.type];
-//    row.disabled = @YES;
-//    [section addFormRow:row];
+    // SECTION 1
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"AIRCRAFT INFORMATION"];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneID rowType:XLFormRowDescriptorTypeZipCode title:@"Identifier"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.aeroplaneID;
+    row.disabled = @YES;
+    [section addFormRow:row];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.rule]];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.rule];
+    row.disabled = @YES;
+    [section addFormRow:row];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.type]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.type];
+    row.disabled = @YES;
+    [section addFormRow:row];
     
     
     // SECTION 2
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"AEROPLANE INFORMATION"];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneNumber rowType:XLFormRowDescriptorTypeEmail title:@"Number"];
@@ -81,7 +88,7 @@
     
     
     // SECTION 3
-    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
     [form addFormSection:section];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyoriginAerodrome rowType:XLFormRowDescriptorTypeText title:@"Origin aerodrome"];

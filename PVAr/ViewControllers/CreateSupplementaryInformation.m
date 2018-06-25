@@ -10,6 +10,12 @@
 #import "Constants.h"
 #import "Utils.h"
 
+typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
+    TextfieldTagSuppEndurance = 1,
+    TextfieldTagSuppDinghiesNumber,
+    TextfieldTagSuppDinghiesCapacity
+};
+
 @interface CreateSupplementaryInformation(){
 
 }
@@ -35,10 +41,11 @@
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeInteger title:@"Endurance"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    [row.cellConfig setObject:@(TextfieldTagSuppEndurance) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,4}$"]];
@@ -99,15 +106,17 @@
     section.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyDinghies];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesNumber rowType:XLFormRowDescriptorTypeZipCode title:@"Number"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesNumber rowType:XLFormRowDescriptorTypeInteger title:@"Number"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagSuppDinghiesNumber) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyDinghiesNumber] != nil ? [self.dicSupplementary valueForKey:ModelFlyDinghiesNumber] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,2}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCapacity rowType:XLFormRowDescriptorTypeZipCode title:@"Capacity"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghiesCapacity rowType:XLFormRowDescriptorTypeInteger title:@"Capacity"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagSuppDinghiesCapacity) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyDinghiesCapacity] != nil ? [self.dicSupplementary valueForKey:ModelFlyDinghiesCapacity] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,4}$"]];
@@ -210,5 +219,44 @@
         
         [self.delegate delegateVC:self dicSupplementary:self.dicSupplementary];
     }
+}
+
+#pragma mark - Textfield Delegate - Real time limit character
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    // Prevent crashing undo bug – see note below.
+    if(range.length + range.location > textField.text.length){
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if(textField.tag == TextfieldTagSuppEndurance){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            return stringIsValid;
+        }
+        return newLength <= 4;
+    }else if(textField.tag == TextfieldTagSuppDinghiesNumber){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 2);
+            return stringIsValid;
+        }
+        return newLength <= 2;
+    }else if(textField.tag == TextfieldTagSuppDinghiesCapacity){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            return stringIsValid;
+        }
+        return newLength <= 4;
+    }
+    return newLength <= 50;
 }
 @end
