@@ -97,15 +97,42 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
+    row.value = self.fly.dateTime;
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestinationAerodrome rowType:XLFormRowDescriptorTypeText title:@"Destination aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.value = self.fly.destinationAerodrome;
     row.disabled = @YES;
     [section addFormRow:row];
     
+    if([self.fly.alternative count] > 0){
+        // SECTION 5 - Alternative fly
+        section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"];
+        
+        for (int i = 0; i<[self.fly.alternative count]; i++) {
+            
+            row = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat:@"%@%d",ModelFlyalternative,i] rowType:XLFormRowDescriptorTypeText];
+            row.disabled = @YES;
+            row.value = [self.fly.alternative objectAtIndex:i];
+            [section addFormRow:row];
+        }
+        section.footerTitle = [NSString stringWithFormat:@"Number of alternatives destinations: %lu",(unsigned long)[self.fly.alternative count]];
+        
+        [form addFormSection:section];
+    }else{
+        section.footerTitle = @"No alternatives destinations";
+    }
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
-    row.value = self.fly.dateTime;
+    // SECTION 6
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
+        
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeEmail title:@"Total EET"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row.value = self.fly.EET;
     row.disabled = @YES;
     [section addFormRow:row];
     
@@ -137,37 +164,6 @@
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
     row.value = self.fly.route;
-    row.disabled = @YES;
-    [section addFormRow:row];
-    
-
-    if([self.fly.alternative count] > 0){
-        // SECTION 5 - Alternative fly
-        section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"];
-        
-        for (int i = 0; i<[self.fly.alternative count]; i++) {
-            
-            row = [XLFormRowDescriptor formRowDescriptorWithTag:[NSString stringWithFormat:@"%@%d",ModelFlyalternative,i] rowType:XLFormRowDescriptorTypeText];
-            row.disabled = @YES;
-            row.value = [self.fly.alternative objectAtIndex:i];
-            [section addFormRow:row];
-        }
-        section.footerTitle = [NSString stringWithFormat:@"Number of alternatives destinations: %lu",(unsigned long)[self.fly.alternative count]];
-        
-        [form addFormSection:section];
-    }else{
-        section.footerTitle = @"No alternatives destinations";
-    }
-    
-    
-    // SECTION 6
-    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
-    [form addFormSection:section];
-    
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeEmail title:@"Total EET"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.EET;
     row.disabled = @YES;
     [section addFormRow:row];
     

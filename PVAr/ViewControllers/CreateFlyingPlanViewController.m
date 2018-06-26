@@ -150,6 +150,11 @@ NSInteger const maxAlternativesDestination = 2;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
+    row.value = [NSDate new];
+    invalidDate = true;
+    [section addFormRow:row];
+    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestinationAerodrome rowType:XLFormRowDescriptorTypeZipCode title:@"Destination aerodrome"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
@@ -157,10 +162,31 @@ NSInteger const maxAlternativesDestination = 2;
     row.required = YES;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
-
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
-    row.value = [NSDate new];
-    invalidDate = true;
+    
+    // SECTION 5 - Alternative fly
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"
+                                             sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
+                                          sectionInsertMode:XLFormSectionInsertModeButton];
+    section.multivaluedAddButton.title = @"Add Fly Alternative";
+    [section.multivaluedAddButton.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeZipCode];
+    [row.cellConfig setObject:@"..." forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAlternative) forKey:@"textField.tag"];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    section.multivaluedRowTemplate = row;
+    [form addFormSection:section];
+    
+    // SECTION 6
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeInteger title:@"Total EET"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagEET) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[0-9].{1,4}$"]];
     [section addFormRow:row];
     
     buttonCruissingSpeed = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -199,35 +225,6 @@ NSInteger const maxAlternativesDestination = 2;
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
     row.required = NO;
-    [section addFormRow:row];
-
-    
-    // SECTION 5 - Alternative fly
-    section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"
-                                             sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
-                                          sectionInsertMode:XLFormSectionInsertModeButton];
-    section.multivaluedAddButton.title = @"Add Fly Alternative";
-    [section.multivaluedAddButton.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
-
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeZipCode];
-    [row.cellConfig setObject:@"..." forKey:@"textField.placeholder"];
-    [row.cellConfig setObject:@(TextfieldTagAlternative) forKey:@"textField.tag"];
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
-    section.multivaluedRowTemplate = row;
-    [form addFormSection:section];
-    
-    
-    // SECTION 6
-    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
-    [form addFormSection:section];
-    
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeZipCode title:@"Total EET"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    [row.cellConfig setObject:@(TextfieldTagEET) forKey:@"textField.tag"];
-    row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
     [section addFormRow:row];
     
     

@@ -573,8 +573,9 @@
 			baseConfigurationReference = 62676AF3737E7D53E993D776 /* Pods-PVAr.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = BZ25Y6478F;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P4ZJVVE6CR;
 				INFOPLIST_FILE = PVAr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -583,8 +584,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.inspirationapps.test.PVAr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "aabb1e32-fcfb-4119-951a-c0e7a6ab34a6";
-				PROVISIONING_PROFILE_SPECIFIER = Test_Apps_Developer;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -594,9 +595,9 @@
 			baseConfigurationReference = 462A8754F2656FC5F404F163 /* Pods-PVAr.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = BZ25Y6478F;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = P4ZJVVE6CR;
 				INFOPLIST_FILE = PVAr/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -605,8 +606,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.inspirationapps.test.PVAr;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "1fed1ead-213f-4c59-988b-943bfccb96ed";
-				PROVISIONING_PROFILE_SPECIFIER = Test_Apps_AdHoc;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
-    
+
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeInteger title:@"Endurance"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     [row.cellConfig setObject:@(TextfieldTagSuppEndurance) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,4}$"]];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[0-9].{0,4}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeZipCode title:@"Persons on board"];
