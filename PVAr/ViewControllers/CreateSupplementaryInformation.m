@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
 
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeInteger title:@"Endurance"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
@@ -231,13 +231,16 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     NSUInteger newLength = [textField.text length] + [string length] - range.length;
     if(textField.tag == TextfieldTagSuppEndurance){
         if(string.length > 0){
-            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            if(textField.text.length == 2){
+                textField.text = [textField.text stringByAppendingString:@":"];
+            }
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@":0123456789"];
             NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
             
-            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 5);
             return stringIsValid;
         }
-        return newLength <= 4;
+        return newLength <= 5;
     }else if(textField.tag == TextfieldTagSuppDinghiesNumber){
         if(string.length > 0){
             NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];

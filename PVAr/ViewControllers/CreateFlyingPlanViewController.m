@@ -181,12 +181,12 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeInteger title:@"Total EET"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeZipCode title:@"Total EET"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     [row.cellConfig setObject:@(TextfieldTagEET) forKey:@"textField.tag"];
     row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[0-9].{1,4}$"]];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,5}$"]];
     [section addFormRow:row];
     
     buttonCruissingSpeed = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -434,7 +434,7 @@ NSInteger const maxAlternativesDestination = 2;
             return stringIsValid;
         }
         return newLength <= 4;
-    }else if(textField.tag == TextfieldTagOrigin || textField.tag == TextfieldTagEET){
+    }else if(textField.tag == TextfieldTagOrigin){
         if(string.length > 0){
             NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
             NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
@@ -443,6 +443,18 @@ NSInteger const maxAlternativesDestination = 2;
             return stringIsValid;
         }
         return newLength <= 8;
+    }else if(textField.tag == TextfieldTagEET){
+        if(string.length > 0){
+            if(textField.text.length == 2){
+                textField.text = [textField.text stringByAppendingString:@":"];
+            }
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@":0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 5);
+            return stringIsValid;
+        }
+        return newLength <= 5;
     }else if(textField.tag == TextfieldTagDestination || textField.tag == TextfieldTagSpeed || textField.tag == TextfieldTagLevel || textField.tag == TextfieldTagAlternative){
         if(string.length > 0){
             NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
