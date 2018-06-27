@@ -359,6 +359,13 @@ NSInteger const maxAlternativesDestination = 2;
                 }
             }
         }
+        
+        if([arrAlternatives count] == 0){
+            [RKDropdownAlert title:@"Submit failure" message:@"Enter at less one alternative destination" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+            [self deselectFormRow:sender];
+            return;
+        }
+        
         [temp setValue:dicSupp forKey:ModelFlySupplementaryDictionary];
         Fly *newFly = [[Fly alloc] initWithDict:temp];
         
@@ -448,7 +455,7 @@ NSInteger const maxAlternativesDestination = 2;
             if(textField.text.length == 2){
                 textField.text = [textField.text stringByAppendingString:@":"];
             }
-            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@":0123456789"];
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
             NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
             
             BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 5);

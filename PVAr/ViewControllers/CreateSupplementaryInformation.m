@@ -46,6 +46,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSuppEndurance) forKey:@"textField.tag"];
+    
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[0-9].{0,4}$"]];
@@ -234,7 +235,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
             if(textField.text.length == 2){
                 textField.text = [textField.text stringByAppendingString:@":"];
             }
-            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@":0123456789"];
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
             NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
             
             BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 5);
