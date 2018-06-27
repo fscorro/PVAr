@@ -20,5 +20,6 @@
 
 -(NSString *) dateFormnat:(NSDate*)date;
 -(NSString *) timeFormnat:(NSDate*)time;
+-(NSString *) timeFormatPicker:(NSDate*)time;
 
 @end

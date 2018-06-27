@@ -23,6 +23,7 @@
 
 #define DateFormat @"MMM d, yyyy"
 #define TimeFormat @"HH:mm a"
+#define TimeFormatPicker @"HH:mm"
 
 #define ModelUserEmailKEY @"email"
 #define ModelUserPasswordKEY @"password"

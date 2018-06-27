@@ -17,7 +17,8 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
 };
 
 @interface CreateSupplementaryInformation(){
-
+    UIButton *buttonEndurance;
+    XLFormRowDescriptor * rowEndurancePicker;
 }
 @end
 
@@ -31,6 +32,26 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     [self initializeForm];
 }
 
+-(void) ShowPicker:(UIButton*)sender{
+    if([rowEndurancePicker.hidden isEqual:@(YES)]){
+        rowEndurancePicker.hidden = @(NO);
+    }else{
+        rowEndurancePicker.hidden = @(YES);
+    }
+    [buttonEndurance setTitle:@"FAAAA" forState:UIControlStateNormal];
+}
+
+-(void)didSelectFormRow:(XLFormRowDescriptor *)formRow{
+    if([formRow.tag isEqualToString:ModelFlyEndurance]){
+        if([rowEndurancePicker.hidden isEqual:@(YES)]){
+            rowEndurancePicker.hidden = @(NO);
+        }else{
+            rowEndurancePicker.hidden = @(YES);
+            [buttonEndurance setTitle:[[Utils sharedUtils] timeFormatPicker:rowEndurancePicker.value] forState:UIControlStateNormal];
+        }
+    }
+}
+
 -(void)initializeForm{
     XLFormDescriptor * form;
     XLFormSectionDescriptor * section;
@@ -40,17 +61,38 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
+    
+    buttonEndurance = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonEndurance addTarget:self action:@selector(ShowPicker:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonEndurance setTitle:@"00:00" forState:UIControlStateNormal];
+    buttonEndurance.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    [buttonEndurance setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [buttonEndurance setBackgroundColor:[UIColor whiteColor]];
+    buttonEndurance.frame = CGRectMake(0.0, 0.0, 88.0, 44.0);
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSuppEndurance) forKey:@"textField.tag"];
-    
+    [row.cellConfig setObject:buttonEndurance forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Fly %@: invalid value.",row.title] regex:@"^[0-9].{0,4}$"]];
     [section addFormRow:row];
+    
+    rowEndurancePicker = [XLFormRowDescriptor formRowDescriptorWithTag:@"rowEndurancePicker" rowType:XLFormRowDescriptorTypeDatePicker];
+    [rowEndurancePicker.cellConfigAtConfigure setObject:@(UIDatePickerModeCountDownTimer) forKey:@"datePicker.datePickerMode"];
+    NSDateComponents * dateComp = [NSDateComponents new];
+    dateComp.hour = -4;
+    dateComp.minute = 7;
+    dateComp.timeZone = [NSTimeZone systemTimeZone];
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    rowEndurancePicker.value = [calendar dateFromComponents:dateComp];
+    rowEndurancePicker.hidden = @(YES);
+    [section addFormRow:rowEndurancePicker];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeZipCode title:@"Persons on board"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];

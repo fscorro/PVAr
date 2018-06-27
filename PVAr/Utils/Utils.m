@@ -92,4 +92,11 @@
     return strTime;
 }
 
+-(NSString *) timeFormatPicker:(NSDate*)time{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:TimeFormatPicker];
+    NSString *strTime = [formatter stringFromDate:time];
+    return strTime;
+}
+
 @end
