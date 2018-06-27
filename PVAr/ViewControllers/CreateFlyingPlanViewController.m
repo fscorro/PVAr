@@ -45,6 +45,8 @@ NSInteger const maxAlternativesDestination = 2;
     NSMutableArray *oldValidation;
     NSMutableDictionary *dicSupp;
     
+    XLFormRowDescriptor * rowTotalEETPicker;
+    
     UIButton *buttonCruissingSpeed;
     UIButton *buttonLevel;
     BOOL cruissingSpeedSelector;
@@ -180,14 +182,26 @@ NSInteger const maxAlternativesDestination = 2;
     // SECTION 6
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
-    
+
+
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeZipCode title:@"Total EET"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     [row.cellConfig setObject:@(TextfieldTagEET) forKey:@"textField.tag"];
     row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,5}$"]];
     [section addFormRow:row];
+    
+    rowTotalEETPicker = [XLFormRowDescriptor formRowDescriptorWithTag:@"rowTotalEETPicker" rowType:XLFormRowDescriptorTypeDatePicker];
+    [rowTotalEETPicker.cellConfigAtConfigure setObject:@(UIDatePickerModeCountDownTimer) forKey:@"datePicker.datePickerMode"];
+    rowTotalEETPicker.hidden = @(YES);
+    NSDateComponents * dateComp = [NSDateComponents new];
+    dateComp.hour = 0;
+    dateComp.minute = 7;
+    dateComp.timeZone = [NSTimeZone systemTimeZone];
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    rowTotalEETPicker.value = [calendar dateFromComponents:dateComp];
+    [section addFormRow:rowTotalEETPicker];
     
     buttonCruissingSpeed = [UIButton buttonWithType:UIButtonTypeCustom];
     [buttonCruissingSpeed addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
@@ -406,6 +420,19 @@ NSInteger const maxAlternativesDestination = 2;
     [self performSegueWithIdentifier:@"SegueCustomSelector" sender:self];
 }
 
+-(void)didSelectFormRow:(XLFormRowDescriptor *)formRow{
+    [super didSelectFormRow:formRow];
+    if([formRow.tag isEqualToString:ModelFlyEET]){
+        if([rowTotalEETPicker.hidden isEqual:@(YES)]){
+            rowTotalEETPicker.hidden = @(NO);
+        }else{
+            rowTotalEETPicker.hidden = @(YES);
+            formRow.value = [[Utils sharedUtils] timeFormatPicker:rowTotalEETPicker.value];
+            [self updateFormRow:formRow];
+        }
+    }
+}
+
 #pragma mark - Textfield Delegate - Real time limit character
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     // Prevent crashing undo bug – see note below.
@@ -450,18 +477,6 @@ NSInteger const maxAlternativesDestination = 2;
             return stringIsValid;
         }
         return newLength <= 8;
-    }else if(textField.tag == TextfieldTagEET){
-        if(string.length > 0){
-            if(textField.text.length == 2){
-                textField.text = [textField.text stringByAppendingString:@":"];
-            }
-            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
-            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
-            
-            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 5);
-            return stringIsValid;
-        }
-        return newLength <= 5;
     }else if(textField.tag == TextfieldTagDestination || textField.tag == TextfieldTagSpeed || textField.tag == TextfieldTagLevel || textField.tag == TextfieldTagAlternative){
         if(string.length > 0){
             NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
