@@ -11,6 +11,7 @@
 @interface Fly : NSObject
 
 @property (nonatomic, copy) NSString *flyState;
+@property NSInteger flyCreationType;
 
 @property (nonatomic, copy) NSString *aeroplaneID;
 @property (nonatomic, copy) NSString *rule;
@@ -19,7 +20,13 @@
 @property (nonatomic, copy) NSString *aeroplaneNumber;
 @property (nonatomic, copy) NSString *aeroplaneType;
 @property (nonatomic, copy) NSString *category;
+
 @property (nonatomic, copy) NSString *equipment;
+@property BOOL hasRadiocomunication;
+@property (nonatomic, strong) NSArray *radiocomunication;
+@property BOOL hasVigilance;
+@property (nonatomic, strong) NSArray *vigilance;
+
 
 @property (nonatomic, copy) NSString *originAerodrome;
 @property (nonatomic, copy) NSString *destinationAerodrome;

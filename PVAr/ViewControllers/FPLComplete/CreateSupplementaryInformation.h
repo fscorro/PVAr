@@ -16,7 +16,6 @@
 - (void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary*)dic;
 @end
 
-
 @interface CreateSupplementaryInformation : XLFormViewController
 
 @property (weak, nonatomic) id<CreateSupplementaryInformationDelegate> delegate;

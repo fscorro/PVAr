@@ -82,6 +82,25 @@ const int tabsNumber = 3;
     [self updateViewController];
 }
 
+- (IBAction)CreateFly:(id)sender {
+    UIAlertController *actionSheet = [UIAlertController alertControllerWithTitle:@"New FPL:" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+        
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Complete" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+
+        [self performSegueWithIdentifier:@"SegueCompleteFPL" sender:nil];
+    }]];
+    
+    [actionSheet addAction:[UIAlertAction actionWithTitle:@"Simplified" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        [self performSegueWithIdentifier:@"SegueSimplifiedFPL" sender:nil];
+    }]];
+    
+    [self presentViewController:actionSheet animated:YES completion:nil];
+}
+
 -(void) updateViewController{
     UIStoryboard *sb = [[AppDelegate sharedAppDelegate] grabStoryboard];
     UIViewController *vc = nil;

@@ -1,12 +1,12 @@
 //
-//  UIViewController+CreateFlyingPlanViewController.m
+//  UITableViewCell+CreateSimplifiedFPLViewController.m
 //  PVAr
 //
-//  Created by Prisma on 14/6/18.
+//  Created by Roberto Daviduk on 20/7/18.
 //  Copyright © 2018 Prisma. All rights reserved.
 //
 
-#import "CreateFlyingPlanViewController.h"
+#import "CreateSimplifiedFPLViewController.h"
 #import "Constants.h"
 #import "Utils.h"
 #import "ShowAlert.h"
@@ -37,11 +37,7 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     TextfieldTagInfo
 };
 
-NSString *const KButtonCreateFPL = @"FLPButton";
-
-NSInteger const maxAlternativesDestination = 2;
-
-@interface CreateFlyingPlanViewController(){
+@interface CreateSimplifiedFPLViewController(){
     NSMutableArray *oldValidation;
     NSMutableDictionary *dicSupp;
     
@@ -55,9 +51,9 @@ NSInteger const maxAlternativesDestination = 2;
 }
 @end
 
-@implementation CreateFlyingPlanViewController
+@implementation CreateSimplifiedFPLViewController
 
--(void)viewDidLoad{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     oldValidation = [[NSMutableArray alloc] init];
@@ -71,7 +67,7 @@ NSInteger const maxAlternativesDestination = 2;
     XLFormRowDescriptor * row;
     
     form = [XLFormDescriptor formDescriptor];
-
+    
     // SECTION 2
     section = [XLFormSectionDescriptor formSectionWithTitle:@"AIRCRAFT INFORMATION"];
     [form addFormSection:section];
@@ -92,7 +88,7 @@ NSInteger const maxAlternativesDestination = 2;
                             ];
     row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
     [section addFormRow:row];
-
+    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
     row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
                             [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
@@ -134,9 +130,8 @@ NSInteger const maxAlternativesDestination = 2;
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeZipCode title:@"Equipment"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
     [row.cellConfig setObject:@(TextfieldTagEquipment) forKey:@"textField.tag"];
-    row.required = YES;
+    row.required = NO;
     [section addFormRow:row];
     
     
@@ -182,8 +177,8 @@ NSInteger const maxAlternativesDestination = 2;
     // SECTION 6
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
     [form addFormSection:section];
-
-
+    
+    
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeZipCode title:@"Total EET"];
     [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
@@ -246,7 +241,7 @@ NSInteger const maxAlternativesDestination = 2;
     section = [XLFormSectionDescriptor formSectionWithTitle:@"More util information."];
     [form addFormSection:section];
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyinformation rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
-//    [row.cellConfig setObject:@(TextfieldTagInfo) forKey:@"textField.tag"];
+    //    [row.cellConfig setObject:@(TextfieldTagInfo) forKey:@"textField.tag"];
     row.required = NO;
     [section addFormRow:row];
     
@@ -257,7 +252,7 @@ NSInteger const maxAlternativesDestination = 2;
     buttonWithSegueId.action.formSegueIdentifier = @"SegueSupplementaryInformation";
     [section addFormRow:buttonWithSegueId];
     [form addFormSection:section];
-
+    
     
     // SECTION BUTTON
     section = [XLFormSectionDescriptor formSectionWithTitle:nil];
@@ -266,7 +261,7 @@ NSInteger const maxAlternativesDestination = 2;
     XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:KButtonCreateFPL rowType:XLFormRowDescriptorTypeButton title:@"Create FPL"];
     buttonRow.action.formSelector = @selector(CreateFPL:);
     [buttonRow.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
-
+    
     [section addFormRow:buttonRow];
     
     self.form = form;
@@ -346,7 +341,8 @@ NSInteger const maxAlternativesDestination = 2;
     if([validationErrors count] == 0){
         NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
         [temp setValue:@"P" forKey:ModelFlystate];
-        
+        [temp setValue:@(1) forKey:ModelFlyCreationType];
+
         NSMutableArray *arrAlternatives = [[NSMutableArray alloc] init];
         
         for(int i = 0; i < [[self.form formSections] count] ; i++){
@@ -397,7 +393,7 @@ NSInteger const maxAlternativesDestination = 2;
     NSString *segueId = segue.identifier;
     
     if ([segueId isEqualToString:@"SegueSupplementaryInformation"]) {
-        CreateSupplementaryInformation *vc = segue.destinationViewController;
+        SuppInfoSimplifiedFPLViewController *vc = segue.destinationViewController;
         vc.delegate = self;
         vc.dicSupplementary = dicSupp;
     }else if ([segueId isEqualToString:@"SegueCustomSelector"]) {
@@ -490,8 +486,7 @@ NSInteger const maxAlternativesDestination = 2;
     return newLength <= 50;
 }
 
-#pragma mark - Custom Delegates
--(void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary *)dic{
+-(void)delegateVC:(SuppInfoSimplifiedFPLViewController *)vc dicSupplementary:(NSMutableDictionary *)dic{
     dicSupp = [[NSMutableDictionary alloc] initWithDictionary:dic];
 }
 
@@ -502,4 +497,5 @@ NSInteger const maxAlternativesDestination = 2;
         [buttonLevel setTitle:option forState:UIControlStateNormal];
     }
 }
+
 @end

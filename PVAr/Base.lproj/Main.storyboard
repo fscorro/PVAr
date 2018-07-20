@@ -221,7 +221,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1036.875" y="776.4084507042254"/>
+            <point key="canvasLocation" x="1037" y="537"/>
         </scene>
         <!--Pending Flying Plans View Controller-->
         <scene sceneID="ELa-pa-mum">
@@ -460,6 +460,44 @@
             </objects>
             <point key="canvasLocation" x="1766" y="3213"/>
         </scene>
+        <!--Supplementary Information-->
+        <scene sceneID="sb2-xv-pEx">
+            <objects>
+                <viewController id="QLo-Aj-FeL" customClass="SuppInfoSimplifiedFPLViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="IhG-0F-gum">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Mhh-3a-Dhp"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Supplementary Information" id="03k-wG-Ykb"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uev-Z6-rSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3437" y="2004"/>
+        </scene>
+        <!--New PFL-->
+        <scene sceneID="BbI-vL-gGf">
+            <objects>
+                <viewController id="2bs-xd-qTR" customClass="CreateSimplifiedFPLViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WIB-c5-PQD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="d3y-FK-gP6"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="New PFL" id="85z-uL-xN3">
+                        <barButtonItem key="backBarButtonItem" title="-" id="mEw-bK-Kh7"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="QLo-Aj-FeL" kind="push" identifier="SegueSupplementaryInformation" id="ect-d0-OKp"/>
+                        <segue destination="Drc-K7-ASH" kind="show" identifier="SegueCustomSelector" id="Uf1-IF-SYT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e2a-72-rh4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1793" y="2004"/>
+        </scene>
         <!--Home View Controller-->
         <scene sceneID="e07-hg-gHr">
             <objects>
@@ -524,7 +562,7 @@
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="icon_more" id="9QE-tT-Sat">
                             <connections>
-                                <segue destination="OgT-SS-8oB" kind="show" id="GUx-jF-nTG"/>
+                                <action selector="CreateFly:" destination="jeA-fP-7ci" id="w5r-0h-92N"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -533,6 +571,8 @@
                         <outlet property="logoutButton" destination="7Gt-Yg-0pZ" id="BCS-IO-Kxy"/>
                         <outlet property="moreButton" destination="9QE-tT-Sat" id="4sK-lo-XeQ"/>
                         <outlet property="segmentControll" destination="UV8-Nz-FZ1" id="Het-DW-1K1"/>
+                        <segue destination="OgT-SS-8oB" kind="show" identifier="SegueCompleteFPL" id="JRk-3B-FyK"/>
+                        <segue destination="2bs-xd-qTR" kind="push" identifier="SegueSimplifiedFPL" id="Uru-UF-EAH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="smZ-L7-Hag" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -559,7 +599,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aaf-dK-uv9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1792.5" y="1592.9577464788733"/>
+            <point key="canvasLocation" x="1811" y="1224"/>
         </scene>
         <!--Supplementary Information-->
         <scene sceneID="dXk-j9-ZRK">
@@ -577,7 +617,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kjf-Vv-O4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2556" y="1594"/>
+            <point key="canvasLocation" x="3437" y="1222"/>
         </scene>
         <!-- -->
         <scene sceneID="oOh-2S-UoL">
@@ -633,7 +673,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J5s-Ia-QMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1793" y="2390"/>
+            <point key="canvasLocation" x="2640" y="1623"/>
         </scene>
         <!--Registration-->
         <scene sceneID="OV5-lq-02f">
@@ -649,7 +689,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GKI-ex-X3B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1793" y="776"/>
+            <point key="canvasLocation" x="1793" y="536"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="dEN-1A-JHE">
@@ -672,7 +712,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jnw-dg-NpF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="291" y="775"/>
+            <point key="canvasLocation" x="291" y="535"/>
         </scene>
         <!--Container View Controller-->
         <scene sceneID="Edg-5b-TEG">
@@ -692,7 +732,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g9e-2j-4zV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1037" y="2331"/>
+            <point key="canvasLocation" x="1037" y="2329"/>
         </scene>
     </scenes>
     <resources>
@@ -703,6 +743,7 @@
         <image name="icon_user" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Uf1-IF-SYT"/>
         <segue reference="eVK-8e-YgF"/>
     </inferredMetricsTieBreakers>
 </document>

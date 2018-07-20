@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2C4AEAC2210213D100FDAADA /* CreateSimplifiedFPLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AEAC1210213D100FDAADA /* CreateSimplifiedFPLViewController.m */; };
+		2C4AEAC52102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AEAC42102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m */; };
 		2C74544420E01AE500F24691 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544320E01AE500F24691 /* Utils.m */; };
 		2C74544720E0266100F24691 /* CustomSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544620E0266100F24691 /* CustomSelectorViewController.m */; };
 		2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE9ACA20D40D0300DCC890 /* Fly.m */; };
@@ -41,6 +43,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2C4AEAC0210213D100FDAADA /* CreateSimplifiedFPLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateSimplifiedFPLViewController.h; sourceTree = "<group>"; };
+		2C4AEAC1210213D100FDAADA /* CreateSimplifiedFPLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CreateSimplifiedFPLViewController.m; sourceTree = "<group>"; };
+		2C4AEAC32102142300FDAADA /* SuppInfoSimplifiedFPLViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuppInfoSimplifiedFPLViewController.h; sourceTree = "<group>"; };
+		2C4AEAC42102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuppInfoSimplifiedFPLViewController.m; sourceTree = "<group>"; };
 		2C74544220E01AE500F24691 /* Utils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Utils.h; sourceTree = "<group>"; };
 		2C74544320E01AE500F24691 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		2C74544520E0266100F24691 /* CustomSelectorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomSelectorViewController.h; sourceTree = "<group>"; };
@@ -126,6 +132,28 @@
 				462A8754F2656FC5F404F163 /* Pods-PVAr.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		2C4AEABE2102137400FDAADA /* FPLComplete */ = {
+			isa = PBXGroup;
+			children = (
+				C435CFE020D29A8B00BEF664 /* CreateFlyingPlanViewController.h */,
+				C435CFE120D29A8B00BEF664 /* CreateFlyingPlanViewController.m */,
+				2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */,
+				2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */,
+			);
+			path = FPLComplete;
+			sourceTree = "<group>";
+		};
+		2C4AEABF2102138400FDAADA /* FPLSimplified */ = {
+			isa = PBXGroup;
+			children = (
+				2C4AEAC0210213D100FDAADA /* CreateSimplifiedFPLViewController.h */,
+				2C4AEAC1210213D100FDAADA /* CreateSimplifiedFPLViewController.m */,
+				2C4AEAC32102142300FDAADA /* SuppInfoSimplifiedFPLViewController.h */,
+				2C4AEAC42102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m */,
+			);
+			path = FPLSimplified;
 			sourceTree = "<group>";
 		};
 		9067C4491580CB5642EB0123 /* Frameworks */ = {
@@ -253,10 +281,8 @@
 				C406E60120D15E990061398A /* Pages */,
 				C43C542420D01BC1004BB923 /* HomeViewController.h */,
 				C43C542520D01BC1004BB923 /* HomeViewController.m */,
-				C435CFE020D29A8B00BEF664 /* CreateFlyingPlanViewController.h */,
-				C435CFE120D29A8B00BEF664 /* CreateFlyingPlanViewController.m */,
-				2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */,
-				2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */,
+				2C4AEABE2102137400FDAADA /* FPLComplete */,
+				2C4AEABF2102138400FDAADA /* FPLSimplified */,
 				2C74544520E0266100F24691 /* CustomSelectorViewController.h */,
 				2C74544620E0266100F24691 /* CustomSelectorViewController.m */,
 				C435CFE920D2EEA800BEF664 /* FlyingPlanDetaillViewController.h */,
@@ -415,11 +441,13 @@
 				C435CFE620D29BDA00BEF664 /* CellFlyingPlan.m in Sources */,
 				C406E60420D15ECF0061398A /* PendingFlyingPlansViewController.m in Sources */,
 				C435CFDF20D292B400BEF664 /* ContainerViewController.m in Sources */,
+				2C4AEAC2210213D100FDAADA /* CreateSimplifiedFPLViewController.m in Sources */,
 				C406E60720D15EDB0061398A /* AcceptedFlyingPlansViewController.m in Sources */,
 				C4D6193720D066B10010F04A /* Reachability.m in Sources */,
 				2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */,
 				2CEAB23120DAE0C8005E77AD /* CreateSupplementaryInformation.m in Sources */,
 				C43C541C20D01B37004BB923 /* LoginViewController.m in Sources */,
+				2C4AEAC52102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m in Sources */,
 				C435CFEB20D2EEA800BEF664 /* FlyingPlanDetaillViewController.m in Sources */,
 				C43C540E20D01AF8004BB923 /* main.m in Sources */,
 				2C74544420E01AE500F24691 /* Utils.m in Sources */,

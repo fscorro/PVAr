@@ -30,6 +30,7 @@
 #define ModelUserRepeatPasswordKEY @"repeatPassword"
 
 #define ModelFlystate @"state"
+#define ModelFlyCreationType @"creationType"
 #define ModelFlyaeroplaneID @"aeroplaneID"
 #define ModelFlyrule @"rule"
 #define ModelFlytype @"type"
@@ -37,6 +38,10 @@
 #define ModelFlyaeroplaneType @"aeroplaneType"
 #define ModelFlycategory @"category"
 #define ModelFlyequipment @"equipment"
+#define ModelFlyHasRadiocomunication @"hasRadiocomunication"
+#define ModelFlyRadiocomunication @"radiocomunication"
+#define ModelFlyhasVigilance @"hasVigilance"
+#define ModelFlyVigilance @"vigilance"
 #define ModelFlydateTime @"dateTime"
 #define ModelFlyunit @"unit"
 #define ModelFlyspeed @"speed"
@@ -71,5 +76,9 @@
 #define SegueFlyingPlanDetail @"SegueFlyingPlanDetail"
 
 #define ValidationPlaceholderRequiered @"Requiered..."
+
+// Forms Constants values
+#define KButtonCreateFPL @"KButtonCreateFPL"
+#define maxAlternativesDestination 2
 
 #endif /* Constants_h */

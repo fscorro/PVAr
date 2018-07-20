@@ -12,6 +12,7 @@
 
 typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     TextfieldTagSuppEndurance = 1,
+    TextfieldTagSuppPersonOnBoard,
     TextfieldTagSuppDinghiesNumber,
     TextfieldTagSuppDinghiesCapacity
 };
@@ -56,10 +57,11 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     rowEndurancePicker.hidden = @(YES);
     [section addFormRow:rowEndurancePicker];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeZipCode title:@"Persons on board"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeInteger title:@"Persons on board"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"P" isEnabled:true] forKey:@"textField.leftView"];
     [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    [row.cellConfig setObject:@(TextfieldTagSuppPersonOnBoard) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] != nil ? [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] : nil;
     [section addFormRow:row];
@@ -252,8 +254,17 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
             return stringIsValid;
         }
         return newLength <= 4;
+    }else if(textField.tag == TextfieldTagSuppPersonOnBoard){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 3);
+            return stringIsValid;
+        }
+        return newLength <= 3;
     }
-    return newLength <= 50;
+    return newLength <= 100;
 }
 
 

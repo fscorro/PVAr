@@ -29,7 +29,8 @@
     // todo esto deberia desaparecer, es solo para una demo..
     NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
     [temp setValue:@"P" forKey:ModelFlystate];
-    
+    [temp setValue:@(0) forKey:ModelFlyCreationType];
+
     [temp setValue:@"K324PS1" forKey:ModelFlyaeroplaneID];
     [temp setValue:@"I" forKey:ModelFlyrule];
     [temp setValue:@"S" forKey:ModelFlytype];

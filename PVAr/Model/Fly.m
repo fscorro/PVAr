@@ -15,6 +15,7 @@
     self = [super init];
     if(self){
         self.flyState = [dict valueForKey:ModelFlystate];
+        self.flyCreationType = [[dict valueForKey:ModelFlyCreationType] integerValue];
 
         self.aeroplaneID = [dict valueForKey:ModelFlyaeroplaneID];
         self.rule = [dict valueForKey:ModelFlyrule];
@@ -23,7 +24,12 @@
         self.aeroplaneNumber = [dict valueForKey:ModelFlyaeroplaneNumber];
         self.aeroplaneType = [dict valueForKey:ModelFlyaeroplaneType];
         self.category = [dict valueForKey:ModelFlycategory];
+        
         self.equipment = [dict valueForKey:ModelFlyequipment];
+        self.hasRadiocomunication = [[dict valueForKey:ModelFlyHasRadiocomunication] boolValue];
+        self.radiocomunication = [dict valueForKey:ModelFlyRadiocomunication];
+        self.hasVigilance = [[dict valueForKey:ModelFlyhasVigilance] boolValue];
+        self.vigilance = [dict valueForKey:ModelFlyVigilance];
 
         self.originAerodrome = [dict valueForKey:ModelFlyoriginAerodrome];
         self.destinationAerodrome = [dict valueForKey:ModelFlydestinationAerodrome];

@@ -12,6 +12,11 @@
 #import "Fly.h"
 #import "DetailSupplementaryInformation.h"
 
+typedef NS_ENUM(NSInteger, FlyCreationType) {
+    FlyComplete = 0,
+    FlySimplified
+};
+
 @interface FlyingPlanDetaillViewController(){
     
 }
@@ -80,13 +85,43 @@
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeEmail title:@"Equipment"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.equipment;
-    row.disabled = @YES;
-    [section addFormRow:row];
-    
-    
+    if(self.fly.flyCreationType == FlyComplete){
+        
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasRadiocomunication rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Radiocomunication"];
+        [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+        row.value = @(self.fly.hasRadiocomunication);
+        row.disabled = @YES;
+        [section addFormRow:row];
+        
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRadiocomunication rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Selected options"];
+        row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasRadiocomunication];
+        row.selectorOptions = self.fly.radiocomunication != nil ? self.fly.radiocomunication : @[@"None"];
+        row.value = self.fly.radiocomunication != nil ?  self.fly.radiocomunication : @[@"None"];
+        row.disabled = @YES;
+        [section addFormRow:row];
+
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyhasVigilance rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Vigilance"];
+        [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+        row.value = @(self.fly.hasVigilance);
+        row.disabled = @YES;
+        [section addFormRow:row];
+        
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyVigilance rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Selected options"];
+        row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyhasVigilance];
+        row.selectorOptions = self.fly.vigilance != nil ? self.fly.vigilance : @[@"None"];
+        row.value = self.fly.vigilance != nil ?  self.fly.vigilance : @[@"None"];
+        row.disabled = @YES;
+        [section addFormRow:row];
+
+    } else if(self.fly.flyCreationType == FlySimplified){
+        
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyequipment rowType:XLFormRowDescriptorTypeEmail title:@"Equipment"];
+        [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+        row.value = self.fly.equipment != nil ?  self.fly.equipment : @"None";
+        row.disabled = @YES;
+        [section addFormRow:row];
+    }
+
     // SECTION 3
     section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
     [form addFormSection:section];

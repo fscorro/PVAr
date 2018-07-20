@@ -18,5 +18,6 @@
 
 - (IBAction)Logout:(id)sender;
 - (IBAction)ChangeSegmentControllPage:(id)sender;
+- (IBAction)CreateFly:(id)sender;
 
 @end

@@ -1,0 +1,523 @@
+//
+//  UIViewController+CreateFlyingPlanViewController.m
+//  PVAr
+//
+//  Created by Prisma on 14/6/18.
+//  Copyright © 2018 Prisma. All rights reserved.
+//
+
+#import "CreateFlyingPlanViewController.h"
+#import "Constants.h"
+#import "Utils.h"
+#import "ShowAlert.h"
+
+typedef NS_ENUM(NSInteger, CustomSelector) {
+    CrouissingSpeed = 0,
+    Level
+};
+
+typedef NS_ENUM(NSInteger, DateStatus) {
+    DateStatusEqual = 0,
+    DateStatusLater,
+    DateStatusEarlier
+};
+
+typedef NS_ENUM(NSInteger, TextfieldTag) {
+    TextfieldTagAeroplaneIdentifier = 1,
+    TextfieldTagAeroplaneNumber,
+    TextfieldTagAeroplaneType,
+    TextfieldTagEquipment,
+    TextfieldTagOrigin,
+    TextfieldTagDestination,
+    TextfieldTagSpeed,
+    TextfieldTagLevel,
+    TextfieldTagRoute,
+    TextfieldTagAlternative,
+    TextfieldTagEET,
+    TextfieldTagInfo
+};
+
+@interface CreateFlyingPlanViewController(){
+    NSMutableArray *oldValidation;
+    NSMutableDictionary *dicSupp;
+    
+    XLFormRowDescriptor * rowTotalEETPicker;
+    
+    UIButton *buttonCruissingSpeed;
+    UIButton *buttonLevel;
+    BOOL cruissingSpeedSelector;
+    
+    BOOL invalidDate;
+}
+@end
+
+@implementation CreateFlyingPlanViewController
+
+-(void)viewDidLoad{
+    [super viewDidLoad];
+    
+    oldValidation = [[NSMutableArray alloc] init];
+    
+    [self initializeForm];
+}
+
+-(void)initializeForm{
+    XLFormDescriptor * form;
+    XLFormSectionDescriptor * section;
+    XLFormRowDescriptor * row;
+    
+    form = [XLFormDescriptor formDescriptor];
+
+    // SECTION 2
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"AIRCRAFT INFORMATION"];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneID rowType:XLFormRowDescriptorTypeZipCode title:@"Identifier"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAeroplaneIdentifier) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"Z"]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
+    [section addFormRow:row];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"X"]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"];
+    [section addFormRow:row];
+    
+    
+    // SECTION 2
+    section = [XLFormSectionDescriptor formSectionWithTitle:@""];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneNumber rowType:XLFormRowDescriptorTypeZipCode title:@"Number"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAeroplaneNumber) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,2}$"]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyaeroplaneType rowType:XLFormRowDescriptorTypeZipCode title:@"Type"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAeroplaneType) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Category"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"L"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"M"],
+                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"H"]
+                            ];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"L"];
+    [section addFormRow:row];
+    
+//
+//    // SECTION EQUIPMENT
+//    section = [XLFormSectionDescriptor formSectionWithTitle:@"Equipment"];
+//    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasRadiocomunication rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Radciocomunication"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @(NO);
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRadiocomunication rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
+    row.selectorOptions = @[@"A",@"B",@"C",@"D",@"E1",@"E2",@"E3",@"F",@"G",@"H",@"I",@"J1",@"J2",@"J3",@"J4",@"J5",@"J6",@"J7",@"K",@"L"
+                            ,@"M1",@"M2",@"M3",@"O",@"P1",@"R",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasRadiocomunication];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyhasVigilance rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Vigilance"];
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
+    row.value = @(NO);
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyVigilance rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
+    row.selectorOptions = @[@"A",@"C",@"E",@"H",@"I",@"L",@"P",@"S",@"X",@"B1",@"B2",@"U1",@"U2",@"V1",@"V2",@"D1",@"G1"];
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyhasVigilance];
+    [section addFormRow:row];
+
+    
+    // SECTION 3
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"FLY INFORMATION"];
+    [form addFormSection:section];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyoriginAerodrome rowType:XLFormRowDescriptorTypeZipCode title:@"Origin aerodrome"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagOrigin) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,8}$"]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydateTime rowType:XLFormRowDescriptorTypeDateTimeInline title:@"Date Time"];
+    row.value = [NSDate new];
+    invalidDate = true;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlydestinationAerodrome rowType:XLFormRowDescriptorTypeZipCode title:@"Destination aerodrome"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagDestination) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    [section addFormRow:row];
+    
+    // SECTION 5 - Alternative fly
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"Alternatives"
+                                             sectionOptions:XLFormSectionOptionCanReorder | XLFormSectionOptionCanInsert | XLFormSectionOptionCanDelete
+                                          sectionInsertMode:XLFormSectionInsertModeButton];
+    section.multivaluedAddButton.title = @"Add Fly Alternative";
+    [section.multivaluedAddButton.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeZipCode];
+    [row.cellConfig setObject:@"..." forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagAlternative) forKey:@"textField.tag"];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    section.multivaluedRowTemplate = row;
+    [form addFormSection:section];
+    
+    // SECTION 6
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
+
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEET rowType:XLFormRowDescriptorTypeZipCode title:@"Total EET"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:@(TextfieldTagEET) forKey:@"textField.tag"];
+    row.required = YES;
+    [section addFormRow:row];
+    
+    rowTotalEETPicker = [XLFormRowDescriptor formRowDescriptorWithTag:@"rowTotalEETPicker" rowType:XLFormRowDescriptorTypeDatePicker];
+    [rowTotalEETPicker.cellConfigAtConfigure setObject:@(UIDatePickerModeCountDownTimer) forKey:@"datePicker.datePickerMode"];
+    rowTotalEETPicker.hidden = @(YES);
+    NSDateComponents * dateComp = [NSDateComponents new];
+    dateComp.hour = 0;
+    dateComp.minute = 7;
+    dateComp.timeZone = [NSTimeZone systemTimeZone];
+    NSCalendar * calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    rowTotalEETPicker.value = [calendar dateFromComponents:dateComp];
+    [section addFormRow:rowTotalEETPicker];
+    
+    buttonCruissingSpeed = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonCruissingSpeed addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonCruissingSpeed setTitle:@"K" forState:UIControlStateNormal];
+    [buttonCruissingSpeed setBackgroundColor:AppColorLight];
+    buttonCruissingSpeed.tag = CrouissingSpeed;
+    buttonCruissingSpeed.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeInteger title:@"Cruissing speed"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:buttonCruissingSpeed forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    [row.cellConfig setObject:@(TextfieldTagSpeed) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    [section addFormRow:row];
+    
+    buttonLevel = [UIButton buttonWithType:UIButtonTypeCustom];
+    [buttonLevel addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
+    [buttonLevel setTitle:@"F" forState:UIControlStateNormal];
+    [buttonLevel setBackgroundColor:AppColorLight];
+    buttonLevel.tag = Level;
+    buttonLevel.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeInteger title:@"Level"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
+    [row.cellConfig setObject:buttonLevel forKey:@"textField.leftView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    [row.cellConfig setObject:@(TextfieldTagLevel) forKey:@"textField.tag"];
+    row.required = YES;
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
+    row.required = NO;
+    [section addFormRow:row];
+    
+    
+    // SECTION 7
+    section = [XLFormSectionDescriptor formSectionWithTitle:@"More util information."];
+    [form addFormSection:section];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyinformation rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
+//    [row.cellConfig setObject:@(TextfieldTagInfo) forKey:@"textField.tag"];
+    row.required = NO;
+    [section addFormRow:row];
+    
+    
+    // SECTION SUPPLEMENTARY INFORMATION
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    XLFormRowDescriptor * buttonWithSegueId = [XLFormRowDescriptor formRowDescriptorWithTag:@"SuplementaryInfo" rowType:XLFormRowDescriptorTypeButton title:@"Supplementary Information"];
+    buttonWithSegueId.action.formSegueIdentifier = @"SegueSupplementaryInformation";
+    [section addFormRow:buttonWithSegueId];
+    [form addFormSection:section];
+
+    
+    // SECTION BUTTON
+    section = [XLFormSectionDescriptor formSectionWithTitle:nil];
+    [form addFormSection:section];
+    
+    XLFormRowDescriptor * buttonRow = [XLFormRowDescriptor formRowDescriptorWithTag:KButtonCreateFPL rowType:XLFormRowDescriptorTypeButton title:@"Create FPL"];
+    buttonRow.action.formSelector = @selector(CreateFPL:);
+    [buttonRow.cellConfig setObject:AppColorLight forKey:@"textLabel.color"];
+
+    [section addFormRow:buttonRow];
+    
+    self.form = form;
+    
+}
+
+#pragma mark - XLFormDescriptorDelegate
+
+-(void)formRowDescriptorValueHasChanged:(XLFormRowDescriptor *)rowDescriptor oldValue:(id)oldValue newValue:(id)newValue{
+    [super formRowDescriptorValueHasChanged:rowDescriptor oldValue:oldValue newValue:newValue];
+    
+    if ([rowDescriptor.tag isEqualToString:ModelFlydateTime]){
+        
+        XLFormRowDescriptor * startDateDescriptor = [self.form formRowWithTag:ModelFlydateTime];
+        
+        XLFormDateCell * dateCell = (XLFormDateCell *)[startDateDescriptor cellForFormController:self];
+        if ([[NSDate new] compare:startDateDescriptor.value] == NSOrderedDescending) {
+            // startDateDescriptor is later than endDateDescriptor
+            [dateCell update]; // force detailTextLabel update
+            NSDictionary *strikeThroughAttribute = [NSDictionary dictionaryWithObject:@1
+                                                                               forKey:NSStrikethroughStyleAttributeName];
+            NSAttributedString* strikeThroughText = [[NSAttributedString alloc] initWithString:dateCell.detailTextLabel.text attributes:strikeThroughAttribute];
+            [startDateDescriptor.cellConfig setObject:strikeThroughText forKey:@"detailTextLabel.attributedText"];
+            [self updateFormRow:startDateDescriptor];
+            invalidDate = true;
+        }
+        else{
+            [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
+            [self updateFormRow:startDateDescriptor];
+            invalidDate = false;
+        }
+    }
+}
+
+-(void)formRowHasBeenAdded:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath{
+    [super formRowHasBeenAdded:formRow atIndexPath:indexPath];
+    
+    //Disable add Row if is neccesary
+    NSInteger rowCount = indexPath.row + 1;
+    if (rowCount == maxAlternativesDestination) {
+        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:indexPath.section];
+        XLFormRowDescriptor * row = [self.form formRowAtIndex:addIndexPath];
+        row.disabled = @YES;
+        
+        [self.tableView reloadRowsAtIndexPaths:@[addIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+    
+}
+-(void)formRowHasBeenRemoved:(XLFormRowDescriptor *)formRow atIndexPath:(NSIndexPath *)indexPath{
+    [super formRowHasBeenRemoved:formRow atIndexPath:indexPath];
+    
+    NSInteger rowCount = indexPath.row;
+    if (rowCount < maxAlternativesDestination) {
+        NSIndexPath *addIndexPath = [NSIndexPath indexPathForRow:rowCount inSection:indexPath.section];
+        XLFormRowDescriptor * row = [self.form formRowAtIndex:addIndexPath];
+        row.disabled = @NO;
+        
+        [self.tableView reloadRowsAtIndexPaths:@[addIndexPath] withRowAnimation:UITableViewRowAnimationNone];
+    }
+}
+
+-(void)CreateFPL:(XLFormRowDescriptor *)sender{
+    
+    NSArray * validationErrors = [self formValidationErrors];
+    if (validationErrors.count > 0){
+        [RKDropdownAlert title:@"Submit failure" message:[[validationErrors firstObject] localizedDescription] backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+        [self deselectFormRow:sender];
+        return;
+    }
+    
+    if(invalidDate == true){
+        [RKDropdownAlert title:@"Submit failure" message:@"Verify selected date" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+        [self deselectFormRow:sender];
+        return;
+    }
+    
+    if([validationErrors count] == 0){
+        NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+        [temp setValue:@"P" forKey:ModelFlystate];
+        [temp setValue:@(0) forKey:ModelFlyCreationType];
+
+        NSMutableArray *arrAlternatives = [[NSMutableArray alloc] init];
+        
+        for(int i = 0; i < [[self.form formSections] count] ; i++){
+            for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
+                if([row.rowType isEqualToString:XLFormRowDescriptorTypeSelectorPush]){
+                    [temp setValue:[row.value displayText] forKey:row.tag];
+                }else if([row.rowType isEqualToString:XLFormRowDescriptorTypeDateInline] || [row.rowType isEqualToString:XLFormRowDescriptorTypeTimeInline]){
+                    [temp setValue:row.value forKey:row.tag];
+                }else if(row.tag == nil){
+                    if (row.value != nil) {
+                        [arrAlternatives addObject:row.value];
+                        [temp setValue:arrAlternatives forKey:ModelFlyalternative];
+                    }
+                }else{
+                    if (row.value != nil) {
+                        if([row.tag isEqualToString:ModelFlyspeed]){
+                            [temp setValue:[NSString stringWithFormat:@"%@%@",buttonCruissingSpeed.titleLabel.text,row.value] forKey:row.tag];
+                        }else if([row.tag isEqualToString:ModelFlylevel]){
+                            [temp setValue:[NSString stringWithFormat:@"%@%@",buttonLevel.titleLabel.text,row.value] forKey:row.tag];
+                        }else if ([row.tag isEqualToString:ModelFlyHasRadiocomunication] || [row.tag isEqualToString:ModelFlyhasVigilance]){
+                            [temp setValue:@([row.value boolValue]) forKey:row.tag];
+                        }else {
+                            [temp setValue:row.value forKey:row.tag];
+                        }
+                    }
+                }
+            }
+        }
+
+        if([arrAlternatives count] == 0){
+            [RKDropdownAlert title:@"Submit failure" message:@"Enter at less one alternative destination" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+            [self deselectFormRow:sender];
+            return;
+        }
+        
+        [temp setValue:dicSupp forKey:ModelFlySupplementaryDictionary];
+        Fly *newFly = [[Fly alloc] initWithDict:temp];
+        
+        [ShowAlert ShowAlertWithTitle:@"Submit Successfull" andMessage:@"Your FPL was created successfully" acceptBlock:^{
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadPendingFPL" object:newFly];
+            
+            [self.navigationController popViewControllerAnimated:YES];
+        }];
+    }
+    
+    [self deselectFormRow:sender];
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSString *segueId = segue.identifier;
+    
+    if ([segueId isEqualToString:@"SegueSupplementaryInformation"]) {
+        CreateSupplementaryInformation *vc = segue.destinationViewController;
+        vc.delegate = self;
+        vc.dicSupplementary = dicSupp;
+    }else if ([segueId isEqualToString:@"SegueCustomSelector"]) {
+        CustomSelectorViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+        vc.selectedOption = cruissingSpeedSelector == true ? buttonCruissingSpeed.titleLabel.text : buttonLevel.titleLabel.text;
+        vc.tag = cruissingSpeedSelector == true ? ModelFlyspeed : ModelFlylevel;
+    }
+}
+
+-(void) ShowCustomSelector:(UIButton*)sender{
+    switch (sender.tag) {
+        case CrouissingSpeed:
+            cruissingSpeedSelector = true;
+            break;
+        case Level:
+            cruissingSpeedSelector = false;
+            break;
+    }
+    [self performSegueWithIdentifier:@"SegueCustomSelector" sender:self];
+}
+
+-(void)didSelectFormRow:(XLFormRowDescriptor *)formRow{
+    [super didSelectFormRow:formRow];
+    if([formRow.tag isEqualToString:ModelFlyEET]){
+        if([rowTotalEETPicker.hidden isEqual:@(YES)]){
+            rowTotalEETPicker.hidden = @(NO);
+        }else{
+            rowTotalEETPicker.hidden = @(YES);
+            formRow.value = [[Utils sharedUtils] timeFormatPicker:rowTotalEETPicker.value];
+            [self updateFormRow:formRow];
+        }
+    }
+}
+
+#pragma mark - Textfield Delegate - Real time limit character
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    // Prevent crashing undo bug – see note below.
+    if(range.length + range.location > textField.text.length){
+        return NO;
+    }
+    
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    if(textField.tag == TextfieldTagAeroplaneIdentifier){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 7);
+            return stringIsValid;
+        }
+        return newLength <= 7;
+    }else if(textField.tag == TextfieldTagAeroplaneNumber){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 2);
+            return stringIsValid;
+        }
+        return newLength <= 2;
+    }else if(textField.tag == TextfieldTagAeroplaneType){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            return stringIsValid;
+        }
+        return newLength <= 4;
+    }else if(textField.tag == TextfieldTagOrigin){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 8);
+            return stringIsValid;
+        }
+        return newLength <= 8;
+    }else if(textField.tag == TextfieldTagDestination || textField.tag == TextfieldTagSpeed || textField.tag == TextfieldTagLevel || textField.tag == TextfieldTagAlternative){
+        if(string.length > 0){
+            NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
+            NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
+            
+            BOOL stringIsValid = [numbersOnly isSupersetOfSet:characterSetFromTextField] && (newLength <= 4);
+            return stringIsValid;
+        }
+        return newLength <= 4;
+    }
+    return newLength <= 50;
+}
+
+#pragma mark - Custom Delegates
+-(void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary *)dic{
+    dicSupp = [[NSMutableDictionary alloc] initWithDictionary:dic];
+}
+
+-(void)delegateVC:(CustomSelectorViewController *)vc option:(NSString *)option{
+    if(cruissingSpeedSelector == true){
+        [buttonCruissingSpeed setTitle:option forState:UIControlStateNormal];
+    }else{
+        [buttonLevel setTitle:option forState:UIControlStateNormal];
+    }
+}
+@end
