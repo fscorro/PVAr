@@ -471,10 +471,13 @@
                         <viewLayoutGuide key="safeArea" id="Mhh-3a-Dhp"/>
                     </view>
                     <navigationItem key="navigationItem" title="Supplementary Information" id="03k-wG-Ykb"/>
+                    <connections>
+                        <segue destination="Drc-K7-ASH" kind="show" identifier="SegueCustomSelector" id="zL9-lD-2mj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uev-Z6-rSQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3437" y="2004"/>
+            <point key="canvasLocation" x="2726" y="2008"/>
         </scene>
         <!--New PFL-->
         <scene sceneID="BbI-vL-gGf">
@@ -614,10 +617,13 @@
                     <navigationItem key="navigationItem" title="Supplementary Information" id="Lct-2f-MGD">
                         <barButtonItem key="backBarButtonItem" title="-" id="3Ej-uw-F6Y"/>
                     </navigationItem>
+                    <connections>
+                        <segue destination="Drc-K7-ASH" kind="show" identifier="SegueCustomSelector" id="4Tj-TN-hg9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kjf-Vv-O4u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3437" y="1222"/>
+            <point key="canvasLocation" x="2726" y="1223"/>
         </scene>
         <!-- -->
         <scene sceneID="oOh-2S-UoL">
@@ -673,7 +679,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J5s-Ia-QMa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2640" y="1623"/>
+            <point key="canvasLocation" x="4316" y="1629"/>
         </scene>
         <!--Registration-->
         <scene sceneID="OV5-lq-02f">
@@ -743,7 +749,7 @@
         <image name="icon_user" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Uf1-IF-SYT"/>
+        <segue reference="4Tj-TN-hg9"/>
         <segue reference="eVK-8e-YgF"/>
     </inferredMetricsTieBreakers>
 </document>

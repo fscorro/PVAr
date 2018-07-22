@@ -26,9 +26,11 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     TextfieldTagAeroplaneIdentifier = 1,
     TextfieldTagRule,
     TextfieldTagType,
-    TextfieldTagCategory,
     TextfieldTagAeroplaneNumber,
     TextfieldTagAeroplaneType,
+    TextfieldTagCategory,
+    TextfieldTagRadiocomunication,
+    TextfieldTagVigilance,
     TextfieldTagEquipment,
     TextfieldTagOrigin,
     TextfieldTagDestination,
@@ -89,14 +91,17 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeZipCode title:@"Rule"];
     row.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyRule] objectAtIndex:0]];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
     [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:@(TextfieldTagRule) forKey:@"textField.tag"];
     [section addFormRow:row];
 
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeZipCode title:@"Type"];
-//    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyType];
     row.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyType] objectAtIndex:0]];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
     [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:@(TextfieldTagType) forKey:@"textField.tag"];
@@ -124,8 +129,9 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeZipCode title:@"Category"];
-//    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyCategory];
     row.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyCategory] objectAtIndex:0]];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
     [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfig setObject:@(TextfieldTagCategory) forKey:@"textField.tag"];
@@ -141,9 +147,13 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     row.value = @(NO);
     hasRadiocomunication = NO;
     [section addFormRow:row];
-    
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRadiocomunication rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyRadiocomunication];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRadiocomunication rowType:XLFormRowDescriptorTypeZipCode title:@"Select options"];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagRadiocomunication) forKey:@"textField.tag"];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasRadiocomunication];
     [section addFormRow:row];
     
@@ -153,8 +163,12 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     hasVigilance = NO;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyVigilance rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyVigilance];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyVigilance rowType:XLFormRowDescriptorTypeZipCode title:@"Select options"];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagVigilance) forKey:@"textField.tag"];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyhasVigilance];
     [section addFormRow:row];
 
@@ -223,8 +237,9 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     [section addFormRow:rowTotalEETPicker];
     
     rowSpeedUnit = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeedUnit rowType:XLFormRowDescriptorTypeZipCode title:@"Cruissing speed"];
-//    rowSpeedUnit.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySpeed];
     rowSpeedUnit.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySpeed] objectAtIndex:0]];
+    [rowSpeedUnit.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [rowSpeedUnit.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
     [rowSpeedUnit.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [rowSpeedUnit.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [rowSpeedUnit.cellConfig setObject:@(TextfieldTagSpeedUnit) forKey:@"textField.tag"];
@@ -238,8 +253,9 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     [section addFormRow:row];
     
     rowLevelUnit = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevelUnit rowType:XLFormRowDescriptorTypeZipCode title:@"Level"];
-//    rowLevelUnit.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyLevel];
     rowLevelUnit.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyLevel] objectAtIndex:0]];
+    [rowLevelUnit.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [rowLevelUnit.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
     [rowLevelUnit.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [rowLevelUnit.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [rowLevelUnit.cellConfig setObject:@(TextfieldTagLevelUnit) forKey:@"textField.tag"];
@@ -388,12 +404,14 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
                             [temp setValue:@([row.value boolValue]) forKey:row.tag];
                         }else if([row.tag isEqualToString:ModelFlyRadiocomunication]){
                             if(hasRadiocomunication){
-                                arrRadiocomunication = [[NSMutableArray alloc] initWithArray:row.value];
+                                NSArray* arrayOfStrings = [row.value componentsSeparatedByString:@","];
+                                arrRadiocomunication = [[NSMutableArray alloc] initWithArray:arrayOfStrings];
                                 [temp setValue:arrRadiocomunication forKey:ModelFlyRadiocomunication];
                             }
                         }else if([row.tag isEqualToString:ModelFlyVigilance]){
                             if(hasVigilance){
-                                arrVigilance = [[NSMutableArray alloc] initWithArray:row.value];
+                                NSArray* arrayOfStrings = [row.value componentsSeparatedByString:@","];
+                                arrVigilance = [[NSMutableArray alloc] initWithArray:arrayOfStrings];
                                 [temp setValue:arrVigilance forKey:ModelFlyVigilance];
                             }
                         }else{
@@ -444,7 +462,16 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
         CustomSelectorViewController *vc = segue.destinationViewController;
         vc.delegate = self;
         vc.tag = segueSelectedRow.tag;
-        vc.selectedOption = [segueSelectedRow.value displayText];
+        if([segueSelectedRow.tag isEqualToString:ModelFlyRadiocomunication] || [segueSelectedRow.tag isEqualToString:ModelFlyVigilance]){
+            if(segueSelectedRow.value != nil){
+                NSArray* arrayOfStrings = [segueSelectedRow.value componentsSeparatedByString:@","];
+                vc.selectedOptions = [[NSMutableArray alloc] initWithArray:arrayOfStrings];
+            }else{
+                vc.selectedOptions = [[NSMutableArray alloc] init];
+            }
+        }else{
+            vc.selectedOption = [segueSelectedRow.value displayText];
+        }
     }
 }
 
@@ -459,7 +486,7 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
             formRow.value = [[Utils sharedUtils] timeFormatPicker:rowTotalEETPicker.value];
             [self updateFormRow:formRow];
         }
-    }else if([formRow.tag isEqualToString:ModelFlyrule] || [formRow.tag isEqualToString:ModelFlytype] || [formRow.tag isEqualToString:ModelFlycategory] || [formRow.tag isEqualToString:ModelFlyspeedUnit] || [formRow.tag isEqualToString:ModelFlylevelUnit]){
+    }else if([formRow.tag isEqualToString:ModelFlyrule] || [formRow.tag isEqualToString:ModelFlytype] || [formRow.tag isEqualToString:ModelFlycategory] || [formRow.tag isEqualToString:ModelFlyspeedUnit] || [formRow.tag isEqualToString:ModelFlylevelUnit] || [formRow.tag isEqualToString:ModelFlyRadiocomunication] || [formRow.tag isEqualToString:ModelFlyVigilance]){
         [self performSegueWithIdentifier:@"SegueCustomSelector" sender:formRow];
     }
 }
@@ -526,7 +553,11 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     dicSupp = [[NSMutableDictionary alloc] initWithDictionary:dic];
 }
 
--(void)delegateVC:(CustomSelectorViewController *)vc option:(NSString *)option{
-    segueSelectedRow.value = option;
+-(void)delegateVC:(CustomSelectorViewController *)vc option:(NSMutableDictionary *)option{
+    if([option valueForKey:@"selectedOptions"]){
+        segueSelectedRow.value = [[option valueForKey:@"selectedOptions"] componentsJoinedByString:@","];
+    }else{
+        segueSelectedRow.value = [option valueForKey:@"selectedOption"];
+    }
 }
 @end

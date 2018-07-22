@@ -13,12 +13,16 @@
 typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     TextfieldTagSuppEndurance = 1,
     TextfieldTagSuppPersonOnBoard,
+    TextfieldTagSuppEmergencyRadio,
+    TextfieldTagSuppSurvivalEquipment,
+    TextfieldTagSuppJackets,
     TextfieldTagSuppDinghiesNumber,
     TextfieldTagSuppDinghiesCapacity
 };
 
 @interface CreateSupplementaryInformation(){
     XLFormRowDescriptor * rowEndurancePicker;
+    XLFormRowDescriptor *segueSelectedRow;
 }
 @end
 
@@ -67,9 +71,13 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasEmergencyRadio] boolValue]);
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyEmergencyRadio];
-    row.value = [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] != nil ? [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] : nil;
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeZipCode title:@"Select options"];
+    row.value = [[self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] componentsJoinedByString:@","];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagSuppEmergencyRadio) forKey:@"textField.tag"];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasEmergencyRadio];
     [section addFormRow:row];
     
@@ -78,9 +86,13 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasSurvivalEquipment] boolValue]);
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySurvivalEquipment];
-    row.value = [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] != nil ? [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] : nil;
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeZipCode title:@"Select options"];
+    row.value = [[self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] componentsJoinedByString:@","];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagSuppSurvivalEquipment) forKey:@"textField.tag"];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasSurvivalEquipment];
     [section addFormRow:row];
     
@@ -89,9 +101,13 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasJackets] boolValue]);
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyJackets];
-    row.value = [self.dicSupplementary valueForKey:ModelFlyJackets] != nil ? [self.dicSupplementary valueForKey:ModelFlyJackets] : nil;
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeZipCode title:@"Select options"];
+    row.value = [[self.dicSupplementary valueForKey:ModelFlyJackets] componentsJoinedByString:@","];
+    [row.cellConfig setObject:[[Utils sharedUtils] addTextfieldImageBox] forKey:@"textField.rightView"];
+    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.rightViewMode"];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagSuppJackets) forKey:@"textField.tag"];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasJackets];
     [section addFormRow:row];
     
@@ -194,7 +210,8 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
                 if([row.tag isEqualToString:ModelFlyHasEmergencyRadio] || [row.tag isEqualToString:ModelFlyHasSurvivalEquipment] || [row.tag isEqualToString:ModelFlyHasJackets] || [row.tag isEqualToString:ModelFlyHasRemakrs]){
                     [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlyEmergencyRadio] || [row.tag isEqualToString:ModelFlySurvivalEquipment] || [row.tag isEqualToString:ModelFlyJackets]){
-                    [self.dicSupplementary setValue:row.value forKey:row.tag];
+                    NSArray* arrayOfStrings = [row.value componentsSeparatedByString:@","];
+                    [self.dicSupplementary setValue:arrayOfStrings forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlyDinghies] || [row.tag isEqualToString:ModelFlyDinghiesHasCover]){
                     [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
                 }else{
@@ -274,7 +291,39 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
             formRow.value = [[Utils sharedUtils] timeFormatPicker:rowEndurancePicker.value];
             [self updateFormRow:formRow];
         }
+    }else if([formRow.tag isEqualToString:ModelFlyEmergencyRadio] || [formRow.tag isEqualToString:ModelFlySurvivalEquipment] || [formRow.tag isEqualToString:ModelFlyJackets]){
+        [self performSegueWithIdentifier:@"SegueCustomSelector" sender:formRow];
     }
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSString *segueId = segue.identifier;
+    
+    if ([segueId isEqualToString:@"SegueCustomSelector"]) {
+        segueSelectedRow = sender;
+        
+        CustomSelectorViewController *vc = segue.destinationViewController;
+        vc.delegate = self;
+        vc.tag = segueSelectedRow.tag;
+        if([segueSelectedRow.tag isEqualToString:ModelFlyEmergencyRadio] || [segueSelectedRow.tag isEqualToString:ModelFlySurvivalEquipment] || [segueSelectedRow.tag isEqualToString:ModelFlyJackets]){
+            if(segueSelectedRow.value != nil){
+                NSArray* arrayOfStrings = [segueSelectedRow.value componentsSeparatedByString:@","];
+                vc.selectedOptions = [[NSMutableArray alloc] initWithArray:arrayOfStrings];
+            }else{
+                vc.selectedOptions = [[NSMutableArray alloc] init];
+            }
+        }else{
+            vc.selectedOption = [segueSelectedRow.value displayText];
+        }
+    }
+}
+
+#pragma mark - Custom Delegates
+-(void)delegateVC:(CustomSelectorViewController *)vc option:(NSMutableDictionary *)option{
+    if([option valueForKey:@"selectedOptions"]){
+        segueSelectedRow.value = [[option valueForKey:@"selectedOptions"] componentsJoinedByString:@","];
+    }else{
+        segueSelectedRow.value = [option valueForKey:@"selectedOption"];
+    }
+}
 @end

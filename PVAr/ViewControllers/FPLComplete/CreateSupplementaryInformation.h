@@ -10,13 +10,14 @@
 #import <RKDropdownAlert.h>
 #import <XLForm.h>
 #import <XLFormViewController.h>
+#import "CustomSelectorViewController.h"
 
 @class CreateSupplementaryInformation;
 @protocol CreateSupplementaryInformationDelegate <NSObject>
 - (void)delegateVC:(CreateSupplementaryInformation *)vc dicSupplementary:(NSMutableDictionary*)dic;
 @end
 
-@interface CreateSupplementaryInformation : XLFormViewController
+@interface CreateSupplementaryInformation : XLFormViewController <CustomSelectorDelegate>
 
 @property (weak, nonatomic) id<CreateSupplementaryInformationDelegate> delegate;
 @property (strong, nonatomic) NSMutableDictionary *dicSupplementary;

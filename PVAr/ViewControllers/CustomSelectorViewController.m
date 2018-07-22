@@ -15,6 +15,8 @@
     
     UITableViewCell *selectedCell;
     NSIndexPath *indexPathOld;
+    
+    BOOL isMultiValue;
 }
 @end
 
@@ -33,13 +35,34 @@
         arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySpeed];
     }else if([self.tag isEqualToString:ModelFlylevelUnit]){
         arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyLevel];
+    }else if([self.tag isEqualToString:ModelFlyRadiocomunication]){
+        isMultiValue = true;
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyRadiocomunication];
+    }else if([self.tag isEqualToString:ModelFlyVigilance]){
+        isMultiValue = true;
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyVigilance];
+    }else if([self.tag isEqualToString:ModelFlyEmergencyRadio]){
+        isMultiValue = true;
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyEmergencyRadio];
+    }else if([self.tag isEqualToString:ModelFlySurvivalEquipment]){
+        isMultiValue = true;
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySurvivalEquipment];
+    }else if([self.tag isEqualToString:ModelFlyJackets]){
+        isMultiValue = true;
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyJackets];
     }
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     if ([self.delegate respondsToSelector:@selector(delegateVC:option:)]) {
-        [self.delegate delegateVC:self option:self.selectedOption];
+        NSMutableDictionary *dic = [[NSMutableDictionary alloc] init];
+        if(isMultiValue){
+            [dic setObject:self.selectedOptions forKey:@"selectedOptions"];
+        }else{
+            [dic setObject:self.selectedOption forKey:@"selectedOption"];
+        }
+        [self.delegate delegateVC:self option:dic];
     }
 }
 
@@ -60,13 +83,28 @@
     
     cell.textLabel.text = [arrOptions objectAtIndex:indexPath.row];
     
-    NSArray * auxArr = [[arrOptions objectAtIndex:indexPath.row] componentsSeparatedByString:@" - "];
-    
-    if([self.selectedOption isEqualToString:[auxArr objectAtIndex:0]]){
-        cell.accessoryType = UITableViewCellAccessoryCheckmark;
-        indexPathOld = indexPath;
+    NSString *symbol = [[Utils sharedUtils] returnFirstWordFromString:[arrOptions objectAtIndex:indexPath.row]];
+
+    if(isMultiValue){
+        if([self.selectedOptions count] > 0){
+            for (NSString *op in self.selectedOptions) {
+                if([op isEqualToString:symbol]){
+                    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+                    break;
+                }else{
+                    cell.accessoryType = UITableViewCellAccessoryNone;
+                }
+            }
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }else{
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        if([self.selectedOption isEqualToString:symbol]){
+            cell.accessoryType = UITableViewCellAccessoryCheckmark;
+            indexPathOld = indexPath;
+        }else{
+            cell.accessoryType = UITableViewCellAccessoryNone;
+        }
     }
     
     return cell;
@@ -76,21 +114,34 @@
     
     selectedCell = [tableView cellForRowAtIndexPath:indexPath];
     
-    if(![indexPathOld isEqual:indexPath]){
-        UITableViewCell *aux = [tableView cellForRowAtIndexPath:indexPathOld];
-        [tableView deselectRowAtIndexPath:indexPathOld animated:YES];
-        aux.accessoryType = UITableViewCellAccessoryNone;
+    if(isMultiValue == false){
+        if(![indexPathOld isEqual:indexPath]){
+            UITableViewCell *aux = [tableView cellForRowAtIndexPath:indexPathOld];
+            [tableView deselectRowAtIndexPath:indexPathOld animated:YES];
+            aux.accessoryType = UITableViewCellAccessoryNone;
+            
+            indexPathOld = indexPath;
+            
+            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+            
+            NSString *symbol = [[Utils sharedUtils] returnFirstWordFromString:[arrOptions objectAtIndex:indexPath.row]];
 
-        indexPathOld = indexPath;
+            self.selectedOption = symbol;
+        }
         
-        selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [self.navigationController popViewControllerAnimated:YES];
+    }else{
+        NSString *symbol = [[Utils sharedUtils] returnFirstWordFromString:[arrOptions objectAtIndex:indexPath.row]];
 
-        NSArray *auxArr = [[arrOptions objectAtIndex:indexPath.row] componentsSeparatedByString:@" - "];
-
-        self.selectedOption = [auxArr objectAtIndex:0];
+        if(selectedCell.accessoryType == UITableViewCellAccessoryNone){
+            selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
+            [self.selectedOptions addObject:symbol];
+        }else{
+            selectedCell.accessoryType = UITableViewCellAccessoryNone;
+            [self.selectedOptions removeObject:symbol];
+        }
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
     }
-    
-    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {

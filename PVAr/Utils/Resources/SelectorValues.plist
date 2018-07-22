@@ -39,59 +39,59 @@
 	</array>
 	<key>Radiocomunication</key>
 	<array>
-		<string>A – Sistema de aterrizaje GBAS</string>
-		<string>B – LPV</string>
-		<string>C – LORAN C</string>
-		<string>D – DME</string>
-		<string>E1 – FMC WPR ACARS</string>
-        <string>E2 – D – FIS ACARS</string>
-        <string>E3 – PDC ACARS</string>
-        <string>F – ADF</string>
-        <string>G – GNSS</string>
-        <string>H – HF RTF</string>
-        <string>I – Navegación inercial</string>
-        <string>J1 – CPDLC ATN VDL</string>
-        <string>J2 – CPDLC FANS 1 / A HFDL</string>
-        <string>J3 – CPDLC FANS 1 / A VDL</string>
-        <string>J4 – CPDLC FANS 1 / A VDL</string>
-        <string>J5 – CPDLC FANS 1 / A SATCOM</string>
-        <string>J6 – CPDLC FANS 1 / A SATCOM</string>
-        <string>J7 – CPDLC FANS 1 / A SATCOM</string>
-        <string>K – MLS</string>
-        <string>L – ILS</string>
-        <string>M1 – ATC RTF SATCOM</string>
-        <string>M2 – ATC RTF</string>
-        <string>M3 – ATC RTF</string>
-        <string>O – VOR</string>
-        <string>P1 – P9 – Reservado para RCP</string>
-        <string>R – PBN Aprobada</string>
-        <string>T – TACAN</string>
-        <string>U – UHF RTF</string>
-        <string>V – VHF RTF</string>
-        <string>W – RVSM Aprobada</string>
-        <string>X – MNPS Aprobada</string>
-        <string>Y – VHF (8,33 khz)</string>
-        <string>Z – Demás equipo instalado</string>
+		<string>A - Sistema de aterrizaje GBAS</string>
+		<string>B - LPV</string>
+		<string>C - LORAN C</string>
+		<string>D - DME</string>
+		<string>E1 - FMC WPR ACARS</string>
+        <string>E2 - D . FIS ACARS</string>
+        <string>E3 - PDC ACARS</string>
+        <string>F - ADF</string>
+        <string>G - GNSS</string>
+        <string>H - HF RTF</string>
+        <string>I - Navegación inercial</string>
+        <string>J1 - CPDLC ATN VDL</string>
+        <string>J2 - CPDLC FANS 1 / A HFDL</string>
+        <string>J3 - CPDLC FANS 1 / A VDL</string>
+        <string>J4 - CPDLC FANS 1 / A VDL</string>
+        <string>J5 - CPDLC FANS 1 / A SATCOM</string>
+        <string>J6 - CPDLC FANS 1 / A SATCOM</string>
+        <string>J7 - CPDLC FANS 1 / A SATCOM</string>
+        <string>K - MLS</string>
+        <string>L - ILS</string>
+        <string>M1 - ATC RTF SATCOM</string>
+        <string>M2 - ATC RTF</string>
+        <string>M3 - ATC RTF</string>
+        <string>O - VOR</string>
+        <string>P1 - P9 . Reservado para RCP</string>
+        <string>R - PBN Aprobada</string>
+        <string>T - TACAN</string>
+        <string>U - UHF RTF</string>
+        <string>V - VHF RTF</string>
+        <string>W - RVSM Aprobada</string>
+        <string>X - MNPS Aprobada</string>
+        <string>Y - VHF (8,33 khz)</string>
+        <string>Z - Demás equipo instalado</string>
 	</array>
 	<key>Vigilance</key>
 	<array>
-        <string>A - Transpondedor — Modo A</string>
-        <string>C - Transpondedor — Modo A y Modo C</string>
-        <string>E – Transpondedor  - Modo S, identificación, altitud y señales espontaneas</string>
-        <string>H – Transpondedor - Modo S, identificación, altitud y vigilancia</string>
-        <string>I – Transpondedor - Modo S, identificación sin altitud</string>
-        <string>L – Transpondedor - Modo S, identificación, altitud, señales y vigilancia</string>
-        <string>P - Transpondedor - Modo S, altitud sin identificación</string>
-        <string>S - Transpondedor  - Modo S, altitud e identificación</string>
-        <string>X - Transpondedor  - Modo S, sin altitud e identificación</string>
-        <string>B1 - ADS-B con capacidad especializada ADS</string>
-        <string>B2 - ADB-B con capacidad especializada ADS-B</string>
-        <string>U1 - Capacidad ADS-B “out” usando UAT</string>
-        <string>U2 - Capacidad ADS-B “out” e “in” usando UAT</string>
-        <string>V1 - Capacidad ADS-B “out” usando VDL</string>
-        <string>V2 - Capacidad ADS-B “out” e “in” usando VDL</string>
-        <string>D1 - ADS-C con capacidades FANS 1/A</string>
-        <string>G1 - ADS-C con capacidades ATN</string>
+        <string>A - Transpondedor . Modo A</string>
+        <string>C - Transpondedor . Modo A y Modo C</string>
+        <string>E – Transpondedor  . Modo S, identificación, altitud y señales espontaneas</string>
+        <string>H – Transpondedor . Modo S, identificación, altitud y vigilancia</string>
+        <string>I – Transpondedor . Modo S, identificación sin altitud</string>
+        <string>L – Transpondedor . Modo S, identificación, altitud, señales y vigilancia</string>
+        <string>P - Transpondedor . Modo S, altitud sin identificación</string>
+        <string>S - Transpondedor  . Modo S, altitud e identificación</string>
+        <string>X - Transpondedor  . Modo S, sin altitud e identificación</string>
+        <string>B1 - ADS.B con capacidad especializada ADS</string>
+        <string>B2 - ADB.B con capacidad especializada ADS-B</string>
+        <string>U1 - Capacidad ADS.B “out” usando UAT</string>
+        <string>U2 - Capacidad ADS.B “out” e “in” usando UAT</string>
+        <string>V1 - Capacidad ADS.B “out” usando VDL</string>
+        <string>V2 - Capacidad ADS.B “out” e “in” usando VDL</string>
+        <string>D1 - ADS.C con capacidades FANS 1/A</string>
+        <string>G1 - ADS.C con capacidades ATN</string>
 	</array>
 	<key>EmergencyRadio</key>
 	<array>

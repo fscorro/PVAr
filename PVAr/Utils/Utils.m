@@ -78,6 +78,23 @@
     return view;
 }
 
+- (UIView*) addTextfieldImageBox{
+    
+    UIView *view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 16, 12)];
+    [view setBackgroundColor:[UIColor clearColor]];
+    
+    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(4, 0, view.frame.size.width, view.frame.size.height)];
+    
+    [imageView setImage:[UIImage imageNamed:@"icon_right_arrow"]];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView.image = [imageView.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [imageView setTintColor:[UIColor lightGrayColor]];
+    
+    [view addSubview:imageView];
+    
+    return view;
+}
+
 -(NSString *) dateFormnat:(NSDate*)date{
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:DateFormat];
@@ -103,9 +120,20 @@
     NSDictionary *dictRoot = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plist ofType:@"plist"]];
     return [NSArray arrayWithArray:[dictRoot objectForKey:key]];
 }
+
 -(NSString*) returnStringSeparateBy:(NSString*)separator fromString:(NSString*)from{
-    NSArray *auxArr = [from componentsSeparatedByString:@" - "];
-    return [auxArr objectAtIndex:0];
+    return [[from componentsSeparatedByString:@" "] objectAtIndex:0];
+}
+
+-(NSString *) returnFirstWordFromString:(NSString*)string{
+    NSArray* lines = [string componentsSeparatedByCharactersInSet: [NSCharacterSet whitespaceCharacterSet]];
+    return lines[0];
+}
+
+-(UIImageView*) changeImageTintFromImageView:(UIImageView*)imageview{
+    imageview.image = [imageview.image imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+    [imageview setTintColor:[UIColor darkGrayColor]];
+    return imageview;
 }
 
 @end

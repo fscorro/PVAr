@@ -12,11 +12,13 @@
 
 + (Utils *)sharedUtils;
 
-- (CALayer*)addTopBorderToView:(UIView*)view;
-- (CALayer*)addBottomBorderToView:(UIView*)view;
-- (CALayer*)addLeftBorderToView:(UIView*)view;
-- (CALayer*)addRightBorderToView:(UIView*)view;
-- (UIView*)leftViewForTextfieldWithLabelText:(NSString*)text isEnabled:(BOOL)enabled;
+-(CALayer*) addTopBorderToView:(UIView*)view;
+-(CALayer*) addBottomBorderToView:(UIView*)view;
+-(CALayer*) addLeftBorderToView:(UIView*)view;
+-(CALayer*) addRightBorderToView:(UIView*)view;
+-(UIView*) leftViewForTextfieldWithLabelText:(NSString*)text isEnabled:(BOOL)enabled;
+-(UIView*) addTextfieldImageBox;
+-(UIImageView*) changeImageTintFromImageView:(UIImageView*)imageview;
 
 -(NSString *) dateFormnat:(NSDate*)date;
 -(NSString *) timeFormnat:(NSDate*)time;
@@ -24,5 +26,6 @@
 
 -(NSArray*) loadDataFromPlist:(NSString*)plist withKey:(NSString*)key;
 -(NSString*) returnStringSeparateBy:(NSString*)separator fromString:(NSString*)from;
+-(NSString *) returnFirstWordFromString:(NSString*)string;
 
 @end

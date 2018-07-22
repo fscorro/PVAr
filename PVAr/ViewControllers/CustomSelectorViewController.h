@@ -10,7 +10,7 @@
 
 @class CustomSelectorViewController;
 @protocol CustomSelectorDelegate <NSObject>
-- (void)delegateVC:(CustomSelectorViewController *)vc option:(NSString*)option;
+-(void)delegateVC:(CustomSelectorViewController *)vc option:(NSMutableDictionary *)option;
 @end
 
 @interface CustomSelectorViewController : UIViewController
@@ -18,6 +18,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableViewSelector;
 
 @property (weak, nonatomic) id<CustomSelectorDelegate> delegate;
+@property (strong, nonatomic) NSMutableArray *selectedOptions;
 @property (strong, nonatomic) NSString *selectedOption;
 @property (strong, nonatomic) NSString *tag;
 
