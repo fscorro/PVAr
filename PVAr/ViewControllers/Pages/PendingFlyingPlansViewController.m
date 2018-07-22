@@ -44,9 +44,11 @@
     [temp setValue:@"KMIA" forKey:ModelFlydestinationAerodrome];
     [temp setValue:[NSDate new] forKey:ModelFlydateTime];
     [temp setValue:@"N" forKey:ModelFlyunit];
-    [temp setValue:@"N470" forKey:ModelFlyspeed];
-    [temp setValue:@"VFR320" forKey:ModelFlylevel];
-    
+    [temp setValue:@"N" forKey:ModelFlyspeedUnit];
+    [temp setValue:@"470" forKey:ModelFlyspeed];
+    [temp setValue:@"VFR" forKey:ModelFlylevelUnit];
+    [temp setValue:@"320" forKey:ModelFlylevel];
+
     [temp setValue:@"0313" forKey:ModelFlyEET];
     [temp setValue:@[@"KBPI",@"SDIP"] forKey:ModelFlyalternative];
     [temp setValue:@"Z1P1H ZIP W44" forKey:ModelFlyinformation];

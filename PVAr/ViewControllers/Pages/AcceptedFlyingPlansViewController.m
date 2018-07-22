@@ -42,8 +42,10 @@
     [temp setValue:@"JKLM" forKey:ModelFlydestinationAerodrome];
     [temp setValue:[NSDate new] forKey:ModelFlydateTime];
     [temp setValue:@"K" forKey:ModelFlyunit];
-    [temp setValue:@"N370" forKey:ModelFlyspeed];
-    [temp setValue:@"F280" forKey:ModelFlylevel];
+    [temp setValue:@"K" forKey:ModelFlyspeedUnit];
+    [temp setValue:@"370" forKey:ModelFlyspeed];
+    [temp setValue:@"F" forKey:ModelFlylevelUnit];
+    [temp setValue:@"280" forKey:ModelFlylevel];
     
     [temp setValue:@"0313" forKey:ModelFlyEET];
     [temp setValue:@"Z1P1H W44" forKey:ModelFlyinformation];

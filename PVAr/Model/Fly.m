@@ -35,7 +35,9 @@
         self.destinationAerodrome = [dict valueForKey:ModelFlydestinationAerodrome];
         self.dateTime = [dict valueForKey:ModelFlydateTime];
         self.unit = [dict valueForKey:ModelFlyunit];
+        self.speedUnit = [dict valueForKey:ModelFlyspeedUnit];
         self.speed = [dict valueForKey:ModelFlyspeed];
+        self.levelUnit = [dict valueForKey:ModelFlylevelUnit];
         self.level = [dict valueForKey:ModelFlylevel];
         self.route = [dict valueForKey:ModelFlyroute];
 
@@ -60,6 +62,7 @@
         self.cover = [[[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghiesHasCover] boolValue];
         self.coverColour = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyDinghiesCoverColor];
         self.aircraftColor = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyAircraftColor];
+        self.hasRemarks = [[[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyHasRemakrs] boolValue];
         self.remarks = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyRemakrs];
         self.pilotInCommand = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyPilotInCommand];
         self.pilotLicence = [[dict valueForKey:ModelFlySupplementaryDictionary] valueForKey:ModelFlyPilotLicence];

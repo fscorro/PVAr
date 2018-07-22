@@ -8,6 +8,7 @@
 
 #import "CustomSelectorViewController.h"
 #import "Constants.h"
+#import "Utils.h"
 
 @interface CustomSelectorViewController(){
     NSArray *arrOptions;
@@ -22,10 +23,16 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-    if([self.tag isEqualToString:ModelFlyspeed]){
-        arrOptions = [[NSArray alloc] initWithObjects:@"K", @"N", @"M", nil];
-    }else if([self.tag isEqualToString:ModelFlylevel]){
-        arrOptions = [[NSArray alloc] initWithObjects:@"F", @"S", @"A", @"M", @"VFR", nil];
+    if([self.tag isEqualToString:ModelFlyrule]){
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyRule];
+    }else if([self.tag isEqualToString:ModelFlytype]){
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyType];
+    }else if([self.tag isEqualToString:ModelFlycategory]){
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyCategory];
+    }else if([self.tag isEqualToString:ModelFlyspeedUnit]){
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySpeed];
+    }else if([self.tag isEqualToString:ModelFlylevelUnit]){
+        arrOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyLevel];
     }
 }
 
@@ -53,7 +60,9 @@
     
     cell.textLabel.text = [arrOptions objectAtIndex:indexPath.row];
     
-    if([self.selectedOption isEqualToString:[arrOptions objectAtIndex:indexPath.row]]){
+    NSArray * auxArr = [[arrOptions objectAtIndex:indexPath.row] componentsSeparatedByString:@" - "];
+    
+    if([self.selectedOption isEqualToString:[auxArr objectAtIndex:0]]){
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         indexPathOld = indexPath;
     }else{
@@ -76,7 +85,9 @@
         
         selectedCell.accessoryType = UITableViewCellAccessoryCheckmark;
 
-        self.selectedOption = [arrOptions objectAtIndex:indexPath.row];
+        NSArray *auxArr = [[arrOptions objectAtIndex:indexPath.row] componentsSeparatedByString:@" - "];
+
+        self.selectedOption = [auxArr objectAtIndex:0];
     }
     
     [self.navigationController popViewControllerAnimated:YES];

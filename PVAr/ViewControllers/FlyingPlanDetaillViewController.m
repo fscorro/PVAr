@@ -171,31 +171,53 @@ typedef NS_ENUM(NSInteger, FlyCreationType) {
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeText title:@"Cruissing speed"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:[self.fly.speed substringToIndex:1] isEnabled:false] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
-    row.value = [self.fly.speed substringWithRange:NSMakeRange(1, [self.fly.speed length]-1)];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeedUnit rowType:XLFormRowDescriptorTypeSelectorPush title:@"Cruissing speed"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.speedUnit]];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.speedUnit];
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeText title:@"Level"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeText title:@"Inserted speed"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    NSString *strObject;
-    if([self.fly.level containsString:@"VFR"]){
-        strObject = [self.fly.level substringToIndex:3];
-    }else{
-        strObject = [self.fly.level substringToIndex:1];
-    }
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:strObject isEnabled:false] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
-    if([self.fly.level containsString:@"VFR"]){
-        row.value = [self.fly.level substringWithRange:NSMakeRange(3, [self.fly.level length]-3)];;
-    }else{
-        row.value = [self.fly.level substringWithRange:NSMakeRange(1, [self.fly.speed length]-1)];
-    }
+//    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:[self.fly.speed substringToIndex:1] isEnabled:false] forKey:@"textField.leftView"];
+//    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+//    row.value = [self.fly.speed substringWithRange:NSMakeRange(1, [self.fly.speed length]-1)];
+    row.value = self.fly.speed;
     row.disabled = @YES;
     [section addFormRow:row];
+
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevelUnit rowType:XLFormRowDescriptorTypeSelectorPush title:@"Level"];
+    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.levelUnit]];
+    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:self.fly.levelUnit];
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeText title:@"Inserted level"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    //    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:[self.fly.speed substringToIndex:1] isEnabled:false] forKey:@"textField.leftView"];
+    //    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    //    row.value = [self.fly.speed substringWithRange:NSMakeRange(1, [self.fly.speed length]-1)];
+    row.value = self.fly.level;
+    row.disabled = @YES;
+    [section addFormRow:row];
+    
+//    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeText title:@"Level"];
+//    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+//    NSString *strObject;
+//    if([self.fly.level containsString:@"VFR"]){
+//        strObject = [self.fly.level substringToIndex:3];
+//    }else{
+//        strObject = [self.fly.level substringToIndex:1];
+//    }
+//    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:strObject isEnabled:false] forKey:@"textField.leftView"];
+//    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+//    if([self.fly.level containsString:@"VFR"]){
+//        row.value = [self.fly.level substringWithRange:NSMakeRange(3, [self.fly.level length]-3)];;
+//    }else{
+//        row.value = [self.fly.level substringWithRange:NSMakeRange(1, [self.fly.speed length]-1)];
+//    }
+//    row.disabled = @YES;
+//    [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
     row.value = self.fly.route;

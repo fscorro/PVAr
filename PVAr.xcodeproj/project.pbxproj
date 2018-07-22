@@ -11,6 +11,7 @@
 		2C4AEAC52102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C4AEAC42102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m */; };
 		2C74544420E01AE500F24691 /* Utils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544320E01AE500F24691 /* Utils.m */; };
 		2C74544720E0266100F24691 /* CustomSelectorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2C74544620E0266100F24691 /* CustomSelectorViewController.m */; };
+		2C8B8F4D2104C8E8000C5337 /* SelectorValues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2C8B8F4C2104C8E8000C5337 /* SelectorValues.plist */; };
 		2CCE9ACB20D40D0300DCC890 /* Fly.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CCE9ACA20D40D0300DCC890 /* Fly.m */; };
 		2CEAB23120DAE0C8005E77AD /* CreateSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23020DAE0C8005E77AD /* CreateSupplementaryInformation.m */; };
 		2CEAB23420DAE7B8005E77AD /* DetailSupplementaryInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 2CEAB23320DAE7B8005E77AD /* DetailSupplementaryInformation.m */; };
@@ -51,6 +52,7 @@
 		2C74544320E01AE500F24691 /* Utils.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Utils.m; sourceTree = "<group>"; };
 		2C74544520E0266100F24691 /* CustomSelectorViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomSelectorViewController.h; sourceTree = "<group>"; };
 		2C74544620E0266100F24691 /* CustomSelectorViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomSelectorViewController.m; sourceTree = "<group>"; };
+		2C8B8F4C2104C8E8000C5337 /* SelectorValues.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = SelectorValues.plist; sourceTree = "<group>"; };
 		2CCE9AC920D40D0300DCC890 /* Fly.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fly.h; sourceTree = "<group>"; };
 		2CCE9ACA20D40D0300DCC890 /* Fly.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Fly.m; sourceTree = "<group>"; };
 		2CEAB22F20DAE0C8005E77AD /* CreateSupplementaryInformation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CreateSupplementaryInformation.h; sourceTree = "<group>"; };
@@ -154,6 +156,14 @@
 				2C4AEAC42102142300FDAADA /* SuppInfoSimplifiedFPLViewController.m */,
 			);
 			path = FPLSimplified;
+			sourceTree = "<group>";
+		};
+		2C8B8F4B2104C8AE000C5337 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2C8B8F4C2104C8E8000C5337 /* SelectorValues.plist */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		9067C4491580CB5642EB0123 /* Frameworks */ = {
@@ -262,6 +272,7 @@
 		C43C541720D01B16004BB923 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				2C8B8F4B2104C8AE000C5337 /* Resources */,
 				C4D6192F20D054420010F04A /* Alert */,
 				C4D6192120D028F10010F04A /* Constants.h */,
 				C4D6193620D066B10010F04A /* Reachability.h */,
@@ -387,6 +398,7 @@
 				C43C540820D01AF8004BB923 /* Assets.xcassets in Resources */,
 				C43C540620D01AF6004BB923 /* Main.storyboard in Resources */,
 				C435CFE820D29BE300BEF664 /* CellFlyingPlan.xib in Resources */,
+				2C8B8F4D2104C8E8000C5337 /* SelectorValues.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,12 +24,17 @@ typedef NS_ENUM(NSInteger, DateStatus) {
 
 typedef NS_ENUM(NSInteger, TextfieldTag) {
     TextfieldTagAeroplaneIdentifier = 1,
+    TextfieldTagRule,
+    TextfieldTagType,
+    TextfieldTagCategory,
     TextfieldTagAeroplaneNumber,
     TextfieldTagAeroplaneType,
     TextfieldTagEquipment,
     TextfieldTagOrigin,
     TextfieldTagDestination,
+    TextfieldTagSpeedUnit,
     TextfieldTagSpeed,
+    TextfieldTagLevelUnit,
     TextfieldTagLevel,
     TextfieldTagRoute,
     TextfieldTagAlternative,
@@ -43,11 +48,13 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     
     XLFormRowDescriptor * rowTotalEETPicker;
     
-    UIButton *buttonCruissingSpeed;
-    UIButton *buttonLevel;
-    BOOL cruissingSpeedSelector;
+    XLFormRowDescriptor *rowSpeedUnit;
+    XLFormRowDescriptor *rowLevelUnit;
+    XLFormRowDescriptor *segueSelectedRow;
     
     BOOL invalidDate;
+    BOOL hasRadiocomunication;
+    BOOL hasVigilance;
 }
 @end
 
@@ -80,23 +87,19 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,7}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeSelectorPush title:@"Rule"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"V"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"Y"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"Z"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"I"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyrule rowType:XLFormRowDescriptorTypeZipCode title:@"Rule"];
+    row.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyRule] objectAtIndex:0]];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagRule) forKey:@"textField.tag"];
     [section addFormRow:row];
 
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeSelectorPush title:@"Type"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"N"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"G"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(3) displayText:@"M"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(5) displayText:@"X"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"S"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlytype rowType:XLFormRowDescriptorTypeZipCode title:@"Type"];
+//    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyType];
+    row.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyType] objectAtIndex:0]];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagType) forKey:@"textField.tag"];
     [section addFormRow:row];
     
     
@@ -120,12 +123,12 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"Aircraft %@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeSelectorPush title:@"Category"];
-    row.selectorOptions = @[[XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"L"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(1) displayText:@"M"],
-                            [XLFormOptionsObject formOptionsObjectWithValue:@(2) displayText:@"H"]
-                            ];
-    row.value = [XLFormOptionsObject formOptionsObjectWithValue:@(0) displayText:@"L"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlycategory rowType:XLFormRowDescriptorTypeZipCode title:@"Category"];
+//    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyCategory];
+    row.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyCategory] objectAtIndex:0]];
+    [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [row.cellConfig setObject:@(TextfieldTagCategory) forKey:@"textField.tag"];
     [section addFormRow:row];
     
 //
@@ -136,21 +139,22 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasRadiocomunication rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Radciocomunication"];
     [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @(NO);
+    hasRadiocomunication = NO;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRadiocomunication rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = @[@"A",@"B",@"C",@"D",@"E1",@"E2",@"E3",@"F",@"G",@"H",@"I",@"J1",@"J2",@"J3",@"J4",@"J5",@"J6",@"J7",@"K",@"L"
-                            ,@"M1",@"M2",@"M3",@"O",@"P1",@"R",@"T",@"U",@"V",@"W",@"X",@"Y",@"Z"];
+    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyRadiocomunication];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasRadiocomunication];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyhasVigilance rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Vigilance"];
     [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @(NO);
+    hasVigilance = NO;
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyVigilance rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = @[@"A",@"C",@"E",@"H",@"I",@"L",@"P",@"S",@"X",@"B1",@"B2",@"U1",@"U2",@"V1",@"V2",@"D1",@"G1"];
+    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyVigilance];
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyhasVigilance];
     [section addFormRow:row];
 
@@ -190,7 +194,7 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyalternative rowType:XLFormRowDescriptorTypeZipCode];
     [row.cellConfig setObject:@"..." forKey:@"textField.placeholder"];
     [row.cellConfig setObject:@(TextfieldTagAlternative) forKey:@"textField.tag"];
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
+    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{0,4}$"]];
     section.multivaluedRowTemplate = row;
     [form addFormSection:section];
     
@@ -218,38 +222,34 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     rowTotalEETPicker.value = [calendar dateFromComponents:dateComp];
     [section addFormRow:rowTotalEETPicker];
     
-    buttonCruissingSpeed = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonCruissingSpeed addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
-    [buttonCruissingSpeed setTitle:@"K" forState:UIControlStateNormal];
-    [buttonCruissingSpeed setBackgroundColor:AppColorLight];
-    buttonCruissingSpeed.tag = CrouissingSpeed;
-    buttonCruissingSpeed.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
+    rowSpeedUnit = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeedUnit rowType:XLFormRowDescriptorTypeZipCode title:@"Cruissing speed"];
+//    rowSpeedUnit.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySpeed];
+    rowSpeedUnit.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySpeed] objectAtIndex:0]];
+    [rowSpeedUnit.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [rowSpeedUnit.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [rowSpeedUnit.cellConfig setObject:@(TextfieldTagSpeedUnit) forKey:@"textField.tag"];
+    [section addFormRow:rowSpeedUnit];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeInteger title:@"Cruissing speed"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyspeed rowType:XLFormRowDescriptorTypeInteger title:@"Insert speed"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    [row.cellConfig setObject:buttonCruissingSpeed forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSpeed) forKey:@"textField.tag"];
     row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
     
-    buttonLevel = [UIButton buttonWithType:UIButtonTypeCustom];
-    [buttonLevel addTarget:self action:@selector(ShowCustomSelector:) forControlEvents:UIControlEventTouchUpInside];
-    [buttonLevel setTitle:@"F" forState:UIControlStateNormal];
-    [buttonLevel setBackgroundColor:AppColorLight];
-    buttonLevel.tag = Level;
-    buttonLevel.frame = CGRectMake(0.0, 0.0, 44.0, 44.0);
+    rowLevelUnit = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevelUnit rowType:XLFormRowDescriptorTypeZipCode title:@"Level"];
+//    rowLevelUnit.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyLevel];
+    rowLevelUnit.value = [[Utils sharedUtils] returnStringSeparateBy:@" - " fromString:[[[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyLevel] objectAtIndex:0]];
+    [rowLevelUnit.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
+    [rowLevelUnit.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    [rowLevelUnit.cellConfig setObject:@(TextfieldTagLevelUnit) forKey:@"textField.tag"];
+    [section addFormRow:rowLevelUnit];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeInteger title:@"Level"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlylevel rowType:XLFormRowDescriptorTypeInteger title:@"Insert level"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     [row.cellConfigAtConfigure setObject:ValidationPlaceholderRequiered forKey:@"textField.placeholder"];
-    [row.cellConfig setObject:buttonLevel forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagLevel) forKey:@"textField.tag"];
     row.required = YES;
-    [row addValidator:[XLFormRegexValidator formRegexValidatorWithMsg:[NSString stringWithFormat:@"%@: invalid value.",row.title] regex:@"^[a-zA-Z0-9].{1,4}$"]];
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyroute rowType:XLFormRowDescriptorTypeTextView title:@"Route"];
@@ -261,7 +261,6 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@"More util information."];
     [form addFormSection:section];
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyinformation rowType:XLFormRowDescriptorTypeTextView title:@"Notes"];
-//    [row.cellConfig setObject:@(TextfieldTagInfo) forKey:@"textField.tag"];
     row.required = NO;
     [section addFormRow:row];
     
@@ -307,12 +306,15 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
             [startDateDescriptor.cellConfig setObject:strikeThroughText forKey:@"detailTextLabel.attributedText"];
             [self updateFormRow:startDateDescriptor];
             invalidDate = true;
-        }
-        else{
+        }else{
             [startDateDescriptor.cellConfig removeObjectForKey:@"detailTextLabel.attributedText"];
             [self updateFormRow:startDateDescriptor];
             invalidDate = false;
         }
+    }else if ([rowDescriptor.tag isEqualToString:ModelFlyHasRadiocomunication]){
+        hasRadiocomunication = !hasRadiocomunication;
+    }else if ([rowDescriptor.tag isEqualToString:ModelFlyhasVigilance]){
+        hasVigilance = !hasVigilance;
     }
 }
 
@@ -364,7 +366,9 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
         [temp setValue:@(0) forKey:ModelFlyCreationType];
 
         NSMutableArray *arrAlternatives = [[NSMutableArray alloc] init];
-        
+        NSMutableArray *arrRadiocomunication = [[NSMutableArray alloc] init];
+        NSMutableArray *arrVigilance = [[NSMutableArray alloc] init];
+
         for(int i = 0; i < [[self.form formSections] count] ; i++){
             for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
                 if([row.rowType isEqualToString:XLFormRowDescriptorTypeSelectorPush]){
@@ -378,13 +382,21 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
                     }
                 }else{
                     if (row.value != nil) {
-                        if([row.tag isEqualToString:ModelFlyspeed]){
-                            [temp setValue:[NSString stringWithFormat:@"%@%@",buttonCruissingSpeed.titleLabel.text,row.value] forKey:row.tag];
-                        }else if([row.tag isEqualToString:ModelFlylevel]){
-                            [temp setValue:[NSString stringWithFormat:@"%@%@",buttonLevel.titleLabel.text,row.value] forKey:row.tag];
+                        if([row.tag isEqualToString:ModelFlyspeed]||[row.tag isEqualToString:ModelFlylevel]){
+                            [temp setValue:[row.value displayText] forKey:row.tag];
                         }else if ([row.tag isEqualToString:ModelFlyHasRadiocomunication] || [row.tag isEqualToString:ModelFlyhasVigilance]){
                             [temp setValue:@([row.value boolValue]) forKey:row.tag];
-                        }else {
+                        }else if([row.tag isEqualToString:ModelFlyRadiocomunication]){
+                            if(hasRadiocomunication){
+                                arrRadiocomunication = [[NSMutableArray alloc] initWithArray:row.value];
+                                [temp setValue:arrRadiocomunication forKey:ModelFlyRadiocomunication];
+                            }
+                        }else if([row.tag isEqualToString:ModelFlyVigilance]){
+                            if(hasVigilance){
+                                arrVigilance = [[NSMutableArray alloc] initWithArray:row.value];
+                                [temp setValue:arrVigilance forKey:ModelFlyVigilance];
+                            }
+                        }else{
                             [temp setValue:row.value forKey:row.tag];
                         }
                     }
@@ -394,6 +406,14 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
 
         if([arrAlternatives count] == 0){
             [RKDropdownAlert title:@"Submit failure" message:@"Enter at less one alternative destination" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+            [self deselectFormRow:sender];
+            return;
+        }else if([arrRadiocomunication count] == 0 && hasRadiocomunication){
+            [RKDropdownAlert title:@"Submit failure" message:@"Select at less one radiocomunication option" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
+            [self deselectFormRow:sender];
+            return;
+        }else if([arrVigilance count] == 0 && hasVigilance){
+            [RKDropdownAlert title:@"Submit failure" message:@"Select at less one vigilance option" backgroundColor:AlertColorError textColor:[UIColor whiteColor] time:3];
             [self deselectFormRow:sender];
             return;
         }
@@ -419,24 +439,15 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
         vc.delegate = self;
         vc.dicSupplementary = dicSupp;
     }else if ([segueId isEqualToString:@"SegueCustomSelector"]) {
+        segueSelectedRow = sender;
+        
         CustomSelectorViewController *vc = segue.destinationViewController;
         vc.delegate = self;
-        vc.selectedOption = cruissingSpeedSelector == true ? buttonCruissingSpeed.titleLabel.text : buttonLevel.titleLabel.text;
-        vc.tag = cruissingSpeedSelector == true ? ModelFlyspeed : ModelFlylevel;
+        vc.tag = segueSelectedRow.tag;
+        vc.selectedOption = [segueSelectedRow.value displayText];
     }
 }
 
--(void) ShowCustomSelector:(UIButton*)sender{
-    switch (sender.tag) {
-        case CrouissingSpeed:
-            cruissingSpeedSelector = true;
-            break;
-        case Level:
-            cruissingSpeedSelector = false;
-            break;
-    }
-    [self performSegueWithIdentifier:@"SegueCustomSelector" sender:self];
-}
 
 -(void)didSelectFormRow:(XLFormRowDescriptor *)formRow{
     [super didSelectFormRow:formRow];
@@ -448,6 +459,8 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
             formRow.value = [[Utils sharedUtils] timeFormatPicker:rowTotalEETPicker.value];
             [self updateFormRow:formRow];
         }
+    }else if([formRow.tag isEqualToString:ModelFlyrule] || [formRow.tag isEqualToString:ModelFlytype] || [formRow.tag isEqualToString:ModelFlycategory] || [formRow.tag isEqualToString:ModelFlyspeedUnit] || [formRow.tag isEqualToString:ModelFlylevelUnit]){
+        [self performSegueWithIdentifier:@"SegueCustomSelector" sender:formRow];
     }
 }
 
@@ -495,7 +508,7 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
             return stringIsValid;
         }
         return newLength <= 8;
-    }else if(textField.tag == TextfieldTagDestination || textField.tag == TextfieldTagSpeed || textField.tag == TextfieldTagLevel || textField.tag == TextfieldTagAlternative){
+    }else if(textField.tag == TextfieldTagDestination || textField.tag == TextfieldTagAlternative){
         if(string.length > 0){
             NSCharacterSet *numbersOnly = [NSCharacterSet characterSetWithCharactersInString:@"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"];
             NSCharacterSet *characterSetFromTextField = [NSCharacterSet characterSetWithCharactersInString:string];
@@ -514,10 +527,6 @@ typedef NS_ENUM(NSInteger, TextfieldTag) {
 }
 
 -(void)delegateVC:(CustomSelectorViewController *)vc option:(NSString *)option{
-    if(cruissingSpeedSelector == true){
-        [buttonCruissingSpeed setTitle:option forState:UIControlStateNormal];
-    }else{
-        [buttonLevel setTitle:option forState:UIControlStateNormal];
-    }
+    segueSelectedRow.value = option;
 }
 @end

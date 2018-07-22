@@ -99,4 +99,13 @@
     return strTime;
 }
 
+-(NSArray*) loadDataFromPlist:(NSString*)plist withKey:(NSString*)key{
+    NSDictionary *dictRoot = [NSDictionary dictionaryWithContentsOfFile:[[NSBundle mainBundle] pathForResource:plist ofType:@"plist"]];
+    return [NSArray arrayWithArray:[dictRoot objectForKey:key]];
+}
+-(NSString*) returnStringSeparateBy:(NSString*)separator fromString:(NSString*)from{
+    NSArray *auxArr = [from componentsSeparatedByString:@" - "];
+    return [auxArr objectAtIndex:0];
+}
+
 @end

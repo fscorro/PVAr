@@ -33,25 +33,25 @@ typedef NS_ENUM(NSInteger, FlyCreationType) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeText title:@"Endurance"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeText title:@"Endurance (E)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:false] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+//    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:false] forKey:@"textField.leftView"];
+//    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.endurance != nil ?  self.fly.endurance : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeText title:@"Persons on board"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeText title:@"Persons on board (P)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"P" isEnabled:false] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+//    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"P" isEnabled:false] forKey:@"textField.leftView"];
+//    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.personsOnBoard != nil ?  self.fly.personsOnBoard : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
     if(self.fly.flyCreationType == FlyComplete){
         
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasEmergencyRadio rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Emergency radio"];
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasEmergencyRadio rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Emergency radio (E)"];
         [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
         row.value = @(self.fly.hasEmergencyRadio);
         row.disabled = @YES;
@@ -64,7 +64,7 @@ typedef NS_ENUM(NSInteger, FlyCreationType) {
         row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasEmergencyRadio];
         [section addFormRow:row];
         
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasSurvivalEquipment rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Survival equipment"];
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasSurvivalEquipment rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Survival equipment (S)"];
         [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
         row.value = @(self.fly.hasSurvivalEquipment);
         row.disabled = @YES;
@@ -77,7 +77,7 @@ typedef NS_ENUM(NSInteger, FlyCreationType) {
         row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasSurvivalEquipment];
         [section addFormRow:row];
         
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasJackets rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Jackets"];
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasJackets rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Jackets (J)"];
         [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
         row.value = @(self.fly.hasJackets);
         row.disabled = @YES;
@@ -94,7 +94,7 @@ typedef NS_ENUM(NSInteger, FlyCreationType) {
         section = [XLFormSectionDescriptor formSectionWithTitle:@""];
         [form addFormSection:section];
         
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies"];
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies (D)"];
         row.value = @(self.fly.dinghies);
         [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
         row.disabled = @YES;
@@ -134,36 +134,42 @@ typedef NS_ENUM(NSInteger, FlyCreationType) {
         section = [XLFormSectionDescriptor formSectionWithTitle:@""];
         [form addFormSection:section];
         
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeText title:@"Aircraft color and marking"];
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeText title:@"Aircraft color and marking (A)"];
         [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-        [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"A" isEnabled:false] forKey:@"textField.leftView"];
-        [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+//        [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"A" isEnabled:false] forKey:@"textField.leftView"];
+//        [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
         row.value = self.fly.aircraftColor != nil ?  self.fly.aircraftColor : @"None";
         row.disabled = @YES;
         [section addFormRow:row];
         
-        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeText title:@"Remarks"];
-        [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-        [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"N" isEnabled:false] forKey:@"textField.leftView"];
-        [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
-        row.value = self.fly.remarks != nil ?  self.fly.remarks : @"None";
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasRemakrs rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Remarks (N)"];
+        row.value = @(self.fly.hasRemarks);
+        [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
         row.disabled = @YES;
         [section addFormRow:row];
         
+        row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeText title:@"Inserted value"];
+        [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+        //        [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"N" isEnabled:false] forKey:@"textField.leftView"];
+        //        [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+        row.hidden = @(!self.fly.hasRemarks);
+        row.value = self.fly.remarks != nil ?  self.fly.remarks : @"None";
+        row.disabled = @YES;
+        [section addFormRow:row];
     }
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeText title:@"Pilot in-command"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeText title:@"Pilot in-command (C)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"C" isEnabled:false] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+//    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"C" isEnabled:false] forKey:@"textField.leftView"];
+//    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.value = self.fly.pilotInCommand != nil ?  self.fly.pilotInCommand : @"None";
     row.disabled = @YES;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeText title:@"Licence"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    row.value = self.fly.pilotLicence != nil ?  self.fly.pilotLicence : @"None";
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeInfo];
+    row.title = @"Licence (L)";
     row.disabled = @YES;
+    row.value = self.fly.pilotLicence != nil ?  self.fly.pilotLicence : @"M240-CMD";
     [section addFormRow:row];
     
     

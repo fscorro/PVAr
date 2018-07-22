@@ -40,11 +40,9 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance (E)"];
     [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSuppEndurance) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
@@ -55,29 +53,24 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     rowEndurancePicker.hidden = @(YES);
     [section addFormRow:rowEndurancePicker];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeInteger title:@"Persons on board"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeInteger title:@"Persons on board (P)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"P" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSuppPersonOnBoard) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] != nil ? [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] : nil;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeZipCode title:@"Pilot in-command"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeZipCode title:@"Pilot in-command (C)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"C" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] : nil;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeZipCode title:@"Licence"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeInfo];
+    row.title = @"Licence (L)";
     row.required = NO;
-    row.value = [self.dicSupplementary valueForKey:ModelFlyPilotLicence] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotLicence] : nil;
+    row.value = @"M240-CMD";
     [section addFormRow:row];
-    
     
     self.form = form;
     
@@ -131,6 +124,5 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
         }
     }
 }
-
 
 @end

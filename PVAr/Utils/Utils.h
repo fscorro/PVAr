@@ -22,4 +22,7 @@
 -(NSString *) timeFormnat:(NSDate*)time;
 -(NSString *) timeFormatPicker:(NSDate*)time;
 
+-(NSArray*) loadDataFromPlist:(NSString*)plist withKey:(NSString*)key;
+-(NSString*) returnStringSeparateBy:(NSString*)separator fromString:(NSString*)from;
+
 @end

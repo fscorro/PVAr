@@ -42,11 +42,9 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
 
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEndurance rowType:XLFormRowDescriptorTypeZipCode title:@"Endurance (E)"];
     [row.cellConfigAtConfigure setObject:@(NO) forKey:@"textField.userInteractionEnabled"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"E" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSuppEndurance) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyEndurance] != nil ? [self.dicSupplementary valueForKey:ModelFlyEndurance] : nil;
@@ -57,44 +55,42 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     rowEndurancePicker.hidden = @(YES);
     [section addFormRow:rowEndurancePicker];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeInteger title:@"Persons on board"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPersonsOnBoard rowType:XLFormRowDescriptorTypeInteger title:@"Persons on board (P)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"P" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     [row.cellConfig setObject:@(TextfieldTagSuppPersonOnBoard) forKey:@"textField.tag"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] != nil ? [self.dicSupplementary valueForKey:ModelFlyPersonsOnBoard] : nil;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasEmergencyRadio rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Emergency radio"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasEmergencyRadio rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Emergency radio (E)"];
     [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasEmergencyRadio] boolValue]);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyEmergencyRadio rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = @[@"U",@"V",@"E"];
+    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyEmergencyRadio];
     row.value = [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] != nil ? [self.dicSupplementary valueForKey:ModelFlyEmergencyRadio] : nil;
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasEmergencyRadio];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasSurvivalEquipment rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Survival equipment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasSurvivalEquipment rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Survival equipment (S)"];
     [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasSurvivalEquipment] boolValue]);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlySurvivalEquipment rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = @[@"S",@"P",@"M",@"J"];
+    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlySurvivalEquipment];
     row.value = [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] != nil ? [self.dicSupplementary valueForKey:ModelFlySurvivalEquipment] : nil;
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasSurvivalEquipment];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasJackets rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Jackets"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasJackets rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Jackets (J)"];
     [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasJackets] boolValue]);
     [section addFormRow:row];
     
     row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyJackets rowType:XLFormRowDescriptorTypeMultipleSelector title:@"Select options"];
-    row.selectorOptions = @[@"L",@"F",@"U",@"V"];
+    row.selectorOptions = [[Utils sharedUtils] loadDataFromPlist:PlistSelectorValuesName withKey:PlistSelectorValuesKeyFlyJackets];
     row.value = [self.dicSupplementary valueForKey:ModelFlyJackets] != nil ? [self.dicSupplementary valueForKey:ModelFlyJackets] : nil;
     row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasJackets];
     [section addFormRow:row];
@@ -103,7 +99,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyDinghies rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Dinghies (D)"];
     [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     row.value = @([[self.dicSupplementary valueForKey:ModelFlyDinghies] boolValue]);
     [section addFormRow:row];
@@ -145,34 +141,34 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
     section = [XLFormSectionDescriptor formSectionWithTitle:@""];
     [form addFormSection:section];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeZipCode title:@"Aircraft color and marking"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyAircraftColor rowType:XLFormRowDescriptorTypeZipCode title:@"Aircraft color and marking (A)"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"A" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyAircraftColor] != nil ? [self.dicSupplementary valueForKey:ModelFlyAircraftColor] : nil;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeZipCode title:@"Remarks"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"N" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
-    row.required = NO;
-    row.value = [self.dicSupplementary valueForKey:ModelFlyRemakrs] != nil ? [self.dicSupplementary valueForKey:ModelFlyRemakrs] : nil;
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyHasRemakrs rowType:XLFormRowDescriptorTypeBooleanSwitch title:@"Remarks (N)"];
+    row.value = @([[self.dicSupplementary valueForKey:ModelFlyHasRemakrs] boolValue]);
+    [row.cellConfigAtConfigure setObject:AppColorLight forKey:@"switchControl.onTintColor"];
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeZipCode title:@"Pilot in-command"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyRemakrs rowType:XLFormRowDescriptorTypeZipCode title:@"Insert value"];
     [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
-    [row.cellConfig setObject:[[Utils sharedUtils] leftViewForTextfieldWithLabelText:@"C" isEnabled:true] forKey:@"textField.leftView"];
-    [row.cellConfig setObject:@(UITextFieldViewModeAlways) forKey:@"textField.leftViewMode"];
+    row.required = NO;
+    row.value = [self.dicSupplementary valueForKey:ModelFlyRemakrs] != nil ? [self.dicSupplementary valueForKey:ModelFlyRemakrs] : nil;
+    row.hidden = [NSString stringWithFormat:@"$%@ == 0", ModelFlyHasRemakrs];
+    [section addFormRow:row];
+    
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotInCommand rowType:XLFormRowDescriptorTypeZipCode title:@"Pilot in-command (C)"];
+    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
     row.required = NO;
     row.value = [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotInCommand] : nil;
     [section addFormRow:row];
     
-    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeZipCode title:@"Licence"];
-    [row.cellConfigAtConfigure setObject:@(NSTextAlignmentRight) forKey:@"textField.textAlignment"];
+    row = [XLFormRowDescriptor formRowDescriptorWithTag:ModelFlyPilotLicence rowType:XLFormRowDescriptorTypeInfo];
+    row.title = @"Licence (L)";
     row.required = NO;
-    row.value = [self.dicSupplementary valueForKey:ModelFlyPilotLicence] != nil ? [self.dicSupplementary valueForKey:ModelFlyPilotLicence] : nil;
+    row.value = @"M240-CMD";
     [section addFormRow:row];
     
     
@@ -195,7 +191,7 @@ typedef NS_ENUM(NSInteger, TextfieldTagSupp) {
         for(int i = 0; i < [[self.form formSections] count] ; i++){
             for (XLFormRowDescriptor *row in [[[self.form formSections] objectAtIndex:i] formRows]) {
                 
-                if([row.tag isEqualToString:ModelFlyHasEmergencyRadio] || [row.tag isEqualToString:ModelFlyHasSurvivalEquipment] || [row.tag isEqualToString:ModelFlyHasJackets]){
+                if([row.tag isEqualToString:ModelFlyHasEmergencyRadio] || [row.tag isEqualToString:ModelFlyHasSurvivalEquipment] || [row.tag isEqualToString:ModelFlyHasJackets] || [row.tag isEqualToString:ModelFlyHasRemakrs]){
                     [self.dicSupplementary setValue:@([row.value boolValue]) forKey:row.tag];
                 }else if([row.tag isEqualToString:ModelFlyEmergencyRadio] || [row.tag isEqualToString:ModelFlySurvivalEquipment] || [row.tag isEqualToString:ModelFlyJackets]){
                     [self.dicSupplementary setValue:row.value forKey:row.tag];

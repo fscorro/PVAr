@@ -32,7 +32,9 @@
 @property (nonatomic, copy) NSString *destinationAerodrome;
 @property (nonatomic, strong) NSDate *dateTime;
 @property (nonatomic, copy) NSString *unit;
+@property (nonatomic, copy) NSString *speedUnit;
 @property (nonatomic, copy) NSString *speed;
+@property (nonatomic, copy) NSString *levelUnit;
 @property (nonatomic, copy) NSString *level;
 @property (nonatomic, copy) NSString *route;
 
@@ -56,6 +58,7 @@
 @property BOOL cover;
 @property (nonatomic, copy) NSString *coverColour;
 @property (nonatomic, copy) NSString *aircraftColor;
+@property BOOL hasRemarks;
 @property (nonatomic, copy) NSString *remarks;
 @property (nonatomic, copy) NSString *pilotInCommand;
 @property (nonatomic, copy) NSString *pilotLicence;

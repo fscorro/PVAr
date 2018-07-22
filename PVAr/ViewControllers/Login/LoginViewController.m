@@ -154,8 +154,8 @@ typedef NS_ENUM(NSInteger, LoginState) {
 - (IBAction)Login:(id)sender {
     [self dismissTextfield];
     
-//    [self.textfieldUser setText:@"admin@gmail.com"];
-//    [self.textfieldPassword setText:@"admin123"];
+    [self.textfieldUser setText:@"admin@gmail.com"];
+    [self.textfieldPassword setText:@"admin123"];
     
     switch ([self validateLogin]) {
         case loginSuccess:
